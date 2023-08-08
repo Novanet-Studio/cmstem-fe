@@ -51,7 +51,7 @@ export default defineConfig({
     presetIcons(),
     presetWebFonts({
       fonts: {
-        sans: ['Nunito Sans', 'sans-serif'],
+        sans: ['Nunito Sans', { name: 'sans-serif', provider: 'none' }],
         primary: [
           fontPrimary as string,
           { name: fontPrimaryType as string, provider: 'none' },
@@ -76,7 +76,6 @@ export default defineConfig({
         4: theme.colors.default.theme_color.color_4,
         5: theme.colors.default.theme_color.color_5,
         6: theme.colors.default.theme_color.color_6,
-        7: theme.colors.default.theme_color.color_7,
       },
     },
     breakpoints: {
