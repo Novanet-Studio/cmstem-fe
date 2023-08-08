@@ -51,7 +51,7 @@ export default defineConfig({
     presetIcons(),
     presetWebFonts({
       fonts: {
-        sans: 'Roboto',
+        sans: ['Nunito Sans', 'sans-serif'],
         primary: [
           fontPrimary as string,
           { name: fontPrimaryType as string, provider: 'none' },
