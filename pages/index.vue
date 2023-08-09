@@ -3,15 +3,21 @@ const { isLoading, categories } = useCategory({ ordered: true });
 </script>
 
 <template>
-  <section>
+  <div>
     <app-banner />
-    <product-loader v-if="isLoading" />
-    <template v-else>
-      <product-landing
-        v-for="category in categories"
-        :key="category.id"
-        :category="category"
+    <section class="container mt-8">
+      <app-message
+        title="¿Quieres conocer nuestra colección?"
+        subtitle="Tenemos artículos para todos"
       />
-    </template>
-  </section>
+      <product-loader v-if="isLoading" />
+      <template v-else>
+        <product-landing
+          v-for="category in categories"
+          :key="category.id"
+          :category="category"
+        />
+      </template>
+    </section>
+  </div>
 </template>
