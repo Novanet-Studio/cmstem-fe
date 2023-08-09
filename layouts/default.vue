@@ -17,21 +17,6 @@
   </client-only>
 </template>
 
-<script lang="ts" setup>
-const route = useRoute();
-
-const maxWidth = computed(() => {
-  const includesPath = ['/nosotros', '/contacto', '/gracias'].includes(
-    route.path
-  );
-
-  return {
-    maxWidth: includesPath ? '100%' : '1650px',
-    paddingX: includesPath ? '0px' : '2rem',
-  };
-});
-</script>
-
 <style scoped>
 .default {
   @apply flex relative;
@@ -47,8 +32,6 @@ const maxWidth = computed(() => {
   @apply flex-auto transition ease;
 }
 .default__main {
-  --main-max-width: v-bind(maxWidth.maxWidth);
-  --main-padding-x: v-bind(maxWidth.paddingX);
-  @apply px-5 transition ease lg:max-w-[var(--main-max-width)] mx-auto md:px-[var(--main-padding-x)];
+  @apply px-5 transition ease w-full mx-auto md:px-0;
 }
 </style>

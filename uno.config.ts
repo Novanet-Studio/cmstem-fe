@@ -91,16 +91,16 @@ export default defineConfig({
       xl: '1280px',
       '2xl': '1366px',
     },
-    containers: {
+    container: {
       center: true,
       maxWidth: {
         sm: '640px',
         md: '768px',
         lg: '1024px',
         xl: '1280px',
-        '2xl': '1366px',
+        '2xl': '1690px',
       },
-      padding: '2rem',
+      padding: '1rem',
     },
   },
   rules: [

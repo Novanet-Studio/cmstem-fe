@@ -5,19 +5,19 @@ const appConfig = useAppConfig();
 <template>
   <div class="banner">
     <div class="banner__wrapper">
-      <div class="banner__left">
-        <div class="banner__slider">
-          <app-slider :items="appConfig.home.slider" />
+      <div class="banner__slider">
+        <app-slider :items="appConfig.home.slider" />
+        <div
+          class="absolute top-0 left-0 w-full h-full bg-black/30 z-9999 text-white"
+        >
+          <h1 class="font-800 container mx-auto text-balance mt-24 leading-14">
+            ¡Bienvenido <br />
+            a nuestra tienda!
+          </h1>
+          <h4 class="font-400 container mx-auto">
+            Artículos deportivos y de natación
+          </h4>
         </div>
-      </div>
-      <div class="banner__right">
-        <nuxt-img
-          v-for="(image, index) in appConfig.home.promotions"
-          :src="image"
-          alt=""
-          class="h-full"
-          :key="index"
-        />
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@ const appConfig = useAppConfig();
 }
 
 .banner {
-  @apply pt-8 mb-8;
+  @apply mb-8;
 }
 
 .banner__wrapper {
@@ -61,7 +61,7 @@ const appConfig = useAppConfig();
 }
 
 .banner__slider {
-  @apply h-full relative;
+  @apply h-full w-full relative;
 }
 
 .banner__slider-image {
