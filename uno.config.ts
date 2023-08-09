@@ -51,7 +51,13 @@ export default defineConfig({
     presetIcons(),
     presetWebFonts({
       fonts: {
-        sans: ['Nunito Sans', { name: 'sans-serif', provider: 'none' }],
+        sans: [
+          {
+            name: 'Nunito Sans',
+            weights: ['400', '500', '600', '700', '800', '900'],
+          },
+          { name: 'sans-serif', provider: 'none' },
+        ],
         primary: [
           fontPrimary as string,
           { name: fontPrimaryType as string, provider: 'none' },
@@ -85,13 +91,24 @@ export default defineConfig({
       xl: '1280px',
       '2xl': '1366px',
     },
+    containers: {
+      center: true,
+      maxWidth: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1366px',
+      },
+      padding: '2rem',
+    },
   },
   rules: [
     [/^border-color-(\d)$/, ([, d]) => ({ 'border-color': getColor(d) })],
   ],
   shortcuts: {
     'header-actions__link': 'flex relative transition ease',
-    'header-actions__icon': 'text-4xl text-[2.45rem]',
+    'header-actions__icon': 'text-4xl text-[2.45rem] text-black',
     'header-actions__indicator-wrapper':
       'absolute bottom-0 -right-[3px] flex justify-center items-center w-[20px] h-[20px] text-white bg-color-2 rounded-full',
     'header-actions__indicator': 'text-xs leading-4 font-medium not-italic',

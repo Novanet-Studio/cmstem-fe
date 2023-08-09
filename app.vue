@@ -9,6 +9,10 @@ useAppAuth();
 </script>
 
 <style>
+html {
+  @apply font-sans;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

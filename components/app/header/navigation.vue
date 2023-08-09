@@ -35,7 +35,7 @@ const isOpen = ref(false);
 
 <style scoped>
 .navigation {
-  @apply relative flex flex-wrap items-center justify-between px-4 py-2 bg-color-1 md:py-4 lg:(px-0 py-0);
+  @apply relative flex flex-wrap items-center justify-between px-4 py-2 bg-color-2 md:py-4 lg:(px-0 py-0);
 }
 
 .navigation__wrapper {

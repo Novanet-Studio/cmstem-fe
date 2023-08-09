@@ -21,7 +21,7 @@ const mainMenu = ref([
       v-for="item in mainMenu"
       :key="item.text"
       class="menu__item"
-      :class="$route.path === item?.url ? 'text-color-4' : 'text-color-2'"
+      :class="$route.path === item?.url ? 'text-white font-bold' : 'text-white'"
     >
       <nuxt-link class="menu__link" :to="item.url">
         {{ item.text }}
