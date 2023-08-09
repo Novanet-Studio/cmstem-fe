@@ -4,18 +4,13 @@ export default defineAppConfig({
   },
   footer: {
     copyright: {
-      site: 'fast-ecommerce.com',
+      site: 'ccsmultisport.com',
     },
     widgets: [
       {
-        link: 'https://www.instagram.com/coracuero/',
+        link: 'https://www.instagram.com/cms/',
         icon: 'instagram',
-        text: '@fastecommerce',
-      },
-      {
-        link: 'https://www.facebook.com/people/coracuero',
-        icon: 'facebook',
-        text: 'fast-ecommerce',
+        text: '@cms',
       },
       {
         link: '#',
@@ -25,7 +20,7 @@ export default defineAppConfig({
       {
         link: '#',
         icon: 'email',
-        text: 'fast@ecommerce.com',
+        text: 'cms@gmal.com',
       },
     ],
   },

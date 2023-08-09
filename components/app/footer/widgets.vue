@@ -4,7 +4,6 @@ const widgets = appConfig.footer.widgets;
 
 const icons = {
   instagram: 'i-ph-instagram-logo-light',
-  facebook: 'i-ph-facebook-logo-light',
   whatsapp: 'i-ph-whatsapp-logo-light',
   email: 'i-ph-envelope-light',
 };
@@ -16,10 +15,9 @@ const icons = {
       <h3 class="widgets__title">Contáctanos</h3>
       <ul class="widgets__list">
         <li v-for="(item, index) in widgets" :key="index" class="widgets__item">
-          <a class="widgets__link" :href="item.link">
-            <div :class="icons[item.icon]" class="lg:text-3xl text-color-2" />
+          <a class="widgets__link" :href="item.link" target="_blank">
+            <div :class="icons[item.icon]" class="lg:text-3xl text-color-3" />
           </a>
-          {{ item.text }}
         </li>
       </ul>
     </aside>
@@ -28,19 +26,19 @@ const icons = {
 
 <style scoped>
 .widgets {
-  @apply pb-7 lg:(mx-4 mx-auto);
+  @apply pb-4 lg:(mx-4 mx-auto);
 }
 
 .widgets__wrapper {
-  @apply max-w-full w-full relative pb-5 mb-5;
+  @apply max-w-full w-full relative pb-5 mb-5 flex flex-col items-center;
 }
 
 .widgets__title {
-  @apply text-3xl pb-4 font-bold text-color-2;
+  @apply text-3xl pb-4 font-bold text-black font-900;
 }
 
 .widgets__list {
-  @apply mt-7 w-full;
+  @apply mt-4 w-full flex justify-center;
 }
 
 .widgets__item {
