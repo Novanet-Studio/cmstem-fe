@@ -10,6 +10,6 @@ defineProps<{ id: string }>();
 
 <style scoped>
 .title {
-  @apply m-0 block text-sm pt-2 pb-1 pl-0 overflow-hidden pr-4 text-color-6;
+  @apply m-0 block text-center text-xl font-800 pt-2 pb-1 pl-0 overflow-hidden pr-4 text-black;
 }
 </style>
