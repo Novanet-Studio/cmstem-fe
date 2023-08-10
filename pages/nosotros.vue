@@ -1,19 +1,53 @@
+<script setup>
+const sections = [
+  'Sumérgete en el mundo de la natación con nuestros trajes de baño de última generación, gafas de alta calidad y accesorios de entrenamiento especializados.',
+  'Si prefieres encontrar la armonía interior, tenemos esterillas de yoga duraderas, bloques y correas para ayudarte a alcanzar posturas perfectas. Para los amantes de la adrenalina, ofrecemos zapatillas de running de vanguardia, ropa transpirable y relojes deportivos con seguimiento de ritmo cardíaco.',
+  'Si prefieres encontrar la armonía interior, tenemos esterillas de yoga duraderas, bloques y correas para ayudarte a alcanzar posturas perfectas. Para los amantes de la adrenalina, ofrecemos zapatillas de running de vanguardia, ropa transpirable y relojes deportivos con seguimiento de ritmo cardíaco.',
+];
+</script>
+
 <template>
   <section>
-    <nuxt-img src="/img/home/1.jpg" w-full />
+    <div class="grid grid-cols-2 relative border-b border-color-5">
+      <div
+        class="w-591px h-591px opacity-10 bg-color-4 rounded-full absolute -top-116px -left-122px -z9"
+      ></div>
+      <div class="relative p-24 mt-42 ml-22">
+        <h1 class="font-800 max-w-md leading-12">
+          ¡Artículos para todas las edades!
+        </h1>
+        <logo-dots />
+      </div>
+      <div>
+        <nuxt-img src="/atleta.jpg" w-full />
+      </div>
+    </div>
     <div class="content-wrapper">
       <div class="wrapper-container">
         <div class="item-container">
-          <h4 class="title">Nosotros</h4>
-          <p class="content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
-            provident repellendus nihil officiis voluptatem quae, qui, obcaecati
-            natus quasi beatae ipsa unde inventore doloremque atque harum illum
-            odio. Reprehenderit repellat doloribus, explicabo soluta inventore
-            consectetur corporis autem voluptatum, obcaecati enim aliquam iste
-            neque pariatur! Dolore neque nesciunt placeat harum autem.
-          </p>
+          <h3 class="title font-400 text-center">
+            ¡Descubre nuestra amplia selección de artículos
+          </h3>
+          <h3 class="title font-700 text-center">
+            para nadadores, yoguis, corredores y ciclistas!
+          </h3>
         </div>
+        <div class="grid grid-cols-1 my-32 lg:(grid-cols-3 gap-8)">
+          <div
+            v-for="(section, index) in sections"
+            :key="index"
+            class="flex flex-col items-center border-r last:border-none px-8"
+          >
+            <div
+              class="i-ph-check-circle-fill text-color-3 text-4xl mb-6"
+            ></div>
+            <p class="text-center">{{ section }}</p>
+          </div>
+        </div>
+        <app-message
+          title="¡Prepárate para superar tus límites y disfrutar al máximo"
+          subtitle="de tu deporte favorito con nuestros productos especializados!"
+        />
       </div>
     </div>
   </section>
@@ -21,22 +55,22 @@
 
 <style scoped>
 .content-wrapper {
-  @apply py-32 bg-color-3;
+  @apply py-22;
 }
 
 .wrapper-container {
-  @apply w-full py-3 mx-auto lg:max-w-[1230px];
+  @apply w-full py-3 mx-auto container;
 }
 
 .item-container {
-  @apply max-w-[820px] mx-auto mb-12;
+  @apply max-w-full mx-auto mb-12;
 }
 
 .title {
-  @apply mb-[65px] text-4xl text-color-2 font-400;
+  @apply text-4xl text-black;
 }
 
 .content {
-  @apply text-xl leading-[1.6em] mb-4 text-[#666];
+  @apply text-xl leading-[1.6em] mb-4 text-[#666] mt-22 border;
 }
 </style>
