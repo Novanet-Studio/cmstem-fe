@@ -40,15 +40,15 @@ onMounted(async () => {
 
 <style scoped>
 .landing {
-  @apply pb-20;
+  @apply pb-20 mt-12;
 }
 
 .landing__header {
-  @apply flex flex-nowrap justify-between items-center px-5 py-4 bg-light-600 border-b-2 border-b-gray-300;
+  @apply flex flex-nowrap justify-between items-center px-5 py-4 bg-light-600;
 }
 
 .landing__title {
-  @apply mb-0 inline-block text-xl font-medium text-color-2;
+  @apply mb-0 inline-block text-2xl font-900 text-black;
 }
 
 .landing__content {
