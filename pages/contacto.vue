@@ -1,7 +1,9 @@
 <template>
-  <section class="w-full">
-    <contact-map />
+  <section class="container">
     <contact-header />
-    <contact-form />
+    <div class="grid grid-cols-1 grid-cols-2 gap-12">
+      <contact-form />
+      <contact-map />
+    </div>
   </section>
 </template>

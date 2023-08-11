@@ -53,9 +53,9 @@ const submit = handleSubmit(async (data) => {
 </script>
 
 <template>
-  <div class="px-40">
-    <div class="w-full py-3 mx-auto lg:max-w-[1230px]">
-      <h3 class="title">Envíanos un mensaje</h3>
+  <div>
+    <h3 class="title">Para pedidos, por favor llene el formulario:</h3>
+    <div class="w-full mx-auto lg:max-w-[1230px] border p-18 rounded-2xl">
       <form
         name="contacto"
         data-netlify="true"
@@ -109,7 +109,7 @@ const submit = handleSubmit(async (data) => {
 
 <style scoped>
 .title {
-  @apply font-bold mb-3 text-color-2 text-4xl mb-24 text-center;
+  @apply font-bold mb-8 text-color-2 text-2xl text-left;
 }
 
 .form__title {
