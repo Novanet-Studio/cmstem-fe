@@ -55,9 +55,10 @@ const submit = handleSubmit(async (data) => {
 <template>
   <div>
     <h3 class="title">Para pedidos, por favor llene el formulario:</h3>
-    <div class="w-full mx-auto lg:max-w-[1230px] border p-18 rounded-2xl">
+    <div class="w-full mx-auto lg:max-w-[1230px] border p-4 rounded-2xl">
       <form
         name="contacto"
+        class="p-18 rounded-2xl shadow bg-gradient-linear bg-gradient-to-[#E6E7E8] bg-gradient-from-[#FFFFFF]"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         @submit.prevent="submit"
