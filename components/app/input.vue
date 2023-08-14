@@ -23,7 +23,7 @@ const { value, errorMessage } = useField(() => props.name);
       class="flex items-center border p-4 rounded-md bg-white"
       :class="[
         errorMessage?.length && 'border-red-5',
-        focus && 'border-[#e36d65]',
+        focus && 'border-color-2',
       ]"
     >
       <div class="mr-3" v-if="$slots.left">

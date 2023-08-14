@@ -45,7 +45,7 @@ onMounted(() => {
 }
 
 .auth__link--active {
-  @apply text-color-2;
+  @apply text-color-3;
 }
 
 .auth__content {

@@ -116,7 +116,7 @@ export default defineConfig({
     'input-group': 'py-3 pt-2 first:mb-4',
     'input-error': 'border-red-500',
     'auth-form__wrapper': 'bg-white p-6 max-w-[26rem] mx-auto mb-4',
-    'auth-form__title': 'text-base mb-4 text-color-2',
+    'auth-form__title': 'text-base mb-4 text-black',
     'auth-form__footer': 'py-3 mb-4 mt-2',
     form__group: 'mb-4 md:mb-10',
     'form__btn-group': 'mb-0 md:(mb-10 w-[25%])',

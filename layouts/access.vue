@@ -5,7 +5,7 @@
         <nuxt-link class="access__link" to="/">
           <img
             class="filter filter-drop-shadow"
-            src="/img/logo.png"
+            src="/logo.svg"
             alt="Project logo"
           />
         </nuxt-link>
@@ -19,7 +19,7 @@
 
 <style scoped>
 .access {
-  @apply flex flex-col px-4 bg-light-500 w-full min-h-screen overflow-hidden relative;
+  @apply flex flex-col bg-light-500 w-full min-h-screen overflow-hidden relative;
 }
 
 .access__wrapper {
