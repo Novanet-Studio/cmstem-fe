@@ -72,21 +72,21 @@ export default defineNuxtConfig({
 
   pwa: {
     meta: {
-      title: 'Tienda en mano',
-      name: 'Tienda en mano Aplicación web',
+      title: 'Caracas Multi Sport - Tienda',
+      name: 'Caracas Multi Sport Aplicación web',
       author: 'Novanet Studio <info@novanet.studio>',
       description: 'Tienda en online para vender tus productos online',
-      theme_color: '#fcd34d',
+      theme_color: '#f18a00',
       lang: 'es',
     },
     manifest: {
-      name: 'Tienda en mano Aplicación web',
-      short_name: 'Tienda en mano',
+      name: 'Caracas Multi Sport Aplicación web',
+      short_name: 'Caracas Multi Sport',
       description: 'Tienda en online para vender tus productos online',
       start_url: '/',
       display: 'standalone',
       background_color: '#ffffff',
-      theme_color: '#fcd34d',
+      theme_color: '#f18a00',
     },
     icon: { source: 'static/favicon.png' },
     /*workbox: {
