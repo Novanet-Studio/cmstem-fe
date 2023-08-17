@@ -63,6 +63,13 @@ export default defineNuxtConfig({
     plugins: [gql()],
   },
 
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag: string) =>
+        ['swiper-container', 'swiper-slide'].includes(tag),
+    },
+  },
+
   pwa: {
     meta: {
       title: 'Caracas Multi Sport - Tienda',
