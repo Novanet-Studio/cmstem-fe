@@ -1,10 +1,20 @@
 <script lang="ts" setup>
+import { Navigation } from 'swiper/modules';
+import 'swiper/element/css/navigation';
+
 interface Props {
   items: string[] | Product[];
-  modules?: string[];
+  slidesPerView?: number;
+  spaceBetween?: number;
+  centeredSlides?: boolean;
+  breakpoints?: Record<number, Record<string, unknown>>;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  slidesPerView: 1,
+  spaceBetween: 1,
+  centeredSlides: false,
+});
 
 const renderImages = ref(false);
 const images = ref<string[]>([]);
@@ -25,7 +35,15 @@ watchEffect(() => {
 </script>
 
 <template>
-  <swiper-container :slides-per-view="1" :space-between="1" loop navigation>
+  <swiper-container
+    :slides-per-view="slidesPerView"
+    :space-between="spaceBetween"
+    :centered-slides="centeredSlides"
+    :breakpoints="breakpoints"
+    loop
+    navigation="true"
+    :modules="[Navigation]"
+  >
     <template v-if="renderImages">
       <swiper-slide v-for="(image, index) in images" :key="index">
         <nuxt-img
@@ -51,4 +69,20 @@ watchEffect(() => {
 .slider__image {
   @apply w-full;
 }
+
+:global(:root) {
+  --swiper-navigation-color: #161824;
+}
+
+:deep(.swiper-button-prev),
+:deep(.swiper-button-next) {
+  --swiper-navigation-size: 10px;
+}
+
+/* :deep(.swiper-button-next),
+:deep(.swiper-button-prev) {
+  --swiper-navigation-size: 2rem;
+  --swiper-navigation-color: #161824;
+  @apply transition;
+} */
 </style>

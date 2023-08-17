@@ -25,8 +25,18 @@ onMounted(async () => {
       <div class="landing__content">
         <app-slider
           :items="products"
-          :slides-per-view="5"
-          :space-between="0"
+          :slides-per-view="2"
+          :space-between="1"
+          :breakpoints="{
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 2,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 3,
+            },
+          }"
           v-if="products.length"
         >
           <template #default="{ product }">
