@@ -17,24 +17,26 @@ const handleQuickView = (open: boolean) => (state.quickView = open);
 
 <template>
   <div class="lg:(p-[20px_20px_0] pb-8) flex flex-col items-center">
-    <div class="product relative">
-      <div class="product__thumbnail pb-4">
+    <div class="product relative p-3 lg:p-0">
+      <div class="product__thumbnail lg:pb-4">
         <product-thumbnail-image />
         <product-actions @quick-view="handleQuickView" />
       </div>
-      <div class="!absolute -bottom-8 left-0 w-full flex justify-center">
+      <div
+        class="!absolute -bottom-5 lg:-bottom-8 left-0 w-full flex justify-center"
+      >
         <product-price
-          class="!my-1 w-50px h-50px bg-color-3 flex justify-center items-center rounded-full !text-white font-bold"
+          class="!my-1 w-40px h-40px text-xs lg:(w-50px h-50px text-base) bg-color-3 flex justify-center items-center rounded-full !text-white font-bold"
           >{{ product.price }}</product-price
         >
       </div>
     </div>
-    <div class="mt-8">
+    <div class="mt-6 lg:mt-8">
       <product-title :id="product.id">{{ product.name }}</product-title>
     </div>
-    <div class="w-full mt-2 px-4 mx-12">
+    <div class="w-full mt-2 px-4 mx-12 pb-2">
       <button
-        class="py-2 px-8 rounded-full w-full bg-color-5 shadow-md shadow-black/20 text-color-2 font-bold"
+        class="py-2 px-8 rounded-full w-full bg-color-5 shadow-md shadow-black/20 text-color-2 font-bold text-xs lg:text-base"
       >
         Comprar
       </button>
@@ -44,7 +46,7 @@ const handleQuickView = (open: boolean) => (state.quickView = open);
 
 <style scoped>
 .product {
-  @apply h-full box-border relative block box-border border rounded-xl transition ease hover:(border border-gray-300) max-w-[168px] lg:(w-250px max-w-[250px] p-[20px_20px_0]);
+  @apply h-full box-border relative block box-border border rounded-xl transition ease hover:(border border-gray-300) w-[168px] max-w-[168px] lg:(w-250px max-w-[250px] p-[20px_20px_0]);
 }
 
 .product__thumbnail {

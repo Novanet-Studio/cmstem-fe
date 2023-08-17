@@ -50,7 +50,7 @@ onMounted(async () => {
 
 <style scoped>
 .landing {
-  @apply pb-20 mt-12;
+  @apply mt-6 pb-12 lg:(pb-20 mt-12);
 }
 
 .landing__header {

@@ -16,7 +16,7 @@ const icons = {
       <ul class="widgets__list">
         <li v-for="(item, index) in widgets" :key="index" class="widgets__item">
           <a class="widgets__link" :href="item.link" target="_blank">
-            <div :class="icons[item.icon]" class="lg:text-3xl text-color-3" />
+            <div :class="icons[item.icon]" class="text-3xl text-color-3" />
           </a>
         </li>
       </ul>
@@ -34,18 +34,14 @@ const icons = {
 }
 
 .widgets__title {
-  @apply text-3xl pb-4 font-bold text-black font-900;
+  @apply text-2xl pb-2 font-bold text-black font-900 lg:(text-3xl pb-4);
 }
 
 .widgets__list {
-  @apply mt-4 w-full flex justify-center;
-}
-
-.widgets__item {
-  @apply relative inline-flex items-center mr-[20px] gap-1 md:mr-2;
+  @apply mt-4 w-full flex justify-center gap-2;
 }
 
 .widgets__link {
-  @apply flex text-lg;
+  @apply flex text-xl;
 }
 </style>
