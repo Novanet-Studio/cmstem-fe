@@ -4,7 +4,7 @@ interface Props {
   modules?: string[];
 }
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const renderImages = ref(false);
 const images = ref<string[]>([]);
@@ -25,18 +25,26 @@ watchEffect(() => {
 </script>
 
 <template>
-  <swiper :slides-per-view="1" :space-between="1" loop navigation :modules="[SwiperNavigation]">
+  <swiper-container :slides-per-view="1" :space-between="1" loop navigation>
     <template v-if="renderImages">
       <swiper-slide v-for="(image, index) in images" :key="index">
-        <nuxt-img class="slider__image" :src="image" alt="Products of the brand" />
+        <nuxt-img
+          class="slider__image"
+          :src="image"
+          alt="Products of the brand"
+        />
       </swiper-slide>
     </template>
     <template v-else>
-      <swiper-slide v-for="item in products" :key="item.id" class="landing__slide">
+      <swiper-slide
+        v-for="item in products"
+        :key="item.id"
+        class="landing__slide"
+      >
         <slot :product="item" />
       </swiper-slide>
     </template>
-  </swiper>
+  </swiper-container>
 </template>
 
 <style scoped>
