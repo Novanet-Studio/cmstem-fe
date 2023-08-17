@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import strapiMapper from 'smapper';
 import { injectKeys } from '~/config/constants';
 import { GetProductById } from '~/graphql/queries';
 
@@ -24,7 +25,7 @@ const loadProductById = async () => {
       id,
     });
 
-    product.value = mapperData(data.products.data[0]);
+    product.value = strapiMapper(data.products.data[0]);
   } catch (error) {
     $notify({
       group: 'all',

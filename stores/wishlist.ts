@@ -1,3 +1,4 @@
+import strapiMapper from 'smapper';
 import config from '~/config/config.json';
 import { defineStore } from 'pinia';
 import { GetProductById } from '~/graphql/queries';
@@ -34,7 +35,7 @@ export const useWishlistStore = defineStore(
       );
 
       const response = await Promise.all(promises);
-      mapperData<any[]>(response).forEach((item) => {
+      strapiMapper<any[]>(response).forEach((item) => {
         temp.push(item.products[0]);
       });
 

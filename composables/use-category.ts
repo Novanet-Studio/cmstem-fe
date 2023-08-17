@@ -1,3 +1,4 @@
+import strapiMapper from 'smapper';
 import { GetCategories } from '~/graphql/queries';
 import type { Ref } from 'vue';
 
@@ -26,11 +27,11 @@ export default function useCategory(params?: Params): Result {
         const ordered = response.data.categories.data.sort(
           (a: CategoriesData, b: CategoriesData) => Number(a.id) - Number(b.id)
         );
-        categories.value = mapperData<Category[]>(ordered);
+        categories.value = strapiMapper<Category[]>(ordered);
         return;
       }
 
-      categories.value = mapperData(response.data.categories.data);
+      categories.value = strapiMapper(response.data.categories.data);
     } catch (error) {
       console.log(error);
       $notify({
