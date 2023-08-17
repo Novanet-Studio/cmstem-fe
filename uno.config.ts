@@ -108,7 +108,7 @@ export default defineConfig({
   ],
   shortcuts: {
     'header-actions__link': 'flex relative transition ease',
-    'header-actions__icon': 'text-4xl text-[2.45rem] text-black',
+    'header-actions__icon': 'text-4xl md:text-[2.45rem] text-black',
     'header-actions__indicator-wrapper':
       'absolute bottom-0 -right-[3px] flex justify-center items-center w-[20px] h-[20px] text-white bg-color-2 rounded-full',
     'header-actions__indicator': 'text-xs leading-4 font-medium not-italic',
@@ -140,27 +140,27 @@ export default defineConfig({
         }
 
         h1 {
-          font-size: ${h1}rem;
+          @apply text-3xl md:text-3xl lg:text-[${h1}rem];
         }
 
         h2 {
-          font-size: ${h2}rem;
+          @apply lg:text-[${h2}rem];
         }
 
         h3 {
-          font-size: ${h3}rem;
+          @apply lg:text-[${h3}rem];
         }
 
         h4 {
-          font-size: ${h4}rem;
+          @apply lg:text-[${h4}rem];
         }
 
         h5 {
-          font-size: ${h5}rem;
+          @apply lg:text-[${h5}rem];
         }
 
         h6 {
-          font-size: ${h6}rem;
+          @apply lg:text-[${h6}rem];
         }
       `,
     },

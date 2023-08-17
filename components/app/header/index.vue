@@ -18,7 +18,7 @@
 
 <style scoped>
 .header__wrapper {
-  @apply px-4 py-8 bg-white border-b border-color-1 md:px-6;
+  @apply px-6 py-10 bg-white border-b border-color-1 md:px-6;
 }
 
 .header__container {
@@ -34,6 +34,6 @@
 }
 
 .header__content {
-  @apply lg:w-[15%];
+  @apply w-[70%] lg:w-[15%];
 }
 </style>

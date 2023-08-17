@@ -12,7 +12,12 @@ const isOpen = ref(false);
 
 <template>
   <div class="relative">
-    <div class="cursor-pointer" @mouseover="isOpen = true" @mouseleave="isOpen = false" @click.prevent="isOpen = !isOpen">
+    <div
+      class="cursor-pointer"
+      @mouseover="isOpen = true"
+      @mouseleave="isOpen = false"
+      @click.prevent="isOpen = !isOpen"
+    >
       <div class="header-actions__link">
         <div class="i-ph-bag-light header-actions__icon"></div>
         <span class="header-actions__indicator-wrapper">
@@ -24,9 +29,7 @@ const isOpen = ref(false);
         <template v-if="isOpen">
           <div v-if="total > 0" class="mini-cart">
             <div class="mini-cart__body">
-              <template v-if="isLoadingCart">
-                <app-loader />
-              </template>
+              <app-loader v-if="isLoadingCart" />
               <template v-else-if="cartProducts?.length">
                 <div v-for="(product, index) in cartProducts" :key="index">
                   <product-mini-cart :product="product!" />

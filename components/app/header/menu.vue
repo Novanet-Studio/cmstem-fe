@@ -40,6 +40,6 @@ const mainMenu = ref([
 }
 
 .menu__link {
-  @apply block py-[10px] pr-12 pl-0;
+  @apply block py-[10px] md:pr-12 pl-0;
 }
 </style>

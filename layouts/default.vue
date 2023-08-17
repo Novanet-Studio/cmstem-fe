@@ -1,20 +1,18 @@
 <template>
-  <client-only>
-    <div class="default">
-      <div class="default__wrapper">
-        <div class="default__container">
-          <div class="default__content">
-            <app-header />
-            <main class="default__main">
-              <nuxt-page />
-            </main>
-            <app-footer />
-            <app-notify />
-          </div>
+  <div class="default">
+    <div class="default__wrapper">
+      <div class="default__container">
+        <div class="default__content">
+          <app-header />
+          <main class="default__main">
+            <nuxt-page />
+          </main>
+          <app-footer />
+          <app-notify />
         </div>
       </div>
     </div>
-  </client-only>
+  </div>
 </template>
 
 <style scoped>
@@ -32,6 +30,6 @@
   @apply flex-auto transition ease;
 }
 .default__main {
-  @apply px-5 transition ease w-full mx-auto md:px-0;
+  @apply transition ease w-full mx-auto md:px-0;
 }
 </style>
