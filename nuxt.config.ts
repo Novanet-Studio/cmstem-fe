@@ -22,7 +22,6 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    'nuxt-swiper',
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
