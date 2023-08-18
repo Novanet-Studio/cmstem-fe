@@ -95,7 +95,7 @@ export default defineConfig({
       center: true,
       maxWidth: {
         sm: '640px',
-        md: '768px',
+        md: '920px',
         lg: '1024px',
         xl: '1280px',
         '2xl': '1690px',
