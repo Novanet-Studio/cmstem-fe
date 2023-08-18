@@ -58,7 +58,7 @@ const submit = handleSubmit(async (data) => {
     <div class="w-full mx-auto lg:max-w-[1230px] border p-4 rounded-2xl">
       <form
         name="contacto"
-        class="p-18 rounded-2xl shadow bg-gradient-linear bg-gradient-to-[#E6E7E8] bg-gradient-from-[#FFFFFF]"
+        class="p-8 rounded-2xl shadow bg-gradient-linear bg-gradient-to-[#E6E7E8] bg-gradient-from-[#FFFFFF] lg:p-18"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         @submit.prevent="submit"
@@ -110,7 +110,7 @@ const submit = handleSubmit(async (data) => {
 
 <style scoped>
 .title {
-  @apply font-bold mb-8 text-color-2 text-2xl text-left;
+  @apply font-bold mb-4 text-color-2  text-left md:(text-2xl mb-8);
 }
 
 .form__title {

@@ -118,9 +118,9 @@ export default defineConfig({
     'auth-form__wrapper': 'bg-white p-6 max-w-[26rem] mx-auto mb-4',
     'auth-form__title': 'text-base mb-4 text-black',
     'auth-form__footer': 'py-3 mb-4 mt-2',
-    form__group: 'mb-4 md:mb-10',
-    'form__btn-group': 'mb-0 md:(mb-10 w-[25%])',
-    form__label: 'mb-6 text-dark-800',
+    form__group: 'mb-2 md:mb-6 lg:mb-10',
+    'form__btn-group': 'mb-0 mt-4 md:(mb-10 w-[25%])',
+    form__label: 'text-sm mb-6 text-dark-800 md:text-base',
     form__required: 'ml-1 text-red-500',
 
     // Block

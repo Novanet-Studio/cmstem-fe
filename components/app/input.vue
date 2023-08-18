@@ -20,7 +20,7 @@ const { value, errorMessage } = useField(() => props.name);
 <template>
   <div class="input-group" :class="class">
     <div
-      class="flex items-center border p-4 rounded-md bg-white"
+      class="flex items-center border p-3 rounded-md bg-white md:p-4"
       :class="[
         errorMessage?.length && 'border-red-5',
         focus && 'border-color-2',
@@ -30,7 +30,7 @@ const { value, errorMessage } = useField(() => props.name);
         <slot name="left" />
       </div>
       <input
-        class="w-4/5 md:w-full outline-none"
+        class="w-4/5 text-sm md:w-full outline-none"
         :type="type"
         v-model="value"
         @focus="focus = true"

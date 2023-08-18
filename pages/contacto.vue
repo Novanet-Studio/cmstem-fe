@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <contact-header />
-    <div class="grid grid-cols-1 grid-cols-2 gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
       <contact-form />
       <contact-map />
     </div>
