@@ -10,16 +10,18 @@ const sections = [
   <section>
     <div class="grid grid-cols-2 relative border-b border-color-5">
       <div
-        class="w-591px h-591px opacity-10 bg-color-4 rounded-full absolute -top-116px -left-122px -z9"
+        class="w-194px h-194px -left-40px -top-38px opacity-10 bg-color-4 rounded-full absolute -z9 lg:(w-591px h-591px -top-116px -left-122px)"
       ></div>
-      <div class="relative p-24 mt-42 ml-22">
-        <h1 class="font-800 max-w-md leading-12">
+      <div class="relative ml-8 mt-20 lg:(ml-22 p-24 mt-42)">
+        <h1
+          class="text-xl leading-6 max-w-xs font-800 lg:(leading-12 max-w-md)"
+        >
           ¡Artículos para todas las edades!
         </h1>
         <logo-dots />
       </div>
       <div>
-        <nuxt-img src="/atleta.jpg" w-full />
+        <nuxt-img src="/atleta.jpg" w-full h-52 />
       </div>
     </div>
     <div class="content-wrapper">
@@ -32,21 +34,22 @@ const sections = [
             para nadadores, yoguis, corredores y ciclistas!
           </h3>
         </div>
-        <div class="grid grid-cols-1 my-32 lg:(grid-cols-3 gap-8)">
+        <div class="grid grid-cols-1 gap-8 lg:(grid-cols-3 my-32)">
           <div
             v-for="(section, index) in sections"
             :key="index"
-            class="flex flex-col items-center border-r last:border-none px-8"
+            class="flex flex-col items-center px-8 border-b border-[#707070] last:border-none pb-8 lg:(border-r pb-0)"
           >
             <div
-              class="i-ph-check-circle-fill text-color-3 text-4xl mb-6"
+              class="i-ph-check-circle-fill text-color-3 text-4xl mb-4 lg:mb-6"
             ></div>
-            <p class="text-center">{{ section }}</p>
+            <p class="text-sm text-center md:text-base">{{ section }}</p>
           </div>
         </div>
         <app-message
           title="¡Prepárate para superar tus límites y disfrutar al máximo"
           subtitle="de tu deporte favorito con nuestros productos especializados!"
+          class="text-xs leading-6 !py-6"
         />
       </div>
     </div>
@@ -67,7 +70,7 @@ const sections = [
 }
 
 .title {
-  @apply text-4xl text-black;
+  @apply text-sm text-black lg:text-4xl;
 }
 
 .content {
