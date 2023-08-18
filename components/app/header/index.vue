@@ -18,7 +18,7 @@
 
 <style scoped>
 .header__wrapper {
-  @apply px-6 py-10 bg-white border-b border-color-1 md:px-6;
+  @apply px-6 py-10 bg-white border-b border-color-4 md:px-6;
 }
 
 .header__container {
@@ -26,7 +26,7 @@
 }
 
 .header__brand {
-  @apply flex items-center flex-basis-[35%] md:flex-basis-[auto];
+  @apply flex items-center flex-basis-[35%] md:flex-basis-full;
 }
 
 .header__link {
@@ -34,6 +34,6 @@
 }
 
 .header__content {
-  @apply w-[70%] lg:w-[15%];
+  @apply w-[55%] md:w-[30%] lg:w-[15%];
 }
 </style>

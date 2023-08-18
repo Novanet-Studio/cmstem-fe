@@ -36,10 +36,10 @@ const mainMenu = ref([
 }
 
 .menu__item {
-  @apply transition first:pl-0 hover:text-color-4;
+  @apply transition first:pl-0 hover:font-bold;
 }
 
 .menu__link {
-  @apply block py-[10px] md:pr-12 pl-0;
+  @apply block py-[10px] lg:pr-12 pl-0;
 }
 </style>

@@ -56,15 +56,15 @@ const isOpen = ref(false);
 
 <style scoped>
 .user-area {
-  @apply mx-5 flex flex-nowrap text-left cursor-pointer;
+  @apply mx-2 flex flex-nowrap text-left cursor-pointer md:mx-5;
 }
 
 .user-area__links-group {
-  @apply pl-[10px];
+  @apply pl-4px md:pl-10px;
 }
 
 .user-area__link {
-  @apply block font-bold text-sm;
+  @apply text-xs block font-bold md:text-sm;
 }
 
 .user-area__menu {
