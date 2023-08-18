@@ -38,7 +38,7 @@ const icons = {
 }
 
 .widgets__list {
-  @apply mt-4 w-full flex justify-center gap-2;
+  @apply w-full flex justify-center gap-2 md:mt-4;
 }
 
 .widgets__link {
