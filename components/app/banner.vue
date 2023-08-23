@@ -9,7 +9,7 @@ const appConfig = useAppConfig();
         <!-- <app-slider :items="appConfig.home.slider" /> -->
         <nuxt-img class="h-100" src="/img/home/2.jpg" lazy />
         <div
-          class="absolute top-0 left-0 w-full h-full bg-black/30 z-9999 text-white"
+          class="absolute top-0 left-0 w-full h-full bg-black/30 z-9 text-white"
         >
           <h1
             class="font-800 container mx-auto text-balance mt-24 lg:leading-14"
