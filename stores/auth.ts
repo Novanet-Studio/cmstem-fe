@@ -6,6 +6,11 @@ type User = StrapiUser & {
   customerId: string;
 };
 
+enum HttpsCallable {
+  CreateCustomer = 'createCustomer',
+  Payment = 'payment',
+}
+
 export const useAuthStore = defineStore(
   config.store.auth,
   () => {
