@@ -116,7 +116,7 @@ export default defineConfig({
     'input-group': 'py-3 pt-2 first:mb-4',
     'input-error': 'border-red-500',
     'auth-form__wrapper':
-      'p-6 max-w-[26rem] mx-auto mb-4 p-8 rounded-2xl bg-gradient-linear bg-gradient-to-[#E6E7E8] bg-gradient-from-[#FFFFFF] border-gray ring-[#707070] ring-2 ring-offset-10',
+      'p-6 max-w-[26rem] mx-auto mb-4 p-8 rounded-2xl bg-gradient-linear bg-gradient-to-[#E6E7E8] bg-gradient-from-[#FFFFFF] border-gray ring-[#707070] ring ring-offset-10',
     'auth-form__title': 'text-base mb-4 text-black',
     'auth-form__footer': 'py-3 mb-4 mt-2',
     form__group: 'mb-2 md:mb-6 lg:mb-10',
