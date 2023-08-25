@@ -30,25 +30,25 @@ const handleDescreaseQuantity = () => {
 <template>
   <div class="quantity">
     <button class="quantity__btn" @click.prevent="handleIncreaseQuantity">
-      <div class="i-ph-plus-light" />
+      <div class="i-ph-plus-light text-xs" />
     </button>
     <input class="quantity__input" v-model="quantity" type="text" disabled />
     <button class="quantity__btn" @click.prevent="handleDescreaseQuantity">
-      <div class="i-ph-minus-light" />
+      <div class="i-ph-minus-light text-xs" />
     </button>
   </div>
 </template>
 
 <style scoped>
 .quantity {
-  @apply max-w-[6.25rem] flex items-center justify-between border border-gray-300;
+  @apply max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md;
 }
 
 .quantity__btn {
-  @apply p-2;
+  @apply px-2;
 }
 
 .quantity__input {
-  @apply h-9 w-6 text-center;
+  @apply h-3 w-4 text-center bg-transparent text-black;
 }
 </style>

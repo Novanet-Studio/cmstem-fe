@@ -72,76 +72,56 @@ const handleAddToCart = (isBuyNow = false) => {
 </script>
 
 <template>
-  <div class="shopping">
-    <figure class="shopping__figure">
-      <figcaption class="shopping__figcaption">Cantidad</figcaption>
-      <div class="shopping__actions">
+  <div>
+    <div class="mt-2">
+      <div class="text-sm font-bold">Tallas</div>
+      <div class="mt-2">
         <button
-          class="shopping__actions-btn"
-          @click.prevent="handleIncreaseQuantity"
+          class="w-9 h-9 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md"
         >
+          XS
+        </button>
+      </div>
+    </div>
+
+    <div class="flex gap-2 mt-4">
+      <div
+        class="max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md"
+      >
+        <button class="px-2" @click.prevent="handleIncreaseQuantity">
           <div class="i-ph-minus-light text-xs text-gray-5" />
         </button>
         <input
           v-model="quantity"
-          class="shopping__actions-input"
+          class="h-3 w-4 text-center bg-transparent text-black text-xs"
           type="text"
           disabled
         />
-        <button
-          class="shopping__actions-btn"
-          @click.prevent="handleDescreaseQuantity"
-        >
+        <button class="px-2" @click.prevent="handleDescreaseQuantity">
           <div class="i-ph-plus-light text-xs text-gray-5" />
         </button>
       </div>
-    </figure>
-    <button class="shopping__btn" @click.prevent="handleAddToCart(false)">
-      Agregar al carrito
-    </button>
-    <button class="shopping__btn-alt" @click.prevent="handleAddToCart(true)">
-      Comprar
-    </button>
-    <button
-      class="shopping__btn-alt !bg-transparent"
-      title="Add to wishlist"
-      @click.prevent="handleAddItemToWishlist()"
-    >
-      <div class="i-ph-heart-light text-[24px] text-color-2" />
-    </button>
+      <button
+        class="bg-color-5 shadow shadow-md text-xs font-bold px-2.5 py-2 rounded-full flex items-center justify-center"
+        @click="handleAddToCart(false)"
+      >
+        Agregar al carrito
+        <!-- <span class="i-ph-shopping-cart text-lg"></span> -->
+      </button>
+      <button
+        class="bg-color-5 shadow shadow-md text-sm font-bold w-10 h-10 rounded-full flex items-center justify-center"
+        @click="handleAddItemToWishlist"
+      >
+        <span class="i-ph-heart text-lg"></span>
+      </button>
+    </div>
+    <div class="flex justify-center mt-8">
+      <button
+        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full"
+        @click="handleAddToCart(true)"
+      >
+        Comprar
+      </button>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.shopping {
-  @apply flex flex-col items-center mb-12 pb-8 border-b-2 border-b-gray-200 lg:(items-end justify-start flex-row);
-}
-
-.shopping__figure {
-  @apply mb-4 lg:mb-0;
-}
-
-.shopping__figcaption {
-  @apply mb-1 text-center;
-}
-
-.shopping__actions {
-  @apply flex border border-gray-400 rounded-md p-2 w-full md:max-w-[7.1875rem];
-}
-
-.shopping__actions-btn {
-  @apply flex items-center justify-center pt-1 w-14 h-5 max-w-14 lg:(w-5 h-5 max-w-5);
-}
-
-.shopping__actions-input {
-  @apply w-14 text-center text-red-500 lg:w-[40px];
-}
-
-.shopping__btn {
-  @apply w-full font-bold p-4 rounded-sm flex items-center justify-center max-h-12 text-white bg-color-2 mx-7 mb-4 border rounded-md transition ease md:w-full lg:(text-xs mb-0 max-w-50);
-}
-
-.shopping__btn-alt {
-  @apply font-bold p-4 rounded-sm flex items-center justify-center max-h-12 w-full transition ease text-color-2 rounded-md bg-color-1 md:w-auto lg:(text-xs mr-7) hover:(text-white border-transparent bg-color-2);
-}
-</style>

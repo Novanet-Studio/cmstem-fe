@@ -13,7 +13,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
       <figure>
         <div class="ps-wrapper max-w-3xl">
           <!-- Gallery-->
-          <div class="ps-product__gallery">
+          <div class="ps-product__gallery relative">
             <swiper-container
               class="main-swiper"
               :space-between="10"
@@ -24,14 +24,26 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
               free-mode
             >
               <swiper-slide v-for="image in product.images" :key="image.id">
-                <img :src="image.url" :alt="image.alternativeText" />
+                <img
+                  class="rounded-2xl"
+                  :src="image.url"
+                  :alt="image.alternativeText"
+                />
               </swiper-slide>
             </swiper-container>
+
+            <div class="absolute -bottom-4 flex w-full justify-center z-9999">
+              <button
+                class="w-13 h-13 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md"
+              >
+                00
+              </button>
+            </div>
           </div>
         </div>
       </figure>
       <!-- Thumbnail -->
-      <div class="ps-product__variants max-w-48">
+      <div class="ps-product__variants max-w-48 mt-5">
         <swiper-container
           class="swiper-thumbs"
           @swiper="setThumbsSwiper"
@@ -46,7 +58,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
         >
           <swiper-slide v-for="image in product.images" :key="image.id">
             <img
-              class="object-contain"
+              class="object-contain rounded-xl"
               :src="image.url"
               :alt="image.alternativeText"
             />
