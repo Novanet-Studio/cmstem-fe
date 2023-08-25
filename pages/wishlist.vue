@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'account',
 });
@@ -6,18 +6,23 @@ definePageMeta({
 const wishlist = useWishlistStore();
 const productStore = useProductStore();
 
+const sectionTitle = inject('sectionTitle') as Ref<string>;
+
+sectionTitle.value = 'Lista de deseos';
+
 onMounted(() => {
   wishlist.load();
 });
 </script>
 
-
 <template>
   <wishlist-wrapper>
-    <wishlist-header>Lista de deseos</wishlist-header>
-    <wishlist-header no-articles v-if="!productStore?.wishlistItems?.length">
+    <h5
+      v-if="!productStore?.wishlistItems?.length"
+      class="text-sm font-bold text-color-7 text-center mb-12"
+    >
       No tienes articulos en tu lista de deseos
-    </wishlist-header>
+    </h5>
     <wishlist-table @reload="wishlist.load" v-else />
   </wishlist-wrapper>
 </template>

@@ -3,13 +3,18 @@ definePageMeta({
   layout: 'account',
   middleware: 'authentication',
 });
+
+const sectionTitle = inject('sectionTitle') as Ref<string>;
+
+sectionTitle.value = 'Ordenes de compra';
 </script>
 
 <template>
   <section class="invoices">
-    <header class="invoices__header">
-      <h3 class="invoices__title">Ordenes de compra</h3>
-    </header>
+    <!-- TODO: Add condition to render this text -->
+    <h5 class="text-sm font-bold text-color-7 text-center mb-12">
+      No hay ordenes de compra
+    </h5>
     <div class="invoices__content">
       <invoices-table />
     </div>
@@ -19,14 +24,6 @@ definePageMeta({
 <style scoped>
 .invoices {
   @apply lg:(ml-8 w-full);
-}
-
-.invoices__header {
-  @apply mb-[30px] pb-[10px] border-b-2 border-b-light-800 flex w-full;
-}
-
-.invoices__title {
-  @apply text-2xl font-semibold text-color-2;
 }
 
 .invoices__content {

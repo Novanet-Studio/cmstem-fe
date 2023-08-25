@@ -32,6 +32,10 @@ const loadCartProducts = async () => {
   product.cartProducts = strapiMapper(response.data.products.data) as Product[];
 };
 
+const sectionTitle = inject('sectionTitle') as Ref<string>;
+
+sectionTitle.value = 'Carrito de compras';
+
 onMounted(() => {
   loadCartProducts();
 });
@@ -40,11 +44,14 @@ onMounted(() => {
 <template>
   <section class="shopping-cart">
     <div class="shopping-cart__wrapper">
-      <div class="shopping-cart__container" v-if="cart.cartItems?.length">
-        <header class="shopping-cart__header">
-          <h1 class="shopping-cart__title">Carrito de compras</h1>
-        </header>
-        <div>
+      <div class="shopping-cart__container">
+        <h5
+          class="text-sm font-bold text-color-7 text-center mb-12"
+          v-if="!cart.cartItems?.length"
+        >
+          No tiene elementos agregado al carrito actualmente
+        </h5>
+        <div v-else>
           <shopping-cart-table v-if="product.cartProducts?.length" />
           <p v-else>Carrito vacio</p>
           <div class="shopping-cart__link-wrapper">
@@ -53,67 +60,60 @@ onMounted(() => {
               Regresar
             </nuxt-link>
           </div>
-        </div>
-        <div class="shopping-cart__footer">
-          <div class="shopping-cart__left">
-            <figure>
-              <figcaption class="shopping-cart__figcaption">
-                Cupon de descuento
-              </figcaption>
-              <input
-                type="text"
-                class="border-none outline-none bg-transparent"
-                v-model="discount"
-              />
-              <app-button class="shopping-cart__btn" outline>
-                Aplicar
-              </app-button>
-            </figure>
-          </div>
-          <div></div>
-          <div>
-            <div class="shopping-cart__right-wrapper">
-              <div class="shopping-cart__text-wrapper">
-                <p class="shopping-cart__text">
-                  Subtotal <span> ${{ cart.amount }} </span>
-                </p>
-              </div>
-              <div>
-                <ul class="cart-product">
-                  <li
-                    class="cart-product__item"
-                    v-for="item in product.cartProducts"
-                    :key="item!.id"
-                  >
-                    <span class="cart-product__wrapper">
-                      <nuxt-link :to="`/product/${item!.id}`">
-                        {{ item!.name }}
-                        <br />
-                        <quantity-section :id="item!.id" :price="item!.price" />
-                      </nuxt-link>
-                    </span>
-                  </li>
-                </ul>
-                <h3 class="cart-product__total">
-                  Total
-                  <span class="cart-product__amount">${{ cart.amount }}</span>
-                </h3>
-              </div>
+          <div class="shopping-cart__footer">
+            <div class="shopping-cart__left">
+              <figure>
+                <figcaption class="shopping-cart__figcaption">
+                  Cupon de descuento
+                </figcaption>
+                <input
+                  type="text"
+                  class="border-none outline-none bg-transparent"
+                  v-model="discount"
+                />
+                <app-button class="shopping-cart__btn" outline>
+                  Aplicar
+                </app-button>
+              </figure>
             </div>
-            <app-button class="mb-24" @click="$router.push('/checkout')">
-              Proceder a la compra
-            </app-button>
+            <div></div>
+            <div>
+              <div class="shopping-cart__right-wrapper">
+                <div class="shopping-cart__text-wrapper">
+                  <p class="shopping-cart__text">
+                    Subtotal <span> ${{ cart.amount }} </span>
+                  </p>
+                </div>
+                <div>
+                  <ul class="cart-product">
+                    <li
+                      class="cart-product__item"
+                      v-for="item in product.cartProducts"
+                      :key="item!.id"
+                    >
+                      <span class="cart-product__wrapper">
+                        <nuxt-link :to="`/product/${item!.id}`">
+                          {{ item!.name }}
+                          <br />
+                          <quantity-section
+                            :id="item!.id"
+                            :price="item!.price"
+                          />
+                        </nuxt-link>
+                      </span>
+                    </li>
+                  </ul>
+                  <h3 class="cart-product__total">
+                    Total
+                    <span class="cart-product__amount">${{ cart.amount }}</span>
+                  </h3>
+                </div>
+              </div>
+              <app-button class="mb-24" @click="$router.push('/checkout')">
+                Proceder a la compra
+              </app-button>
+            </div>
           </div>
-        </div>
-      </div>
-      <div v-else class="shopping-cart__container">
-        <header class="shopping-cart__header">
-          <h1 class="shopping-cart__title">Carrito de compras</h1>
-        </header>
-        <div>
-          <h3 class="empy-cart text-color-2 text-center text-3xl font-bold">
-            No tiene elementos agregado al carrito actualmente
-          </h3>
         </div>
       </div>
     </div>
@@ -146,7 +146,7 @@ onMounted(() => {
 }
 
 .shopping-cart__link {
-  @apply inline-flex items-center px-[45px] py-[15px] text-base rounded-sm bg-color-1 transition ease hover:bg-opacity-90 active:bg-opacity-90 cursor-pointer;
+  @apply inline-flex items-center px-5 py-2 text-white text-xs font-bold rounded-full bg-color-2 transition ease hover:bg-opacity-90 active:bg-opacity-90 cursor-pointer;
 }
 
 .shopping-cart__footer {

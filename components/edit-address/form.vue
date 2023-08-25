@@ -4,6 +4,12 @@ import { object, string, minLength, nonNullable, any } from 'valibot';
 import { toTypedSchema } from '@vee-validate/valibot';
 import countries from '~/data/countries.json';
 
+enum AddressType {
+  Billing = 'billing',
+  Shipping = 'shipping',
+  None = '',
+}
+
 type Form = {
   country: string;
   streetAddress: string;
@@ -104,7 +110,7 @@ onMounted(() => {
         {{ title }}
       </h3>
     </header>
-    <div>
+    <div class="app-gradient">
       <div class="address-form__group">
         <label class="address-form__label"
           >País<sup class="address-form__required">*</sup></label
@@ -153,19 +159,19 @@ onMounted(() => {
 }
 
 .address-form__header {
-  @apply mb-8 pb-3 border-b border-b-light-800;
+  @apply mb-8 pb-3;
 }
 
 .address-form__title {
-  @apply text-2xl font-semibold text-color-2;
+  @apply text-sm font-bold text-color-2;
 }
 
 .address-form__group {
-  @apply mb-10;
+  @apply mb-5 lg:mb-10;
 }
 
 .address-form__label {
-  @apply mb-6 text-dark-800;
+  @apply mb-6 text-dark-800 text-xs font-bold;
 }
 
 .address-form__required {
@@ -173,6 +179,6 @@ onMounted(() => {
 }
 
 .address-form__group-btn {
-  @apply mb-10 md:w-[25%];
+  @apply mb-2 md:w-[25%] lg:mb-10;
 }
 </style>

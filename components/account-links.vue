@@ -31,12 +31,15 @@ const getIcon = (icon: string) => {
 </script>
 
 <template>
-  <ul class="border border-gray-300">
+  <ul class="border border-gray-300 mt-12 rounded-3xl max-w-xs mx-auto">
     <li
       class="border-b-2 last:border-b-gray-300"
       v-for="link in links"
       :key="link.text"
-      :class="hasText(link?.name) ? 'text-color-2' : ''"
+      :class="[
+        hasText(link?.name) && 'text-white bg-color-2',
+        link?.name === 'invoices' && 'rounded-t-3xl',
+      ]"
     >
       <nuxt-link
         :to="link.url"
@@ -44,7 +47,7 @@ const getIcon = (icon: string) => {
         :class="hasText(link?.name) ? 'font-bold' : 'font-medium'"
       >
         <div
-          class="mr-3"
+          class="mr-3 text-xl"
           :class="
             hasText(link.name)
               ? getIcon(link.name).active
@@ -60,7 +63,7 @@ const getIcon = (icon: string) => {
         href="#"
         @click.prevent="auth.logout"
       >
-        <div class="i-ph-power-light mr-3" />
+        <div class="i-ph-power-light mr-3 text-xl" />
         Cerrar Sesión
       </a>
     </li>

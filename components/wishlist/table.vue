@@ -61,10 +61,10 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
 <template>
   <table-wrapper>
     <table class="table">
-      <thead class="">
-        <tr>
-          <th scope="col" class="table-th">Nombre</th>
-          <th scope="col" class="table-th">Precio por unidad</th>
+      <thead class="bg-color-3">
+        <tr class="rounded-t-3xl">
+          <th scope="col" class="table-th">Producto</th>
+          <th scope="col" class="table-th">Precio</th>
           <th scope="col" class="table-th">Acciones</th>
         </tr>
       </thead>
@@ -74,26 +74,25 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
           v-for="item in productStore.wishlistItems"
           :key="item?.id"
         >
-          <td class="product-td">
-            <product-shopping-cart
-              image-class="!h-24"
-              :id="item!.id"
-              :title="item!.name"
-              :product="item!"
+          <td class="product-td text-color-2">
+            <nuxt-img
+              v-if="item?.images.length"
+              :src="item?.images[0].url"
+              :alt="item?.name"
+              :placeholder="[100, 50, 10]"
+              sizes="sm:100vw md:50vw lg:200px"
+              fit="outside"
+              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6"
             />
           </td>
           <td class="price-td">$ {{ item?.price.toFixed(2) }}</td>
-          <td class="actions-td">
-            <app-button class="!w-48" @click="handleAddToCart(item!)">
+          <td class="flex items-center h-ful">
+            <app-button class="!text-xs !w-32" @click="handleAddToCart(item!)">
               Añadir al carrito
             </app-button>
-            <a
-              href="#"
-              class="text-color-2 ml-4"
-              @click.prevent="handleRemoveItemFromWishlist(item)"
-            >
+            <button class="text-color-2 ml-4">
               <div class="i-ph-x-light"></div>
-            </a>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -111,22 +110,22 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
 }
 
 .table-th {
-  @apply text-sm font-bold text-color-2 px-6 py-4 text-left lg:text-base;
+  @apply text-sm font-bold text-white px-6 py-4 text-left lg:text-base;
 }
 
 .table-tr {
-  @apply border-b transition duration-300 ease-in-out hover:bg-color-8 group;
+  @apply border-b transition duration-300 ease-in-out bg-color-6 even:bg-color-5 hover:bg-color-8 group;
 }
 
 .product-td {
-  @apply px-6 py-4 text-sm font-bold text-color-6 p-2 lg:text-base;
+  @apply px-6 py-4 text-sm font-bold text-black p-2 lg:text-base;
 }
 
 .price-td {
-  @apply text-sm text-color-6 font-light px-6 py-4 whitespace-nowrap lg:text-base;
+  @apply text-sm text-black font-bold px-6 py-4 whitespace-nowrap lg:text-base;
 }
 
 .actions-td {
-  @apply text-sm text-color-6 font-light px-6 py-4 lg:text-base lg:flex items-center h-full;
+  @apply text-sm text-color-6 font-light px-6 py-4 lg:text-base flex items-center h-full;
 }
 </style>

@@ -47,7 +47,7 @@ defineExpose({
 
 <style>
 .btn {
-  @apply w-full text-center text-white py-2 font-bold inline-block text-sm border-transparent rounded-full bg-color-2 transition ease cursor-pointer hover:(bg-opacity-80) active:(bg-opacity-80) disabled:(opacity-70 text-gray cursor-not-allowed) md:py-4;
+  @apply w-full text-center text-white py-2 font-bold inline-block text-xs border-transparent rounded-full bg-color-2 transition ease cursor-pointer md:text-sm hover:(bg-opacity-80) active:(bg-opacity-80) disabled:(opacity-70 text-gray cursor-not-allowed) md:py-4;
 }
 
 .btn--outline {

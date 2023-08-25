@@ -4,6 +4,12 @@ definePageMeta({
   middleware: 'authentication',
 });
 
+enum AddressType {
+  Billing = 'billing',
+  Shipping = 'shipping',
+  None = '',
+}
+
 const route = useRoute();
 
 const type = computed(() => {
@@ -16,15 +22,16 @@ const type = computed(() => {
 
   return type as AddressType.None;
 });
+
+const sectionTitle = inject('sectionTitle') as Ref<string>;
+
+sectionTitle.value = 'Dirección';
 </script>
 
 <template>
   <section class="edit-address" v-if="type">
     <div class="edit-address__wrapper">
-      <header class="edit-address__header">
-        <h3 class="edit-address__title">Direcciones</h3>
-      </header>
-      <div class="edit-address__content bg-white">
+      <div class="edit-address__content">
         <edit-address-form :type="type" />
       </div>
     </div>
@@ -33,7 +40,7 @@ const type = computed(() => {
 
 <style scoped>
 .edit-address {
-  @apply w-full lg:ml-8;
+  @apply w-full mb-8 lg:ml-8;
 }
 
 .edit-address__wrapper {

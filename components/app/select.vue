@@ -111,11 +111,19 @@ setTimeout(() => {
 <template>
   <div>
     <div class="relative mt-2" ref="target">
-      <button type="button"
-        class="relative w-full cursor-default rounded-md bg-white py-5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-color-1 sm:text-sm sm:leading-6"
-        :class="[error && 'ring-red-600']" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="select-label"
-        @click="open = !open">
-        <span class="flex items-center h-4" v-if="isObjectData ? selected?.label : selected">
+      <button
+        type="button"
+        class="relative w-full cursor-default rounded-md bg-white py-3 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-color-1 sm:text-sm sm:leading-6"
+        :class="[error && 'ring-red-600']"
+        aria-haspopup="listbox"
+        aria-expanded="true"
+        aria-labelledby="select-label"
+        @click="open = !open"
+      >
+        <span
+          class="flex items-center h-4"
+          v-if="isObjectData ? selected?.label : selected"
+        >
           <!-- <img
             :src="selected.avatar"
             class="mr-3 h-5 w-5 flex-shrink-0 rounded-full"
@@ -129,12 +137,16 @@ setTimeout(() => {
             :src="selected.avatar"
             class="h-5 w-5 flex-shrink-0 rounded-full"
           /> -->
-          <span class="block truncate text-gray-400 p-0 ml-1">{{
+          <span class="block truncate text-gray-400 p-0 ml-1 text-xs">{{
             placeholder ?? 'Select a option'
           }}</span>
         </span>
-        <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-          <div class="i-ph-caret-down-light text-[12px] h-5 w-5 text-gray-400"></div>
+        <span
+          class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2"
+        >
+          <div
+            class="i-ph-caret-down-light text-10px h-5 w-5 text-gray-400"
+          ></div>
         </span>
       </button>
 
@@ -148,12 +160,19 @@ setTimeout(() => {
         From: "opacity-100"
         To: "opacity-0"
     -->
-      <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100"
-        leave-to-class="opacity-0">
+      <transition
+        leave-active-class="transition ease-in duration-100"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
         <ul
           class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-          :class="open ? '' : 'hidden'" tabindex="-1" role="listbox" aria-labelledby="listbox-label"
-          aria-activedescendant="listbox-option-3">
+          :class="open ? '' : 'hidden'"
+          tabindex="-1"
+          role="listbox"
+          aria-labelledby="listbox-label"
+          aria-activedescendant="listbox-option-3"
+        >
           <template v-for="(option, index) in data" :key="index">
             <!--
             Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
@@ -162,29 +181,37 @@ setTimeout(() => {
           -->
 
             <li
-              class="relative cursor-default select-none py-2 pl-3 pr-9 transition ease hover:bg-color-2 hover:text-white"
-              :class="compareOptions(option)
-                ? 'bg-color-2 text-white'
-                : 'text-gray-900'
-                " @click="
-    selected = option;
-  open = false;
-  ">
+              class="relative cursor-default select-none py-2 pl-3 pr-9 transition ease text-xs hover:bg-color-2 hover:text-white"
+              :class="
+                compareOptions(option)
+                  ? 'bg-color-2 text-white'
+                  : 'text-gray-900'
+              "
+              @click="
+                selected = option;
+                open = false;
+              "
+            >
               <div class="flex items-center">
                 <!-- <img
                   :src="person.avatar"
                   alt=""
                   class="mr-3 h-5 w-5 flex-shrink-0 rounded-full"
                 /> -->
-                <span :class="[
-                  compareOptions(option) ? 'font-semibold' : 'font-normal',
-                  'block p-0 truncate',
-                ]">{{ isObjectData ? option?.label : option }}</span>
+                <span
+                  :class="[
+                    compareOptions(option) ? 'font-semibold' : 'font-normal',
+                    'block p-0 truncate',
+                  ]"
+                  >{{ isObjectData ? option?.label : option }}</span
+                >
               </div>
 
-              <span v-if="compareOptions(option)"
+              <span
+                v-if="compareOptions(option)"
                 class="absolute inset-y-0 right-0 flex items-center pr-4 hover:text-white"
-                :class="compareOptions(option) ? 'text-white' : 'text-color-1'">
+                :class="compareOptions(option) ? 'text-white' : 'text-color-1'"
+              >
                 <div class="i-ph-x-light h-5 w-5"></div>
               </span>
             </li>

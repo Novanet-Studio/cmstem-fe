@@ -1,3 +1,9 @@
+<script setup lang="ts">
+const sectionTitle = ref('');
+
+provide('sectionTitle', sectionTitle);
+</script>
+
 <template>
   <client-only>
     <div class="account">
@@ -6,16 +12,22 @@
           <div class="account__main-wrapper">
             <app-header />
             <section class="account__section">
-              <div class="account__section-wrapper">
-                <div class="account__section-container">
-                  <div class="account__aside">
-                    <div>
-                      <aside-account />
-                    </div>
-                  </div>
-                  <div class="account__content">
-                    <nuxt-page />
-                  </div>
+              <div class="container">
+                <div
+                  class="relative mt-10 md:(mt-32) flex flex-col items-center lg:(p-10 mt-12)"
+                >
+                  <h1
+                    class="text-xl leading-6 max-w-xs font-800 md:(text-3xl max-w-[18rem]) lg:(text-5xl leading-12 max-w-md)"
+                  >
+                    {{ sectionTitle }}
+                  </h1>
+                  <logo-dots />
+                </div>
+                <div class="mb-8">
+                  <account-links />
+                </div>
+                <div class="account__content">
+                  <nuxt-page />
                 </div>
               </div>
             </section>
@@ -30,7 +42,7 @@
 
 <style scoped>
 .account {
-  @apply flex relative bg-color-3;
+  @apply flex relative;
 }
 
 .account__wrapper {
@@ -46,26 +58,6 @@
 }
 
 .account__section {
-  @apply pt-12 min-h-screen;
-}
-
-.account__section-wrapper {
-  @apply max-w-sm p-3 mx-auto flex sm:max-w-lg md:max-w-2xl lg:(px-52 max-w-full);
-}
-
-.account__section-container {
-  @apply pt-12 min-h-screen;
-}
-
-.account__section-container {
-  @apply flex flex-wrap flex-auto -m-3;
-}
-
-.account__aside {
-  @apply flex-[0_0_100%] mb-8 md:h-auto lg:(flex-[0_0_30.333333%] mb-8);
-}
-
-.account__content {
-  @apply flex-[0_0_100%] flex lg:flex-[0_0_66.666666%];
+  @apply pt-12;
 }
 </style>

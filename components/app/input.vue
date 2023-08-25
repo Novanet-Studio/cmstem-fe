@@ -30,7 +30,7 @@ const { value, errorMessage } = useField(() => props.name);
         <slot name="left" />
       </div>
       <input
-        class="w-4/5 text-sm md:w-full outline-none"
+        class="w-4/5 text-xs md:w-full outline-none"
         :type="type"
         v-model="value"
         @focus="focus = true"

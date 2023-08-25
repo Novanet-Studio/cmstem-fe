@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import mapper from 'smapper';
 import { GetProductById } from '~/graphql/queries';
 
 const graphql = useStrapiGraphQL();
@@ -20,7 +21,7 @@ const loadCartProducts = async () => {
 
   const [response] = await Promise.all(productPromises);
 
-  productStore.cartProducts = mapperData(response.data.products.data);
+  productStore.cartProducts = mapper(response.data.products.data);
 };
 
 const handleRemoveProductFromCart = (product?: Product) => {
@@ -35,7 +36,7 @@ const handleRemoveProductFromCart = (product?: Product) => {
   <table-wrapper>
     <table class="table">
       <thead class="table__thead">
-        <tr>
+        <tr class="!rounded-t-3xl">
           <th scope="col" class="table__th">Producto</th>
           <th scope="col" class="table__th">Precio</th>
           <th scope="col" class="table__th">Cantidad</th>
@@ -46,11 +47,14 @@ const handleRemoveProductFromCart = (product?: Product) => {
       <tbody>
         <tr class="table__tr" v-for="product in products" :key="product!.id">
           <td class="product-td">
-            <product-shopping-cart
-              image-class="!h-auto !w-18"
-              :id="product!.id"
-              :title="product!.name"
-              :product="product!"
+            <nuxt-img
+              v-if="product?.images.length"
+              :src="product?.images[0].url"
+              :alt="product?.name"
+              :placeholder="[100, 50, 10]"
+              sizes="sm:100vw md:50vw lg:200px"
+              fit="outside"
+              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6"
             />
           </td>
           <td class="base-td">${{ product!.price }}</td>
@@ -85,23 +89,23 @@ const handleRemoveProductFromCart = (product?: Product) => {
 }
 
 .table__thead {
-  @apply border-b;
+  @apply border-b bg-color-3 !rounded-t-3xl;
 }
 
 .table__th {
-  @apply text-sm font-bold text-color-2 px-6 py-4 text-left lg:text-base;
+  @apply text-sm font-bold text-white px-6 py-4 text-left lg:text-base;
 }
 
 .table__tr {
-  @apply border-b transition duration-300 ease-in-out hover:bg-color-8 group;
+  @apply border-b transition duration-300 bg-color-6 even:bg-color-5 ease-in-out hover:bg-color-8 group;
 }
 
 .product-td {
-  @apply px-6 py-4 whitespace-nowrap text-sm font-bold text-color-6 p-2 lg:text-base;
+  @apply px-6 py-4 whitespace-nowrap text-sm font-bold text-black p-2 lg:text-base;
 }
 
 .base-td {
-  @apply text-sm text-color-4 font-light px-6 py-4 whitespace-nowrap lg:text-base;
+  @apply text-sm text-black font-light px-6 py-4 whitespace-nowrap lg:text-base;
 }
 
 .quantity-td {

@@ -6,6 +6,10 @@ definePageMeta({
 
 const checkout = useCheckoutStore();
 const { hasBilling, hasShipping } = checkout.checkAddressType();
+
+const sectionTitle = inject('sectionTitle') as Ref<string>;
+
+sectionTitle.value = 'Dirección';
 </script>
 
 <template>
@@ -16,53 +20,57 @@ const { hasBilling, hasShipping } = checkout.checkAddressType();
           <figcaption class="address__figcaption">
             Dirección de facturación
           </figcaption>
-          <template v-if="hasBilling">
-            <div>
-              <p class="address__text">
-                ¿Deseas actualizar tu dirección de facturación?
-              </p>
-              <nuxt-link class="address__link" to="/edit-address?add=billing">
-                Actualizar
-              </nuxt-link>
-            </div>
-          </template>
-          <template v-else>
-            <div>
-              <p class="address__text">
-                No has registrado ningun dirección de facturación
-              </p>
-              <nuxt-link class="address__link" to="/edit-address?add=billing">
-                Agregar
-              </nuxt-link>
-            </div>
-          </template>
+          <div
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            v-if="hasBilling"
+          >
+            <p class="address__text">
+              ¿Deseas actualizar tu dirección de facturación?
+            </p>
+            <nuxt-link class="address__link" to="/edit-address?add=billing">
+              Actualizar
+            </nuxt-link>
+          </div>
+          <div
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            v-else
+          >
+            <p class="address__text">
+              No has registrado ningun dirección de facturación
+            </p>
+            <nuxt-link class="address__link" to="/edit-address?add=billing">
+              Agregar
+            </nuxt-link>
+          </div>
         </figure>
       </div>
       <div class="address__content">
-        <figure class="mr-5">
+        <figure class="lg:mr-5">
           <figcaption class="address__figcaption">
             Dirección de envío
           </figcaption>
-          <template v-if="hasShipping">
-            <div>
-              <p class="address__text">
-                ¿Deseas actualizar tu dirección de envío?
-              </p>
-              <nuxt-link class="address__link" to="/edit-address?add=shipping">
-                Actualizar
-              </nuxt-link>
-            </div>
-          </template>
-          <template v-else>
-            <div>
-              <p class="address__text">
-                No has registrado ningun dirección de envío
-              </p>
-              <nuxt-link class="address__link" to="/edit-address?add=shipping">
-                Agregar
-              </nuxt-link>
-            </div>
-          </template>
+          <div
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            v-if="hasShipping"
+          >
+            <p class="address__text">
+              ¿Deseas actualizar tu dirección de envío?
+            </p>
+            <nuxt-link class="address__link" to="/edit-address?add=shipping">
+              Actualizar
+            </nuxt-link>
+          </div>
+          <div
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            v-else
+          >
+            <p class="address__text">
+              No has registrado ningun dirección de envío
+            </p>
+            <nuxt-link class="address__link" to="/edit-address?add=shipping">
+              Agregar
+            </nuxt-link>
+          </div>
         </figure>
       </div>
     </div>
@@ -83,7 +91,7 @@ const { hasBilling, hasShipping } = checkout.checkAddressType();
 }
 
 .address__figcaption {
-  @apply mb-8 pb-3 text-xl font-semibold text-color-2 border-b-[1px] border-b-primary-alt;
+  @apply mb-8 pb-3 text-sm font-bold text-color-2;
 }
 
 .address__text {
@@ -91,6 +99,6 @@ const { hasBilling, hasShipping } = checkout.checkAddressType();
 }
 
 .address__link {
-  @apply text-base text-color-6 transition ease hover:(text-opacity-70);
+  @apply text-white px-6 bg-color-2 py-2 rounded-full transition ease text-sm hover:(text-opacity-70);
 }
 </style>

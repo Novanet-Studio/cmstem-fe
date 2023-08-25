@@ -82,6 +82,7 @@ export default defineConfig({
         4: theme.colors.default.theme_color.color_4,
         5: theme.colors.default.theme_color.color_5,
         6: theme.colors.default.theme_color.color_6,
+        7: theme.colors.default.theme_color.color_7,
       },
     },
     breakpoints: {
