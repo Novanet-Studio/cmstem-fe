@@ -92,7 +92,7 @@ const submit = handleSubmit(async (data) => {
         <div class="form__group flex flex-col">
           <label class="form__label">Mensaje</label>
           <textarea
-            class="w-full border border-color-7 rounded-md p-2 outline-none ring-2 ring-transparent focus:ring-color-2"
+            class="w-full border border-color-7 rounded-md p-4 text-sm outline-none ring-2 ring-transparent focus:ring-color-2"
             cols="15"
             placeholder="Saludos, me gustaria saber..."
             rows="8"
@@ -101,7 +101,9 @@ const submit = handleSubmit(async (data) => {
         </div>
 
         <div class="form__btn-group">
-          <app-button type="submit" @click="submit">Enviar</app-button>
+          <app-button class="!py-2 self-center" type="submit" @click="submit"
+            >Enviar</app-button
+          >
         </div>
       </form>
     </div>
@@ -110,7 +112,7 @@ const submit = handleSubmit(async (data) => {
 
 <style scoped>
 .title {
-  @apply font-bold mb-4 text-color-2  text-left md:(text-2xl mb-8);
+  @apply font-bold mb-4 text-color-2  text-left md:(text-lg mb-8) lg:(text-2xl);
 }
 
 .form__title {

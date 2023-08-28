@@ -20,7 +20,7 @@ const { value, errorMessage } = useField(() => props.name);
 <template>
   <div class="input-group" :class="class">
     <div
-      class="flex items-center border p-3 rounded-md bg-white md:p-4"
+      class="flex items-center border p-3 rounded-md bg-white lg:p-4"
       :class="[
         errorMessage?.length && 'border-red-5',
         focus && 'border-color-2',

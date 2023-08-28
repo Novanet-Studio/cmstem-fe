@@ -29,8 +29,8 @@ onMounted(async () => {
           :space-between="1"
           :breakpoints="{
             768: {
-              slidesPerView: 3,
-              spaceBetween: 2,
+              slidesPerView: 4,
+              spaceBetween: 1,
             },
             1024: {
               slidesPerView: 5,

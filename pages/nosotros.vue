@@ -43,13 +43,15 @@ const sections = [
             <div
               class="i-ph-check-circle-fill text-color-3 text-4xl mb-4 lg:mb-6"
             ></div>
-            <p class="text-xs text-center lg:text-base">{{ section }}</p>
+            <p class="text-11px text-center text-[#292929] lg:text-base">
+              {{ section }}
+            </p>
           </div>
         </div>
         <app-message
           title="¡Prepárate para superar tus límites y disfrutar al máximo"
           subtitle="de tu deporte favorito con nuestros productos especializados!"
-          class="text-xs leading-6 !py-6 md:mt-12 lg:(!py-20 leading-12)"
+          class="text-xs leading-6 !py-6 md:(mt-12 !py-12) lg:(!py-20 leading-12)"
         />
       </div>
     </div>
