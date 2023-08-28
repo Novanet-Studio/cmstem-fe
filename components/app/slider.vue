@@ -79,10 +79,13 @@ watchEffect(() => {
   --swiper-navigation-size: 10px;
 }
 
-/* :deep(.swiper-button-next),
-:deep(.swiper-button-prev) {
-  --swiper-navigation-size: 2rem;
+:root {
   --swiper-navigation-color: #161824;
-  @apply transition;
-} */
+  --swiper-pagination-color: #161824;
+}
+
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  --swiper-navigation-size: 1.5rem;
+}
 </style>
