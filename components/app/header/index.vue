@@ -34,6 +34,6 @@
 }
 
 .header__content {
-  @apply w-[55%] md:w-[30%] lg:w-[15%];
+  @apply w-[45%] md:w-[30%] lg:w-[15%];
 }
 </style>
