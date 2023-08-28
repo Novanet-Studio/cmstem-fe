@@ -21,19 +21,22 @@ withDefaults(defineProps<Props>(), {
           <strong class="order-summary__strong-text">total</strong>
         </figcaption>
       </figure>
-      <figure class="order-summary__figure">
+      <figure class="order-summary__figure grid grid-cols-[70%_1fr]">
         <template v-for="(item, index) in product.cartProducts" :key="index">
-          <nuxt-link :to="`/product/${item!.id}`" class="order-summary__link flex-1">
+          <nuxt-link
+            :to="`/product/${item!.id}`"
+            class="order-summary__link flex-1"
+          >
             {{ item!.name }}
           </nuxt-link>
-          <p class="order-summary__price">
+          <p class="order-summary__price flex justify-end">
             {{ cart.cartItems[index]?.quantity }} x ${{
               item!.price.toFixed(2)
             }}
           </p>
         </template>
       </figure>
-      <figure class="order-summary__figure">
+      <figure class="order-summary__figure !border-none !mb-0 !pb-0">
         <figcaption class="order-summary__figcaption">
           <strong class="order-summary__strong-text">Subtotal</strong>
           <small>$ {{ cart.amount }}</small>
@@ -45,11 +48,11 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .order-summary__title {
-  @apply font-semibold mb-3 text-color-2 text-2xl;
+  @apply font-bold mb-3 text-color-2 text-sm;
 }
 
 .order-summary__content {
-  @apply px-5 py-8 mb-3 rounded-sm border border-light-600;
+  @apply px-6 py-8 mb-3 rounded-3xl border border-color-7;
 }
 
 .order-summary__figure {
@@ -61,14 +64,14 @@ withDefaults(defineProps<Props>(), {
 }
 
 .order-summary__strong-text {
-  @apply text-sm text-color-2 font-semibold uppercase;
+  @apply text-sm text-color-2 font-bold;
 }
 
 .order-summary__link {
-  @apply py-3 flex justify-between w-full;
+  @apply py-3 flex justify-between w-full text-sm;
 }
 
 .order-summary__price {
-  @apply text-sm text-dark-100;
+  @apply text-xs text-dark-100;
 }
 </style>

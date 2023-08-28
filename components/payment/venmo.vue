@@ -6,13 +6,13 @@ const { isSending, hasError, submit } = usePaymentForm({
   payment: {
     validation: (form) =>
       Date.parse(form.date) > Date.parse(new Date().toISOString()),
-    message: `El monto del pago no es valido o la fecha no concuerda con el dia de hoy`
-  }
+    message: `El monto del pago no es valido o la fecha no concuerda con el dia de hoy`,
+  },
 });
 </script>
 
 <template>
-  <section>
+  <section class="mt-6 container">
     <template v-show="false">
       <div>
         <figure>
@@ -29,37 +29,54 @@ const { isSending, hasError, submit } = usePaymentForm({
         </figure>
       </div>
       <div>
-        <strong>No disponemos de este metodo actualmente, por favor, seleccione
-          otro.</strong>
+        <strong
+          >No disponemos de este metodo actualmente, por favor, seleccione
+          otro.</strong
+        >
       </div>
     </template>
-    <form @submit.prevent="submit">
+    <form class="app-gradient" @submit.prevent="submit">
       <div class="form__group">
-        <label class="form__label">Nombre del usuario<sup class="form__required">*</sup></label>
+        <label class="form__label"
+          >Nombre del usuario<sup class="form__required">*</sup></label
+        >
         <app-input name="name" placeholder="john" />
       </div>
       <div class="form__group">
-        <label class="form__label">Apellido del usuario<sup class="form__required">*</sup></label>
+        <label class="form__label"
+          >Apellido del usuario<sup class="form__required">*</sup></label
+        >
         <app-input name="lastName" placeholder="doe" />
       </div>
       <div class="form__group">
-        <label class="form__label">Fecha del pago<sup class="form__required">*</sup></label>
+        <label class="form__label"
+          >Fecha del pago<sup class="form__required">*</sup></label
+        >
         <app-input name="date" type="date" />
       </div>
       <div class="form__group">
-        <label class="form__label">Monto del pago en USD<sup class="form__required">*</sup></label>
+        <label class="form__label"
+          >Monto del pago en USD<sup class="form__required">*</sup></label
+        >
         <app-input name="amountPayed" />
       </div>
       <div class="form__group">
-        <label class="form__label">Payment ID<sup class="form__required">*</sup></label>
+        <label class="form__label"
+          >Payment ID<sup class="form__required">*</sup></label
+        >
         <app-input name="confirmation" />
       </div>
-      <p>
+      <p class="text-xs whitespace-normal">
         Al realizar esta compra usted acepta
         <a href="#" class="text-color-2">nuestros términos y condiciones</a>.
       </p>
       <div class="form__btn-group mt-4">
-        <app-button type="submit" @click="submit" :loading="isSending" :disabled="hasError">
+        <app-button
+          type="submit"
+          @click="submit"
+          :loading="isSending"
+          :disabled="hasError"
+        >
           Enviar
         </app-button>
       </div>

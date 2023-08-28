@@ -17,6 +17,12 @@ type Form = {
   phone: string;
 };
 
+enum AddressType {
+  Billing = 'billing',
+  Shipping = 'shipping',
+  None = '',
+}
+
 const router = useRouter();
 const graphql = useStrapiGraphQL();
 const auth = useAuthStore();
@@ -115,82 +121,86 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h3 class="title">Información de contacto</h3>
+  <div class="container">
     <form>
-      <div class="form__group">
-        <label class="form__label"
-          >Email<sup class="form__required">*</sup></label
-        >
-        <app-input name="email" placeholder="correo@mail.com" />
-      </div>
+      <h3 class="title">Información de contacto</h3>
+      <div class="app-gradient mb-12">
+        <div class="form__group">
+          <label class="form__label"
+            >Email<sup class="form__required">*</sup></label
+          >
+          <app-input name="email" placeholder="correo@mail.com" />
+        </div>
 
-      <div class="form__container">
-        <div class="form__left">
-          <div class="form__group">
-            <label class="form__label">Nombre</label>
-            <app-input name="name" placeholder="Juan" />
+        <div class="form__container">
+          <div class="form__left">
+            <div class="form__group">
+              <label class="form__label">Nombre</label>
+              <app-input name="name" placeholder="Juan" />
+            </div>
+          </div>
+          <div class="form__right">
+            <div class="form__group">
+              <label class="form__label">Apellido</label>
+              <app-input name="lastName" placeholder="Pérez" />
+            </div>
           </div>
         </div>
-        <div class="form__right">
-          <div class="form__group">
-            <label class="form__label">Apellido</label>
-            <app-input name="lastName" placeholder="Pérez" />
-          </div>
-        </div>
       </div>
 
-      <h3 class="form__title">Informacion de envio</h3>
+      <h3 class="title">Informacion de envio</h3>
 
-      <div class="form__group">
-        <label class="form__label">Dirección</label>
-        <app-input
-          name="address"
-          placeholder="Av. Principal con calle Secundaria"
-        />
-      </div>
-      <div class="form__group">
-        <label class="form__label">Apartamento</label>
-        <app-input name="home" placeholder="11E" />
-      </div>
-
-      <div class="form__group">
-        <label class="form__label">Pais</label>
-        <app-select
-          v-bind="country"
-          label="name"
-          value-key="code"
-          :options="countries"
-          placeholder="Selecciona una opcion"
-          :error="!!errors.country"
-          :error-message="errors.country"
-        />
-      </div>
-
-      <div class="form__grid">
-        <div class="form__group-alt">
-          <label class="form__label">Ciudad</label>
-          <app-input name="city" placeholder="Caracas" />
-        </div>
-        <div class="form__group-alt">
-          <label class="form__label">Código Postal</label>
-          <app-input name="zipCode" placeholder="1050" />
+      <div class="app-gradient">
+        <div class="form__group">
+          <label class="form__label">Dirección</label>
+          <app-input
+            name="address"
+            placeholder="Av. Principal con calle Secundaria"
+          />
         </div>
         <div class="form__group">
-          <label class="form__label">Numero de contacto</label>
-          <app-input name="phone" placeholder="04120000102" />
+          <label class="form__label">Apartamento</label>
+          <app-input name="home" placeholder="11E" />
         </div>
-      </div>
 
-      <div class="form__group">
-        <app-checkbox
-          label="Guardar informacion"
-          v-model="checkout.saveInformation"
-        />
-      </div>
+        <div class="form__group">
+          <label class="form__label">Pais</label>
+          <app-select
+            v-bind="country"
+            label="name"
+            value-key="code"
+            :options="countries"
+            placeholder="Selecciona una opcion"
+            :error="!!errors.country"
+            :error-message="errors.country"
+          />
+        </div>
 
-      <div class="form__btn-group">
-        <app-button type="submit" @click="submit">Continuar</app-button>
+        <div class="form__grid">
+          <div class="form__group-alt">
+            <label class="form__label">Ciudad</label>
+            <app-input name="city" placeholder="Caracas" />
+          </div>
+          <div class="form__group-alt">
+            <label class="form__label">Código Postal</label>
+            <app-input name="zipCode" placeholder="1050" />
+          </div>
+          <div class="form__group">
+            <label class="form__label">Numero de contacto</label>
+            <app-input name="phone" placeholder="04120000102" />
+          </div>
+        </div>
+
+        <div class="form__group">
+          <app-checkbox
+            label="Guardar informacion"
+            v-model="checkout.saveInformation"
+          />
+        </div>
+
+        <div class="form__btn-group">
+          <app-button type="submit" @click="submit">Continuar</app-button>
+        </div>
       </div>
     </form>
   </div>
@@ -198,11 +208,7 @@ onMounted(() => {
 
 <style scoped>
 .title {
-  @apply font-semibold mb-3 text-color-2 text-2xl;
-}
-
-.form__title {
-  @apply font-semibold mb-8 text-color-2 text-2xl md:mb-3;
+  @apply font-bold mb-5 text-color-2 text-sm;
 }
 
 .form__group-alt {

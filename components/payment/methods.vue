@@ -51,19 +51,19 @@ const tabs = [
 }
 
 :deep(.tabs-component-tabs) {
-  @apply flex overflow-x-scroll w-30rem max-w-30rem md:(w-full max-w-full);
+  @apply flex overflow-x-scroll w-26rem max-w-26rem md:(w-full max-w-full) rounded-l-3xl rounded-r-3xl shadow shadow-md;
 }
 
 :deep(.tabs-component-tab) {
-  @apply px-4 py-3 border-b text-gray-400 flex-1 text-center;
+  @apply px-4 py-3 border-b text-xs text-color-7 flex-1 text-center;
 }
 
 :deep(.is-active:not(a)) {
-  @apply px-4 py-3 border-b-2 border-dark-1 text-color-2;
+  @apply px-4 py-3 bg-color-2 text-white font-bold;
 }
 
 :deep(.is-disabled:not(a)) {
-  @apply px-4 py-3 border-b-2 border-dark-1 text-color-2;
+  @apply px-4 py-3 bg-color-2 text-white font-bold;
 }
 
 :deep(.tabs-component-panels) {

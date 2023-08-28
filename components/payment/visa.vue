@@ -200,7 +200,11 @@ onMounted(async () => {
           By making this purchase you agree to
           <a href="#" class="visa__link">our terms and conditions</a>.
         </p>
-        <app-button :loading="state.isLoading" :disabled="state.cardButtonDisabled" ref="btnRef">
+        <app-button
+          :loading="state.isLoading"
+          :disabled="state.cardButtonDisabled"
+          ref="btnRef"
+        >
           Pagar
         </app-button>
       </div>
@@ -215,10 +219,10 @@ onMounted(async () => {
 }
 
 .visa__text {
-  @apply text-sm mb-8;
+  @apply text-xs mb-8 text-center;
 }
 
 .visa__link {
-  @apply text-color-2;
+  @apply text-color-2 font-semibold;
 }
 </style>

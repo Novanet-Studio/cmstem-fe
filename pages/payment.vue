@@ -1,5 +1,5 @@
 <template>
-  <div class="block mt-28">
+  <div class="block mt-15 container">
     <header class="b-header">
       <h1 class="b-title">Método de pago</h1>
     </header>
@@ -9,9 +9,9 @@
         <h4 class="b-subtitle">Selecciona el método de pago</h4>
         <payment-methods />
         <div class="b-link-wrapper">
-          <nuxt-link class="flex items-center" to="/shipping">
+          <nuxt-link class="flex items-center text-xs underline" to="/shipping">
             <div class="i-ph-arrow-left-light mr-2" />
-            Return to shipping
+            Regresar
           </nuxt-link>
         </div>
       </div>

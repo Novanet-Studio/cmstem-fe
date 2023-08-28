@@ -5,7 +5,7 @@ definePageMeta({
 </script>
 
 <template>
-  <section class="block mt-32">
+  <section class="block mt-20 container mb-15">
     <header class="b-header">
       <h1 class="b-title">Informacion de envio</h1>
     </header>
@@ -13,7 +13,7 @@ definePageMeta({
       <div class="b-left">
         <resume-information />
         <div class="b-link-wrapper">
-          <nuxt-link to="/checkout" class="flex items-center">
+          <nuxt-link to="/checkout" class="flex items-center text-sm">
             <div class="i-ph-arrow-left-light mr-2" />
             Regresar
           </nuxt-link>

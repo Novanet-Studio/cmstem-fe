@@ -110,7 +110,8 @@ export default defineConfig({
   shortcuts: {
     'app-gradient':
       'p-8 rounded-2xl  bg-gradient-linear bg-gradient-to-[#E6E7E8] bg-gradient-from-[#FFFFFF] border-gray ring-[#707070] ring ring-offset-10',
-
+    'main-gradient':
+      'p-8 rounded-2xl bg-gradient-linear bg-gradient-from-[#FFFFFF] bg-gradient-from-[#E6E7E8]',
     'header-actions__link': 'flex relative transition ease',
     'header-actions__icon': 'text-4xl md:text-[2.45rem] text-black',
     'header-actions__indicator-wrapper':
@@ -122,18 +123,18 @@ export default defineConfig({
     'auth-form__wrapper': 'p-6 max-w-[26rem] mx-auto mb-4 app-gradient',
     'auth-form__title': 'text-base mb-4 text-black',
     'auth-form__footer': 'py-3 mb-4 mt-2',
-    form__group: 'mb-2 md:mb-6 lg:mb-10',
+    form__group: 'md:mb-6 lg:mb-10',
     'form__btn-group': 'mb-0 mt-4 md:(mb-10 w-[25%])',
-    form__label: 'text-sm mb-6 text-dark-800 md:text-base',
+    form__label: 'text-xs mb-6 text-dark-800 font-bold md:text-base',
     form__required: 'ml-1 text-red-500',
 
     // Block
-    'b-header': 'text-center pb-16 md:pb-[6.25rem]',
-    'b-title': 'text-3xl font-semibold text-color-2 md:text-5xl',
-    'b-content': 'flex flex-col gap-8 lg:(flex-row mx-32)',
+    'b-header': 'text-center pb-8 md:pb-[6.25rem]',
+    'b-title': 'text-sm font-bold text-black md:text-5xl',
+    'b-content': 'flex flex-col-reverse gap-8 lg:(flex-row mx-32)',
     'b-left': 'flex-[0_0_100%] md:flex-[0_0_65%]',
     'b-right': 'flex-[0_0_100%] md:flex-[0_0_35%]',
-    'b-subtitle': 'text-lg text-color-2 mt-0 mb-6 font-bold md:mb-3',
+    'b-subtitle': 'text-sm text-color-2 mt-0 mb-6 font-bold md:mb-3',
     'b-link-wrapper': 'flex justify-between items-center',
   },
   preflights: [

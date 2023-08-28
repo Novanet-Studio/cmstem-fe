@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   middleware: 'authentication',
 });
@@ -7,7 +7,7 @@ definePageMeta({
 <template>
   <section class="checkout">
     <header class="checkout__header">
-      <h1 class="checkout__title">Informacion de facturación</h1>
+      <h4 class="checkout__title">Informacion de facturación</h4>
     </header>
     <div class="checkout__content">
       <div class="checkout__main">
@@ -22,7 +22,7 @@ definePageMeta({
 
 <style scoped>
 .checkout {
-  @apply w-full py-[6.25rem] px-3 mx-auto md:max-w-4xl lg:max-w-6xl;
+  @apply w-full py-10 px-3 container;
 }
 
 .checkout__header {
@@ -30,11 +30,11 @@ definePageMeta({
 }
 
 .checkout__title {
-  @apply text-2xl font-semibold text-color-2 md:text-5xl;
+  @apply text-sm font-bold text-black md:text-5xl;
 }
 
 .checkout__content {
-  @apply flex flex-col gap-8 md:flex-row;
+  @apply flex flex-col-reverse gap-8 md:flex-row;
 }
 
 .checkout__main {

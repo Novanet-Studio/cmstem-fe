@@ -28,7 +28,7 @@ const checkout = useCheckoutStore();
 
 <style scoped>
 .resume {
-  @apply mb-8 px-5 py-3 border border-light-800 rounded-sm text-dark-200;
+  @apply mb-8 px-5 py-3 border border-light-800 rounded-3xl text-dark-200;
 }
 
 .resume__content {
@@ -40,7 +40,7 @@ const checkout = useCheckoutStore();
 }
 
 .resume__item-title {
-  @apply flex-basis-[100%] text-sm max-w-40 md:(flex-0 max-w-18);
+  @apply flex-basis-[100%] text-black font-bold text-sm max-w-40 md:(flex-0 max-w-18);
 }
 
 .resume__contact {
@@ -52,6 +52,6 @@ const checkout = useCheckoutStore();
 }
 
 .resume__link {
-  @apply text-sm self-center text-color-6 max-w-40 text-right;
+  @apply text-xs self-center text-color-2 font-bold underline max-w-40 text-right;
 }
 </style>
