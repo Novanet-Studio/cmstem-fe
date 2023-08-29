@@ -74,19 +74,22 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
           v-for="item in productStore.wishlistItems"
           :key="item?.id"
         >
-          <td class="product-td text-color-2">
-            <nuxt-img
-              v-if="item?.images.length"
-              :src="item?.images[0].url"
-              :alt="item?.name"
-              :placeholder="[100, 50, 10]"
-              sizes="sm:100vw md:50vw lg:200px"
-              fit="outside"
-              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6 md:w-20"
-            />
+          <td class="product-td max-w-15rem text-color-2">
+            <div class="flex gap-6 items-center">
+              <nuxt-img
+                v-if="item?.images.length"
+                :src="item?.images[0].url"
+                :alt="item?.name"
+                :placeholder="[100, 50, 10]"
+                sizes="sm:100vw md:50vw lg:200px"
+                fit="outside"
+                class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6 md:w-20"
+              />
+              <h5>{{ item?.name }}</h5>
+            </div>
           </td>
           <td class="price-td">$ {{ item?.price.toFixed(2) }}</td>
-          <td class="flex items-center !h-full mt-6">
+          <td class="flex items-center !h-full mt-6 md:mt-8 lg:mt-10">
             <app-button class="!text-xs !w-32" @click="handleAddToCart(item!)">
               Añadir al carrito
             </app-button>
@@ -118,7 +121,7 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
 }
 
 .product-td {
-  @apply px-6 py-4 text-sm font-bold text-black p-2 lg:text-base;
+  @apply px-6 py-4 text-sm font-bold text-black md:(pr-0) lg:(text-base);
 }
 
 .price-td {
