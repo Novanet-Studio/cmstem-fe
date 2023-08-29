@@ -31,7 +31,7 @@ const getIcon = (icon: string) => {
 </script>
 
 <template>
-  <ul class="border border-gray-300 mt-12 rounded-3xl max-w-xs mx-auto">
+  <ul class="border border-gray-300 mt-12 rounded-3xl max-w-xs mx-auto md:mt-6">
     <li
       class="border-b-2 last:border-b-gray-300"
       v-for="link in links"

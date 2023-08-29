@@ -21,7 +21,7 @@ sectionTitle.value = 'Dirección';
             Dirección de facturación
           </figcaption>
           <div
-            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent shadow-2xl shadow-dark flex flex-col items-center gap-2 border md:(flex-row justify-between)"
             v-if="hasBilling"
           >
             <p class="address__text">
@@ -32,7 +32,7 @@ sectionTitle.value = 'Dirección';
             </nuxt-link>
           </div>
           <div
-            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border md:(flex-row justify-between)"
             v-else
           >
             <p class="address__text">
@@ -50,7 +50,7 @@ sectionTitle.value = 'Dirección';
             Dirección de envío
           </figcaption>
           <div
-            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border md:(flex-row justify-between)"
             v-if="hasShipping"
           >
             <p class="address__text">
@@ -61,7 +61,7 @@ sectionTitle.value = 'Dirección';
             </nuxt-link>
           </div>
           <div
-            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border"
+            class="app-gradient !ring-0 !ring-offset-0 !ring-transparent !shadow shadow-2xl flex flex-col items-center gap-2 border md:(flex-row justify-between)"
             v-else
           >
             <p class="address__text">
@@ -79,7 +79,7 @@ sectionTitle.value = 'Dirección';
 
 <style scoped>
 .wrapper {
-  @apply w-full lg:(ml-8);
+  @apply w-full md:px-8 lg:(ml-8 );
 }
 
 .address {
@@ -91,11 +91,11 @@ sectionTitle.value = 'Dirección';
 }
 
 .address__figcaption {
-  @apply mb-8 pb-3 text-sm font-bold text-color-2;
+  @apply mb-8 pb-3 text-sm font-bold text-color-2 md:(text-2xl mb-4);
 }
 
 .address__text {
-  @apply mb-4 text-color-2 text-sm;
+  @apply mb-4 text-color-2 text-sm md:(mb-0);
 }
 
 .address__link {

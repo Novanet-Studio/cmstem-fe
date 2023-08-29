@@ -82,11 +82,11 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
               :placeholder="[100, 50, 10]"
               sizes="sm:100vw md:50vw lg:200px"
               fit="outside"
-              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6"
+              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6 md:w-20"
             />
           </td>
           <td class="price-td">$ {{ item?.price.toFixed(2) }}</td>
-          <td class="flex items-center h-ful">
+          <td class="flex items-center !h-full mt-6">
             <app-button class="!text-xs !w-32" @click="handleAddToCart(item!)">
               Añadir al carrito
             </app-button>

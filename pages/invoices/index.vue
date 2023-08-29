@@ -12,7 +12,9 @@ sectionTitle.value = 'Ordenes de compra';
 <template>
   <section class="invoices">
     <!-- TODO: Add condition to render this text -->
-    <h5 class="text-sm font-bold text-color-7 text-center mb-12">
+    <h5
+      class="text-sm font-bold text-color-7 text-center mb-12 md:(mt-24 text-base)"
+    >
       No hay ordenes de compra
     </h5>
     <div class="invoices__content">

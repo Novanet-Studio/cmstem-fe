@@ -49,6 +49,6 @@ onMounted(() => {
 }
 
 .auth__content {
-  @apply mt-4;
+  @apply mt-4 container;
 }
 </style>

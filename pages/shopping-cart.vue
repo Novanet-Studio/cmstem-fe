@@ -62,7 +62,7 @@ onMounted(() => {
           </div>
           <div class="shopping-cart__footer">
             <div class="shopping-cart__left">
-              <figure>
+              <figure class="hidden">
                 <figcaption class="shopping-cart__figcaption">
                   Cupon de descuento
                 </figcaption>
@@ -162,7 +162,7 @@ onMounted(() => {
 }
 
 .shopping-cart__right-wrapper {
-  @apply mb-8 px-8 py-7 border border-color-7;
+  @apply mb-8 px-8 py-7 border border-color-7 rounded-3xl;
 }
 
 .shopping-cart__text-wrapper {

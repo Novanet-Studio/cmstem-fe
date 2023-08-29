@@ -14,7 +14,7 @@ provide('sectionTitle', sectionTitle);
             <section class="account__section">
               <div class="container">
                 <div
-                  class="relative mt-10 md:(mt-32) flex flex-col items-center lg:(p-10 mt-12)"
+                  class="relative mt-10 md:(mt-18) flex flex-col items-center lg:(p-10 mt-4 pt-0)"
                 >
                   <h1
                     class="text-xl leading-6 max-w-xs font-800 md:(text-3xl max-w-[18rem]) lg:(text-5xl leading-12 max-w-md)"
@@ -23,11 +23,13 @@ provide('sectionTitle', sectionTitle);
                   </h1>
                   <logo-dots />
                 </div>
-                <div class="mb-8">
-                  <account-links />
-                </div>
-                <div class="account__content">
-                  <nuxt-page />
+                <div class="md:(grid grid-cols-[25%_1fr] gap-6 mt-12)">
+                  <div class="mb-8">
+                    <account-links />
+                  </div>
+                  <div class="account__content">
+                    <nuxt-page />
+                  </div>
                 </div>
               </div>
             </section>
@@ -58,6 +60,6 @@ provide('sectionTitle', sectionTitle);
 }
 
 .account__section {
-  @apply pt-12;
+  @apply py-12 mb-20;
 }
 </style>

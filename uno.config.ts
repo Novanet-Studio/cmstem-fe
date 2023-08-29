@@ -86,6 +86,7 @@ export default defineConfig({
       },
     },
     breakpoints: {
+      xs: '340px',
       sm: '640px',
       md: '768px',
       lg: '1024px',
@@ -95,13 +96,16 @@ export default defineConfig({
     container: {
       center: true,
       maxWidth: {
-        sm: '640px',
+        xs: '330px',
+        sm: '520px',
         md: '920px',
         lg: '1024px',
         xl: '1280px',
         '2xl': '1690px',
       },
-      padding: '1rem',
+      padding: {
+        DEFAULT: '1rem',
+      },
     },
   },
   rules: [
@@ -129,8 +133,8 @@ export default defineConfig({
     form__required: 'ml-1 text-red-500',
 
     // Block
-    'b-header': 'text-center pb-8 md:pb-8',
-    'b-title': 'text-sm font-bold text-black md:text-base',
+    'b-header': 'text-center pb-8 md:pb-15',
+    'b-title': 'text-sm font-bold text-black md:text-xl',
     'b-content': 'flex flex-col-reverse gap-8 md:(flex-row)',
     'b-left': 'flex-[0_0_100%] md:flex-[0_0_60%]',
     'b-right': 'flex-[0_0_100%] md:flex-[0_0_35%]',

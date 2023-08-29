@@ -103,7 +103,7 @@ const submit = handleSubmit(async (data, { resetForm }) => {
           </div>
         </template>
       </app-input>
-      <div class="auth-form__footer">
+      <div class="auth-form__footer !mb-0">
         <app-button
           @click="submit"
           :loading="state.isLoading"

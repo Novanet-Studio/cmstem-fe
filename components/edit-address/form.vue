@@ -147,7 +147,9 @@ onMounted(() => {
         <app-input name="postcode" placeholder="1073" />
       </div>
       <div class="address-form__group-btn">
-        <app-button type="submit" @click="submit">Guardar</app-button>
+        <app-button class="!w-40 !py-3" type="submit" @click="submit"
+          >Guardar</app-button
+        >
       </div>
     </div>
   </form>
@@ -159,11 +161,11 @@ onMounted(() => {
 }
 
 .address-form__header {
-  @apply mb-8 pb-3;
+  @apply mb-8 pb-3 md:(pb-0);
 }
 
 .address-form__title {
-  @apply text-sm font-bold text-color-2;
+  @apply text-sm font-bold text-color-2 md:text-2xl;
 }
 
 .address-form__group {
@@ -179,6 +181,6 @@ onMounted(() => {
 }
 
 .address-form__group-btn {
-  @apply mb-2 md:w-[25%] lg:mb-10;
+  @apply mb-2 flex justify-center;
 }
 </style>

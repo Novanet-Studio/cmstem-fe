@@ -54,7 +54,7 @@ const handleRemoveProductFromCart = (product?: Product) => {
               :placeholder="[100, 50, 10]"
               sizes="sm:100vw md:50vw lg:200px"
               fit="outside"
-              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6"
+              class="h-full w-full object-contain rounded-sm bg-transparent ring ring-offset-5 ring-color-4 ring-offset-color-6 md:w-20"
             />
           </td>
           <td class="base-td">${{ product!.price }}</td>
