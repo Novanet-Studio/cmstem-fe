@@ -84,7 +84,7 @@ const handleAddToCart = (isBuyNow = false) => {
       </div>
     </div>
 
-    <div class="flex gap-2 mt-4">
+    <div class="flex gap-2 mt-4 md:gap-4">
       <div
         class="max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md"
       >
@@ -102,7 +102,7 @@ const handleAddToCart = (isBuyNow = false) => {
         </button>
       </div>
       <button
-        class="bg-color-5 shadow shadow-md text-xs font-bold px-2.5 py-2 rounded-full flex items-center justify-center"
+        class="bg-color-5 shadow shadow-md text-xs font-bold px-2.5 py-2 rounded-full flex items-center justify-center md:(px-4)"
         @click="handleAddToCart(false)"
       >
         Agregar al carrito
@@ -115,9 +115,9 @@ const handleAddToCart = (isBuyNow = false) => {
         <span class="i-ph-heart text-lg"></span>
       </button>
     </div>
-    <div class="flex justify-center mt-8">
+    <div class="flex justify-center mt-8 md:justify-initial">
       <button
-        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full"
+        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full md:px-10"
         @click="handleAddToCart(true)"
       >
         Comprar

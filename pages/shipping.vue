@@ -10,7 +10,7 @@ definePageMeta({
       <h1 class="b-title">Informacion de envio</h1>
     </header>
     <div class="b-content">
-      <div class="b-left">
+      <div class="b-left md:mt-8">
         <resume-information />
         <div class="b-link-wrapper">
           <nuxt-link to="/checkout" class="flex items-center text-sm">

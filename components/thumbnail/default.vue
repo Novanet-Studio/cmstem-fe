@@ -3,15 +3,22 @@ import { injectKeys } from '~/config/constants';
 
 const product = inject(injectKeys.productDetail) as Ref<Product>;
 const thumbsSwiper = ref(null);
+const breakpoint = useBreakpoint({
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  '2xl': 1366,
+});
 
 const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
 </script>
 
 <template>
   <client-only>
-    <div data-vertical="true">
+    <div class="md:(flex flex-row-reverse gap-4)">
       <figure>
-        <div class="ps-wrapper max-w-3xl">
+        <div class="ps-wrapper max-w-3xl md:max-w-16rem">
           <!-- Gallery-->
           <div class="ps-product__gallery relative">
             <swiper-container
@@ -43,7 +50,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
         </div>
       </figure>
       <!-- Thumbnail -->
-      <div class="ps-product__variants max-w-48 mt-5">
+      <div class="ps-product__variants max-w-48 mt-5 md:(max-w-24 mt-0)">
         <swiper-container
           class="swiper-thumbs"
           @swiper="setThumbsSwiper"
@@ -55,6 +62,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
           navigation
           pagination
           thumbs
+          :direction="['md', 'lg', 'xl', '2xl'].includes(breakpoint!) ? 'vertical' : 'horizontal'"
         >
           <swiper-slide v-for="image in product.images" :key="image.id">
             <img
@@ -111,11 +119,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
 }
 
 .swiper-thumbs {
-  /* height: 20%; */
-  height: 100px;
-  width: 300px;
-  box-sizing: border-box;
-  padding: 10px 0;
+  @apply h-100px w-300px box-border px-0 py-10px md:w-auto;
 }
 
 .swiper-thumbs .swiper-slide {

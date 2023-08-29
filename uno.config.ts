@@ -129,10 +129,10 @@ export default defineConfig({
     form__required: 'ml-1 text-red-500',
 
     // Block
-    'b-header': 'text-center pb-8 md:pb-[6.25rem]',
-    'b-title': 'text-sm font-bold text-black md:text-5xl',
-    'b-content': 'flex flex-col-reverse gap-8 lg:(flex-row mx-32)',
-    'b-left': 'flex-[0_0_100%] md:flex-[0_0_65%]',
+    'b-header': 'text-center pb-8 md:pb-8',
+    'b-title': 'text-sm font-bold text-black md:text-base',
+    'b-content': 'flex flex-col-reverse gap-8 md:(flex-row)',
+    'b-left': 'flex-[0_0_100%] md:flex-[0_0_60%]',
     'b-right': 'flex-[0_0_100%] md:flex-[0_0_35%]',
     'b-subtitle': 'text-sm text-color-2 mt-0 mb-6 font-bold md:mb-3',
     'b-link-wrapper': 'flex justify-between items-center',
@@ -142,6 +142,7 @@ export default defineConfig({
       getCSS: () => `
         html {
           font-size: ${fontBase}px;
+          box-sizing: border-box;
         }
 
         h1 {

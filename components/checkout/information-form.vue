@@ -198,8 +198,10 @@ onMounted(() => {
           />
         </div>
 
-        <div class="form__btn-group">
-          <app-button type="submit" @click="submit">Continuar</app-button>
+        <div class="form__btn-group flex justify-center">
+          <app-button class="!py-2 !w-40 !text-sm" type="submit" @click="submit"
+            >Continuar</app-button
+          >
         </div>
       </div>
     </form>

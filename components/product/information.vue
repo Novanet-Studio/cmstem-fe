@@ -5,6 +5,7 @@ const product = inject(injectKeys.productDetail) as Ref<Product>;
 
 <template>
   <div>
+    <h4 class="hidden md:block font-bold mb-2">{{ product?.name }}</h4>
     <div class="text-sm font-bold">Descripcion</div>
     <p class="text-xs">
       {{ product?.description ?? 'No hay descripcion' }}

@@ -26,15 +26,15 @@ definePageMeta({
 }
 
 .checkout__header {
-  @apply mb-12 text-center md:pb-[6.25rem];
+  @apply mb-12 text-center md:pt-10;
 }
 
 .checkout__title {
-  @apply text-sm font-bold text-black md:text-5xl;
+  @apply text-sm font-bold text-black md:text-xl;
 }
 
 .checkout__content {
-  @apply flex flex-col-reverse gap-8 md:flex-row;
+  @apply flex flex-col-reverse gap-8 md:(flex-row gap-4);
 }
 
 .checkout__main {

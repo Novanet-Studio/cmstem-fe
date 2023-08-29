@@ -5,10 +5,12 @@ const product = inject(injectKeys.productDetail);
 
 <template>
   <section class="container">
-    <h4 class="font-bold text-lg py-8">{{ product?.category.name }}</h4>
+    <h4 class="font-bold text-lg py-8 md:text-2xl">
+      {{ product?.category.name }}
+    </h4>
     <div class="app-gradient mb-8">
-      <div>
-        <h5 class="text-center mb-4 text-sm font-bold">
+      <div class="border border-amber flex flex-col md:(flex-row gap-6)">
+        <h5 class="text-center mb-4 text-sm font-bold md:hidden">
           {{ product?.name }}
         </h5>
         <thumbnail-default />
