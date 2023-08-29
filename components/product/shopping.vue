@@ -88,7 +88,7 @@ const handleAddToCart = (isBuyNow = false) => {
       <div
         class="max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md lg:px-4"
       >
-        <button class="px-2" @click.prevent="handleIncreaseQuantity">
+        <button class="px-2" @click.prevent="handleDescreaseQuantity">
           <div class="i-ph-minus-light text-xs text-gray-5 lg:text-sm" />
         </button>
         <input
@@ -97,7 +97,7 @@ const handleAddToCart = (isBuyNow = false) => {
           type="text"
           disabled
         />
-        <button class="px-2" @click.prevent="handleDescreaseQuantity">
+        <button class="px-2" @click.prevent="handleIncreaseQuantity">
           <div class="i-ph-plus-light text-xs text-gray-5 lg:text-sm" />
         </button>
       </div>

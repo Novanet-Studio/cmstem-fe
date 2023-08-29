@@ -4,7 +4,7 @@ const product = inject(injectKeys.productDetail);
 </script>
 
 <template>
-  <section class="container">
+  <section class="container lg:max-w-5xl">
     <h4 class="font-800 text-lg py-8 md:text-2xl">
       {{ product?.category.name }}
     </h4>
