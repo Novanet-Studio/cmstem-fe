@@ -65,38 +65,55 @@ watch(activePage, (newVal, oldVal) => {
 
 <template>
   <div class="paginator-container">
-    <a @click.prevent="setPage(activePage > 1 ? activePage - 1 : 1)" class="paginator-item paginator-item-prev"
-      :class="{ disabled: activePage === 1 || disabled }">
-      <slot name="prev-button">&lsaquo;</slot>
+    <a
+      @click.prevent="setPage(activePage > 1 ? activePage - 1 : 1)"
+      class="paginator-item paginator-item-prev"
+      :class="{ disabled: activePage === 1 || disabled }"
+    >
+      <slot name="prev-button">
+        <div class="i-ph-caret-left"></div>
+      </slot>
     </a>
 
     <div class="paginator-items">
-      <a v-for="p in pages" :key="p.id" class="paginator-item" :class="{
-        active: activePage === p.n,
-        space: p.n === space,
-        disabled,
-      }" @click.prevent="setPage(p.n)">
+      <a
+        v-for="p in pages"
+        :key="p.id"
+        class="paginator-item"
+        :class="{
+          active: activePage === p.n,
+          space: p.n === space,
+          disabled,
+        }"
+        @click.prevent="setPage(p.n)"
+      >
         {{ p.n }}
       </a>
     </div>
 
-    <a @click.prevent="
-      setPage(
-        activePage < pages[pages.length - 1].n
-          ? activePage + 1
-          : pages[pages.length - 1].n
-      )
-      " class="paginator-item paginator-item-next" :class="{
-    disabled: activePage === pages[pages.length - 1].n || disabled,
-  }">
-      <slot name="next-button">&rsaquo;</slot>
+    <a
+      @click.prevent="
+        setPage(
+          activePage < pages[pages.length - 1].n
+            ? activePage + 1
+            : pages[pages.length - 1].n
+        )
+      "
+      class="paginator-item paginator-item-next"
+      :class="{
+        disabled: activePage === pages[pages.length - 1].n || disabled,
+      }"
+    >
+      <slot name="next-button">
+        <div class="i-ph-caret-right"></div>
+      </slot>
     </a>
   </div>
 </template>
 
 <style>
 :root {
-  --primary-color: #ceb085;
+  --primary-color: #f18a00;
   --pg-item-width: 40px;
   --pg-item-height: 40px;
   --pg-item-border-radius: 50%;

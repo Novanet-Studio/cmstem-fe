@@ -7,6 +7,8 @@ definePageMeta({
 const sectionTitle = inject('sectionTitle') as Ref<string>;
 
 sectionTitle.value = 'Ordenes de compra';
+
+const invoice = useInvoiceStore();
 </script>
 
 <template>
@@ -14,6 +16,7 @@ sectionTitle.value = 'Ordenes de compra';
     <!-- TODO: Add condition to render this text -->
     <h5
       class="text-sm font-bold text-color-7 text-center mb-12 md:(mt-24 text-base)"
+      v-if="!invoice.invoices.length"
     >
       No hay ordenes de compra
     </h5>
