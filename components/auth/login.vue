@@ -38,7 +38,6 @@ const resetState = () => {
 };
 
 const submit = handleSubmit(async (data, { resetForm }) => {
-  console.log(data);
   try {
     state.isLoading = true;
     state.isDisabled = true;

@@ -1,18 +1,48 @@
 <script lang="ts" setup>
+import mapper from 'smapper';
 import { injectKeys } from '~/config/constants';
+import { GetProductById } from '~/graphql/queries';
 
 const props = defineProps<{ product: Product }>();
 
-const state = reactive({
-  modal: false,
-  preload: false,
-  isImageLoaded: false,
-  quickView: false,
-});
+const cart = useCartStore();
+const graphql = useStrapiGraphQL();
+const pruductStore = useProductStore();
+const { $notify } = useNuxtApp();
+
+async function handleAddToCart() {
+  const newProduct = {
+    id: props.product.id,
+    quantity: 1,
+    price: props.product.price,
+  };
+
+  cart.addProductToCart(newProduct);
+
+  const itemsList = cart.cartItems.map((item) => {
+    return graphql<ProductRequest>(GetProductById, { id: item.id });
+  });
+
+  const itemsResult = await Promise.all(itemsList);
+
+  const temp: any[] = [];
+
+  mapper<any[]>(itemsResult).map((item) => {
+    temp.push(item.products[0]);
+  });
+
+  pruductStore.addCartProducts(temp);
+
+  $notify({
+    group: 'all',
+    title: '¡Éxito!',
+    text: `Producto ${newProduct.id} ha sido agregado al carrito!`,
+  });
+}
 
 provide(injectKeys.product, props.product);
 
-const handleQuickView = (open: boolean) => (state.quickView = open);
+// const handleQuickView = (open: boolean) => (state.quickView = open);
 </script>
 
 <template>
@@ -37,6 +67,7 @@ const handleQuickView = (open: boolean) => (state.quickView = open);
     <div class="w-full mt-2 px-4 mx-12 pb-2">
       <button
         class="py-2 px-8 rounded-full w-full bg-color-5 shadow-md shadow-black/20 text-color-2 font-bold text-xs lg:text-base"
+        @click="handleAddToCart"
       >
         Comprar
       </button>
