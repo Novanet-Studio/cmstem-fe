@@ -70,12 +70,10 @@ const { isSending, hasError, submit } = usePaymentForm({
         >
         <app-input name="confirmation" />
       </div>
-      <div class="max-w-xs text-center">
-        <p class="text-xs whitespace-normal">
-          Al realizar esta compra usted acepta
-          <a href="#" class="text-color-2">nuestros términos y condiciones</a>.
-        </p>
-      </div>
+      <p class="text-xs whitespace-normal lg:text-sm">
+        Al realizar esta compra usted acepta
+        <a href="#" class="text-color-2">nuestros términos y condiciones</a>.
+      </p>
       <div class="form__btn-group mt-4">
         <app-button
           type="submit"

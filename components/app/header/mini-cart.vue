@@ -78,7 +78,7 @@ const isOpen = ref(false);
 }
 
 .mini-cart__footer-title {
-  @apply block mb-5 text-lg font-semibold flex justify-between;
+  @apply block mb-5 text-base font-semibold flex justify-between;
 }
 
 .mini-cart__amount {

@@ -210,7 +210,7 @@ onMounted(() => {
 
 <style scoped>
 .title {
-  @apply font-bold mb-5 text-color-2 text-sm;
+  @apply font-bold mb-5 text-color-2 text-sm lg:text-xl;
 }
 
 .form__group-alt {

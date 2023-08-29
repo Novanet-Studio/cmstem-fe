@@ -73,11 +73,11 @@ const handleAddToCart = (isBuyNow = false) => {
 
 <template>
   <div>
-    <div class="mt-2">
-      <div class="text-sm font-bold">Tallas</div>
+    <div class="mt-2 lg:mt-4">
+      <div class="text-sm font-bold lg:text-base">Tallas</div>
       <div class="mt-2">
         <button
-          class="w-9 h-9 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md"
+          class="w-9 h-9 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md lg:(w-12 h-12)"
         >
           XS
         </button>
@@ -86,23 +86,23 @@ const handleAddToCart = (isBuyNow = false) => {
 
     <div class="flex gap-2 mt-4 md:gap-4">
       <div
-        class="max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md"
+        class="max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md lg:px-4"
       >
         <button class="px-2" @click.prevent="handleIncreaseQuantity">
-          <div class="i-ph-minus-light text-xs text-gray-5" />
+          <div class="i-ph-minus-light text-xs text-gray-5 lg:text-sm" />
         </button>
         <input
           v-model="quantity"
-          class="h-3 w-4 text-center bg-transparent text-black text-xs"
+          class="h-3 w-4 text-center bg-transparent text-black text-xs lg:text-sm"
           type="text"
           disabled
         />
         <button class="px-2" @click.prevent="handleDescreaseQuantity">
-          <div class="i-ph-plus-light text-xs text-gray-5" />
+          <div class="i-ph-plus-light text-xs text-gray-5 lg:text-sm" />
         </button>
       </div>
       <button
-        class="bg-color-5 shadow shadow-md text-xs font-bold px-2.5 py-2 rounded-full flex items-center justify-center md:(px-4)"
+        class="bg-color-5 shadow shadow-md text-xs font-bold px-2.5 py-2 rounded-full flex items-center justify-center md:(px-4) lg:(px-8 text-sm)"
         @click="handleAddToCart(false)"
       >
         Agregar al carrito
@@ -117,7 +117,7 @@ const handleAddToCart = (isBuyNow = false) => {
     </div>
     <div class="flex justify-center mt-8 md:justify-initial">
       <button
-        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full md:px-10"
+        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full md:px-10 lg:px-12"
         @click="handleAddToCart(true)"
       >
         Comprar

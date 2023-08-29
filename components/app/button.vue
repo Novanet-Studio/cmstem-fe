@@ -47,10 +47,10 @@ defineExpose({
 
 <style>
 .btn {
-  @apply w-full text-center text-white py-2 font-bold inline-block text-xs border-transparent rounded-full bg-color-2 transition ease cursor-pointer md:text-sm hover:(bg-opacity-80) active:(bg-opacity-80) disabled:(opacity-70 text-gray cursor-not-allowed) md:py-4;
+  @apply w-full text-center text-white py-2 font-bold inline-block text-xs border-transparent rounded-full bg-color-2 transition ease cursor-pointer md:text-sm hover:(bg-opacity-80) active:(bg-opacity-80) disabled:(opacity-70 text-gray cursor-not-allowed) md:py-4 md:py-2;
 }
 
 .btn--outline {
-  @apply flex justify-center border !bg-transparent rounded-md border-color-2 text-color-2 hover:( !bg-color-2 !border-transparent !text-white);
+  @apply flex justify-center border !bg-transparent rounded-full border-color-2 text-color-2 hover:( !bg-color-2 !border-transparent !text-white);
 }
 </style>

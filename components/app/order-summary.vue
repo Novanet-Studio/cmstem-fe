@@ -48,11 +48,11 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped>
 .order-summary__title {
-  @apply font-bold mb-3 text-color-2 text-sm;
+  @apply font-bold mb-3 text-color-2 text-sm lg:text-base;
 }
 
 .order-summary__content {
-  @apply px-6 py-8 mb-3 rounded-3xl border border-color-7;
+  @apply px-6 py-8 mb-3 rounded-3xl shadow-md border border-color-7;
 }
 
 .order-summary__figure {

@@ -6,7 +6,7 @@
     <div class="b-content">
       <div class="b-left">
         <resume-information />
-        <h4 class="b-subtitle">Selecciona el método de pago</h4>
+        <h4 class="b-subtitle mt-12">Selecciona el método de pago</h4>
         <payment-methods />
         <div class="b-link-wrapper">
           <nuxt-link class="flex items-center text-xs underline" to="/shipping">

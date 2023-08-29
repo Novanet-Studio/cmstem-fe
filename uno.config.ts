@@ -127,7 +127,7 @@ export default defineConfig({
     'auth-form__wrapper': 'p-6 max-w-[26rem] mx-auto mb-4 app-gradient',
     'auth-form__title': 'text-base mb-4 text-black',
     'auth-form__footer': 'py-3 mb-4 mt-2',
-    form__group: 'md:mb-2 lg:mb-10',
+    form__group: 'md:mb-2 lg:mb-4',
     'form__btn-group': 'mb-0 mt-4',
     form__label: 'text-xs mb-3 text-dark-800 font-bold md:text-sm',
     form__required: 'ml-1 text-red-500',
@@ -135,10 +135,11 @@ export default defineConfig({
     // Block
     'b-header': 'text-center pb-8 md:pb-15',
     'b-title': 'text-sm font-bold text-black md:text-xl',
-    'b-content': 'flex flex-col-reverse gap-8 md:(flex-row)',
+    'b-content': 'flex flex-col-reverse gap-8 md:(flex-row) lg:gap-12',
     'b-left': 'flex-[0_0_100%] md:flex-[0_0_60%]',
     'b-right': 'flex-[0_0_100%] md:flex-[0_0_35%]',
-    'b-subtitle': 'text-sm text-color-2 mt-0 mb-6 font-bold md:mb-3',
+    'b-subtitle':
+      'text-sm text-color-2 mt-0 mb-6 font-bold md:mb-3 lg:text-base',
     'b-link-wrapper': 'flex justify-between items-center',
   },
   preflights: [

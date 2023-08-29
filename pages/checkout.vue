@@ -30,18 +30,18 @@ definePageMeta({
 }
 
 .checkout__title {
-  @apply text-sm font-bold text-black md:text-xl;
+  @apply text-sm font-bold text-black md:text-xl lg:text-2xl;
 }
 
 .checkout__content {
-  @apply flex flex-col-reverse gap-8 md:(flex-row gap-4);
+  @apply flex flex-col-reverse gap-8 md:(flex-row gap-4) lg:gap-8;
 }
 
 .checkout__main {
-  @apply flex-[0_0_100%] md:flex-[0_0_65%];
+  @apply flex-[0_0_100%] md:flex-[0_0_65%] lg:flex-[0_0_60%];
 }
 
 .checkout__aside {
-  @apply flex-[0_0_100%] md:flex-[0_0_35%];
+  @apply flex-[0_0_100%] md:flex-[0_0_35%] lg:flex-[0_0_30%];
 }
 </style>

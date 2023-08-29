@@ -20,7 +20,7 @@ const handleQuickView = (open: boolean) => (state.quickView = open);
     <div class="product relative p-3 lg:p-0">
       <div class="product__thumbnail lg:pb-4">
         <product-thumbnail-image />
-        <product-actions @quick-view="handleQuickView" />
+        <!-- <product-actions @quick-view="handleQuickView" /> -->
       </div>
       <div
         class="!absolute -bottom-5 lg:-bottom-8 left-0 w-full flex justify-center"

@@ -28,7 +28,7 @@ const checkout = useCheckoutStore();
 
 <style scoped>
 .resume {
-  @apply mb-8 px-5 py-3 border border-light-800 rounded-3xl text-dark-200;
+  @apply mb-8 px-5 py-3 border border-light-800 rounded-3xl text-dark-200 lg:py-8;
 }
 
 .resume__content {

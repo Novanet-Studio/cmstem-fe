@@ -66,7 +66,7 @@ const { isSending, hasError, submit } = usePaymentForm({
         >
         <app-input name="confirmation" />
       </div>
-      <p class="text-xs whitespace-normal">
+      <p class="text-xs whitespace-normal lg:text-sm">
         Al realizar esta compra usted acepta
         <a href="#" class="text-color-2">nuestros términos y condiciones</a>.
       </p>

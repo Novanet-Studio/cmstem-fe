@@ -219,7 +219,7 @@ onMounted(async () => {
 }
 
 .visa__text {
-  @apply text-xs mb-8 text-center;
+  @apply text-xs mb-8 text-center lg:text-sm;
 }
 
 .visa__link {

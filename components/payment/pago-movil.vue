@@ -64,9 +64,7 @@ const { isSending, hasError, submit } = usePaymentForm({
         <label class="form__label"
           >Monto en Bs<sup class="form__required">*</sup></label
         >
-        <p
-          class="text-xs max-w-full text-wrap text-balance font-bold whitespace-normal"
-        >
+        <p class="text-xs max-w-full text-wrap font-bold whitespace-normal">
           La tasa del día BCV es de {{ bcvUsd }} BsD. El monto del pago debe ser
           de {{ amountRate }}
         </p>
@@ -78,7 +76,7 @@ const { isSending, hasError, submit } = usePaymentForm({
         >
         <app-input name="confirmation" />
       </div>
-      <p class="text-xs whitespace-normal">
+      <p class="text-xs whitespace-normal lg:text-sm">
         Al realizar esta compra usted acepta
         <a href="#" class="text-color-2">nuestros términos y condiciones</a>.
       </p>

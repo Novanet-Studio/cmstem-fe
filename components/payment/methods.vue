@@ -55,7 +55,7 @@ const tabs = [
 }
 
 :deep(.tabs-component-tab) {
-  @apply px-4 py-3 border-b text-xs text-color-7 flex-1 text-center;
+  @apply px-4 py-3 border-b text-xs text-color-7 flex-1 text-center lg:text-sm;
 }
 
 :deep(.is-active:not(a)) {

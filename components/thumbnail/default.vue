@@ -119,7 +119,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
 }
 
 .swiper-thumbs {
-  @apply h-100px w-300px box-border px-0 py-10px md:w-auto;
+  @apply h-100px w-300px box-border px-0 py-10px md:w-auto lg:w-400px;
 }
 
 .swiper-thumbs .swiper-slide {

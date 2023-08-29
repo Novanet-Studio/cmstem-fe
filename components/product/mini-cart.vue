@@ -32,12 +32,18 @@ const handleRemoveProductFromCart = (product: any) => {
       <product-thumbnail-image />
     </div>
     <div class="product-mini-cart__body">
-      <a class="product-mini-cart__icon-wrapper" href="#" @click.prevent="handleRemoveProductFromCart(product)">
+      <a
+        class="product-mini-cart__icon-wrapper"
+        href="#"
+        @click.prevent="handleRemoveProductFromCart(product)"
+      >
         <div class="i-ph-x-light text-color-4" />
       </a>
-      <product-title :id="product.id">
+      <h5
+        class="m-0 block text-center text-lg lg:text-sm font-800 pt-2 pb-1 pl-0 overflow-hidden pr-4 text-black"
+      >
         {{ product.name }}
-      </product-title>
+      </h5>
       <small v-if="quantity !== null">
         {{ quantity }} x {{ currency }} {{ product.price }}
       </small>

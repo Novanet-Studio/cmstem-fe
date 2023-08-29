@@ -34,7 +34,7 @@ onMounted(async () => {
             },
             1024: {
               slidesPerView: 5,
-              spaceBetween: 3,
+              spaceBetween: 1,
             },
           }"
           v-if="products.length"
