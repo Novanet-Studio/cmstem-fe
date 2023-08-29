@@ -17,7 +17,7 @@ provide('sectionTitle', sectionTitle);
                   class="relative mt-10 md:(mt-18) flex flex-col items-center lg:(p-10 mt-4 pt-0)"
                 >
                   <h1
-                    class="text-xl leading-6 max-w-xs font-800 md:(text-3xl max-w-[18rem]) lg:(text-5xl leading-12 max-w-md)"
+                    class="text-xl leading-6 max-w-xs font-800 md:(text-3xl max-w-[18rem]) lg:(leading-12 max-w-md)"
                   >
                     {{ sectionTitle }}
                   </h1>
