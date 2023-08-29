@@ -8,8 +8,6 @@ import {
   email,
   regex,
   nonNullable,
-  ValiError,
-  type ValidateInfo,
 } from 'valibot';
 import { toTypedSchema } from '@vee-validate/valibot';
 
@@ -40,51 +38,45 @@ const showPasswords = ref(false);
 const PASSWORD_REGEX =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/gm;
 
-const confirmPasswordValidation = (input: string, info: ValidateInfo) => {
-  if (info?.path?.length) {
-    const data = info.path[0].input as { password: string };
-
-    if (data.password !== input) {
-      throw new ValiError([
-        {
-          validation: 'custom',
-          origin: 'value',
-          message: 'Contraseñas no coinciden',
-          input,
-          ...info,
-        },
-      ]);
-    }
-  }
-
-  return input;
-};
-
 const schema = toTypedSchema(
-  object({
-    email: string([
-      minLength(1, 'Ingrese su email'),
-      email('Formato de email inválido'),
-    ]),
-    username: nonNullable(
-      string([
-        minLength(1, 'Este campo es requerido'),
-        minLength(2, 'El nombre es muy corto'),
-        maxLength(10, 'El nombre es muy largo'),
-      ])
-    ),
-    password: string([
-      minLength(1, 'Este campo es requerido'),
-      regex(
-        PASSWORD_REGEX,
-        'Debe ser igual o mayor a 8 carácteres, una letra mayúscula, una minúscula, un número y un carácter especial'
+  object(
+    {
+      email: string([
+        minLength(1, 'Ingrese su email'),
+        email('Formato de email inválido'),
+      ]),
+      username: nonNullable(
+        string([
+          minLength(1, 'Este campo es requerido'),
+          minLength(2, 'El nombre es muy corto'),
+          maxLength(10, 'El nombre es muy largo'),
+        ])
       ),
-    ]),
-    confirmPassword: string([
-      minLength(1, 'Este campo es requerido'),
-      confirmPasswordValidation,
-    ]),
-  })
+      password: string([
+        minLength(1, 'Este campo es requerido'),
+        regex(
+          PASSWORD_REGEX,
+          'Debe ser igual o mayor a 8 carácteres, una letra mayúscula, una minúscula, un número y un carácter especial'
+        ),
+      ]),
+      confirmPassword: string([minLength(1, 'Este campo es requerido')]),
+    },
+    [
+      (input) => {
+        if (input.password !== input.confirmPassword) {
+          return {
+            issue: {
+              validation: 'custom',
+              message: 'Las contraseñas no coinciden',
+              input,
+            },
+          };
+        }
+
+        return { output: input };
+      },
+    ]
+  )
 );
 
 const resetState = () => {
