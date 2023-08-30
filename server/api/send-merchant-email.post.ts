@@ -728,19 +728,17 @@ export default defineEventHandler(async (event) => {
     const data = await readBody(event);
     const { sendgrid } = useRuntimeConfig();
 
-    console.log(sendgrid);
+    sgMail.setApiKey(sendgrid.apiKey);
 
-    // sgMail.setApiKey(sendgrid.apiKey);
+    const payload = {
+      to: sendgrid.receiverEmail,
+      from: sendgrid.senderEmail,
+      subject: `CCS MultiSport nueva orden ${data.order_id}`,
+      text: 'CCS MultiSport nueva orden',
+      html: getTemplate(data),
+    };
 
-    // const payload = {
-    //   to: sendgrid.receiverEmail,
-    //   from: sendgrid.senderEmail,
-    //   subject: `CCS MultiSport nueva orden ${data.order_id}`,
-    //   text: 'CCS MultiSport nueva orden',
-    //   html: getTemplate(data),
-    // };
-
-    // await sgMail.send(payload);
+    await sgMail.send(payload);
 
     return {
       message: 'Email enviado',

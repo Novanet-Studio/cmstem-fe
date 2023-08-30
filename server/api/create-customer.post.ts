@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
       data: customer,
     };
   } catch (error) {
+    console.log(error);
     return createError({
       statusCode: 500,
       statusMessage: 'Error creando el customer',
