@@ -328,15 +328,17 @@ export const useInvoiceStore = defineStore(
       payed,
       date,
       content,
+      email,
+      nameCustomer,
       orderId,
     }: EmailObjectParams) => ({
       payed,
       date,
       content,
-      email: authStore.user.email,
+      email: email || authStore.user.email,
       phone: checkout.phone,
       shipping: checkout.shippingAddress,
-      nameCustomer: checkout.fullName,
+      nameCustomer: nameCustomer || checkout.fullName,
       order_id: orderId,
     });
 
@@ -351,8 +353,8 @@ export const useInvoiceStore = defineStore(
       payed,
       date,
       content,
-      email: email ?? authStore.user.email,
-      nameCustomer: nameCustomer ?? checkout.fullName,
+      email: email || authStore.user.email,
+      nameCustomer: nameCustomer || checkout.fullName,
       order_id: orderId,
     });
 

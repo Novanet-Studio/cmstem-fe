@@ -859,6 +859,7 @@ export default defineEventHandler(async (event) => {
       status: 200,
     };
   } catch (error) {
+    console.log(error);
     return createError({
       statusCode: 500,
       statusMessage: 'Error enviando el email del recibo',
