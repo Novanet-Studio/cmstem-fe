@@ -335,7 +335,7 @@ export const useInvoiceStore = defineStore(
       payed,
       date,
       content,
-      email: email || authStore.user.email,
+      email: email || checkout?.email || authStore.user.email,
       phone: checkout.phone,
       shipping: checkout.shippingAddress,
       nameCustomer: nameCustomer || checkout.fullName,
@@ -353,7 +353,7 @@ export const useInvoiceStore = defineStore(
       payed,
       date,
       content,
-      email: email || authStore.user.email,
+      email: email || checkout?.email || authStore.user.email,
       nameCustomer: nameCustomer || checkout.fullName,
       order_id: orderId,
     });
