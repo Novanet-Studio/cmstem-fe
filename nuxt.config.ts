@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    sengrid: {
+    sendgrid: {
       apiKey: process.env.SENDGRID_API_KEY,
       senderEmail: process.env.SENDGRID_SENDER_MAIL,
       receiverEmail: process.env.SENDGRID_RECEIVER_MAIL,

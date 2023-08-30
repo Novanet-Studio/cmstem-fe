@@ -840,13 +840,13 @@ align="center"
 export default defineEventHandler(async (event) => {
   try {
     const data = await readBody(event);
-    const { sengrid } = useRuntimeConfig();
+    const { sendgrid } = useRuntimeConfig();
 
-    sgMail.setApiKey(sengrid.apiKey);
+    sgMail.setApiKey(sendgrid.apiKey);
 
     const payload = {
       to: data.email,
-      from: sengrid.senderEmail,
+      from: sendgrid.senderEmail,
       subject: `CCS MultiSport recibo de compra ${data.order_id}`,
       text: 'CCS MultiSport recibo de compra',
       html: getTemplate(data),
