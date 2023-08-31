@@ -11,8 +11,6 @@ const useBreakpoint = (
       (key) => windowWidth <= breakpoints[key]
     );
 
-    // console.log(matchingBreakpoint);
-
     breakpoint.value = matchingBreakpoint;
   };
 

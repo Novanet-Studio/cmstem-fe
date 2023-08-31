@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import { injectKeys } from '~/config/constants';
+import { FreeMode, Navigation, Mousewheel, Thumbs } from 'swiper/modules';
+import 'swiper/element/css/navigation';
+import 'swiper/element/css/thumbs';
 
 const product = inject(injectKeys.productDetail) as Ref<Product>;
 const thumbsSwiper = ref(null);
@@ -9,6 +12,7 @@ const breakpoint = useBreakpoint({
   lg: 1024,
   xl: 1280,
   '2xl': 1366,
+  '3xl': 3600,
 });
 
 const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
@@ -29,6 +33,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
               pagination
               thumbs-swiper=".swiper-thumbs"
               free-mode
+              :modules="[Navigation, Thumbs, Mousewheel]"
             >
               <swiper-slide v-for="image in product.images" :key="image.id">
                 <img
@@ -54,6 +59,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
         <swiper-container
           class="swiper-thumbs"
           @swiper="setThumbsSwiper"
+          :modules="[FreeMode, Navigation]"
           :space-between="10"
           :slides-per-view="4"
           free-mode
@@ -62,11 +68,11 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
           navigation
           pagination
           thumbs
-          :direction="['md', 'lg', 'xl', '2xl'].includes(breakpoint!) ? 'vertical' : 'horizontal'"
+          :direction="['md', 'lg', 'xl', '2xl', '3xl'].includes(breakpoint!) ? 'vertical' : 'horizontal'"
         >
           <swiper-slide v-for="image in product.images" :key="image.id">
             <img
-              class="object-contain rounded-xl"
+              class="object-contain rounded-xl h-90px w-full"
               :src="image.url"
               :alt="image.alternativeText"
             />
@@ -119,16 +125,16 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
 }
 
 .swiper-thumbs {
-  @apply h-100px w-300px box-border px-0 py-10px md:w-auto lg:w-400px;
+  @apply h-100px w-300px box-border px-0 py-10px md:w-auto lg:(w-100px h-400px);
 }
 
 .swiper-thumbs .swiper-slide {
   width: 25%;
-  height: 100%;
   opacity: 0.4;
+  @apply h-100px;
 }
 
-.swiper-thumbs .swiper-slide-thumb-active {
+.swiper-thumbs .swiper-slide .swiper-slide-thumb-active {
   opacity: 1;
 }
 
