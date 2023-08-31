@@ -5,7 +5,7 @@ const { isLoading, categories } = useCategory({ ordered: true });
 <template>
   <div>
     <app-banner />
-    <section class="container mt-8">
+    <section class="contenedor">
       <app-message
         title="¿Quieres conocer nuestra colección?"
         subtitle="Tenemos artículos para todos"
@@ -21,3 +21,9 @@ const { isLoading, categories } = useCategory({ ordered: true });
     </section>
   </div>
 </template>
+
+<style>
+.contenedor {
+  @apply md:(container) mt-8;
+}
+</style>

@@ -8,7 +8,7 @@ interface Props {
 defineProps<Props>();
 
 const product = inject(injectKeys.product) as Product;
-const imageUrl = computed(() => product?.images[0].formats.thumbnail.url);
+const imageUrl = computed(() => product?.images[0].url);
 </script>
 
 <template>
@@ -17,8 +17,8 @@ const imageUrl = computed(() => product?.images[0].formats.thumbnail.url);
       v-if="imageUrl"
       :src="imageUrl"
       :alt="product.name"
-      :placeholder="[100, 50, 10]"
-      sizes="sm:100vw md:50vw lg:200px"
+      :placeholder="[208, 232, 10]"
+      sizes="sm:0.625em md:13.125em"
       fit="outside"
       class="h-full w-full object-contain"
     />
