@@ -54,7 +54,7 @@ const submit = handleSubmit(async (data) => {
 
 <template>
   <div>
-    <h3 class="title">Para pedidos, por favor llene el formulario:</h3>
+    <h3 class="title">Para contactarnos, envíenos un mensaje:</h3>
     <div class="w-full mx-auto lg:max-w-[1230px] border p-4 rounded-2xl">
       <form
         name="contacto"

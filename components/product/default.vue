@@ -66,7 +66,7 @@ provide(injectKeys.product, props.product);
     </div>
     <div class="w-full mt-2 px-4 mx-12 pb-2">
       <button
-        class="py-2 px-8 rounded-full w-full bg-color-5 shadow-md shadow-black/20 text-color-2 font-bold text-xs lg:text-base"
+        class="py-2 px-8 rounded-full w-full bg-color-2 shadow-md shadow-black/20 text-color-4 font-bold text-xs lg:text-base"
         @click="handleAddToCart"
       >
         Comprar

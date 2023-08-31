@@ -13,7 +13,8 @@
       "text_color": {
         "default": "#292929",
         "dark": "#222",
-        "light": "#ceced0"
+        "light": "#ceced0",
+        "brandblue": "#001e61"
       }
     }
   },

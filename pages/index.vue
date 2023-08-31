@@ -21,9 +21,3 @@ const { isLoading, categories } = useCategory({ ordered: true });
     </section>
   </div>
 </template>
-
-<style>
-.contenedor {
-  @apply md:(container) mt-8;
-}
-</style>

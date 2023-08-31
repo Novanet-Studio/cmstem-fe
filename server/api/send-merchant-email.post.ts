@@ -131,7 +131,7 @@ align="center"
                             align="center"
                           >
                             <a
-                              href="https://drive.google.com/file/d/1a3--7Qn1Tttcody0zbJlOzM0HXtY0ujs/view?usp=sharing"
+                              href="https://tienda.ccsmultisport.com"
                               ><img
                                 class="max-width"
                                 border="0"
@@ -547,11 +547,11 @@ align="center"
             padding: 40px 30px 40px 30px;
             line-height: 22px;
             text-align: inherit;
-            background-color: #e36d65;
+            background-color: #fff;
           "
             height="100%"
             valign="top"
-            bgcolor="#80817f"
+            bgcolor="#001e61"
             role="module-content"
           >
             <div>
@@ -630,12 +630,12 @@ align="center"
                     <a
                       href="https://farine-be-test.herokuapp.com/admin"
                       style="
-                        background-color: #feeed7;
-                        border: 1px solid #feeed7;
-                        border-color: #feeed7;
+                        background-color: #f18a00;
+                        border: 1px solid #f18a00;
+                        border-color: #f18a00;
                         border-radius: 0px;
                         border-width: 1px;
-                        color: #e36d65;
+                        color: #fff;
                         display: inline-block;
                         font-size: 12px;
                         font-weight: 700;

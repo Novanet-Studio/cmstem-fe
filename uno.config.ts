@@ -141,6 +141,7 @@ export default defineConfig({
     'b-subtitle':
       'text-sm text-color-2 mt-0 mb-6 font-bold md:mb-3 lg:text-base',
     'b-link-wrapper': 'flex justify-between items-center',
+    contenedor:"m-8 md:(container)"
   },
   preflights: [
     {

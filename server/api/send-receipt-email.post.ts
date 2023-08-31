@@ -127,7 +127,7 @@ align="center"
                             align="center"
                           >
                             <a
-                              href="https://drive.google.com/file/d/1a3--7Qn1Tttcody0zbJlOzM0HXtY0ujs/view?usp=sharing"
+                              href="https://tienda.ccsmultisport.com"
                               ><img
                                 class="max-width"
                                 border="0"
@@ -142,7 +142,7 @@ align="center"
                                 alt="Farine logo"
                                 data-proportionally-constrained="true"
                                 data-responsive="false"
-                                src="http://cdn.mcauto-images-production.sendgrid.net/e5b36267a1a59cc3/a0cca121-e2b5-42d8-992e-0a8c93132c3e/150x150.png"
+                                src="https://drive.google.com/file/d/1HAYLzGL2N0ZOxjtt78I9p23NU4L_M7oS/view?usp=sharing"
                                 height="150"
                             /></a>
                           </td>
@@ -749,7 +749,7 @@ align="center"
                         border-color: #feeed7;
                         border-radius: 0px;
                         border-width: 1px;
-                        color: #e36d65;
+                        color: #fff;
                         display: inline-block;
                         font-size: 12px;
                         font-weight: 700;

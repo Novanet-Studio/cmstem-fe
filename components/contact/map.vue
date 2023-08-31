@@ -1,7 +1,7 @@
 <template>
   <div class="mb-12 lg:mb-0">
     <h3 class="font-bold mb-8 text-color-2 mg:text-lg text-left lg:text-2xl">
-      Mapa
+      Ubicación
     </h3>
     <div class="w-full p-4 border rounded-2xl lg:p-4">
       <iframe

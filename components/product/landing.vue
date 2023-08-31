@@ -50,7 +50,7 @@ onMounted(async () => {
 
 <style scoped>
 .landing {
-  @apply mt-6 pb-12 lg:(pb-20 mt-12);
+  @apply mt-6 lg:();
 }
 
 .landing__header {
@@ -58,7 +58,7 @@ onMounted(async () => {
 }
 
 .landing__title {
-  @apply mb-0 inline-block text-2xl font-900 text-black;
+  @apply mb-0 inline-block text-2xl font-900 text-color-2;
 }
 
 .landing__content {
