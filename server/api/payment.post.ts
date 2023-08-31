@@ -1,46 +1,51 @@
-import { Client, Environment } from 'square';
 import type { CreatePaymentRequest, Payment } from 'square';
 
 interface PaymentResponse extends Payment {
   version: bigint;
 }
 
-const { paymentsApi } = new Client({
-  environment: Environment.Sandbox,
-  accessToken:
-    'EAAAEJyncqd3OPpoDxFbqfbNjmfeDnM_8OZmPxgUfk-ifWbwexuPqMaAUACyfdbs',
-});
-
 export default defineEventHandler(async (event) => {
   try {
     const data = (await readBody(event)) as CreatePaymentRequest;
     const body = {
-      idempotencyKey: data.idempotencyKey,
-      locationId: data.locationId,
-      sourceId: data.sourceId,
-      customerId: data.customerId,
-      amountMoney: {
+      idempotency_key: data.idempotencyKey,
+      location_id: data.locationId,
+      source_id: data.sourceId,
+      customer_id: data.customerId,
+      amount_money: {
         amount: data.amountMoney?.amount,
         currency: data.amountMoney?.currency,
       },
-      buyerEmailAddress: data.buyerEmailAddress,
-      shippingAddress: {
-        addressLine1: data.shippingAddress?.addressLine1,
+      buyer_email_address: data.buyerEmailAddress,
+      shipping_address: {
+        address_line1: data.shippingAddress?.addressLine1,
         locality: data.shippingAddress?.locality,
-        postalCode: data.shippingAddress?.postalCode,
+        postal_code: data.shippingAddress?.postalCode,
         country: data.shippingAddress?.country,
       },
-      billingAddress: {
-        addressLine1: data.billingAddress?.addressLine1,
+      billing_address: {
+        address_line1: data.billingAddress?.addressLine1,
         locality: data.billingAddress?.locality,
-        postalCode: data.billingAddress?.postalCode,
+        postal_code: data.billingAddress?.postalCode,
         country: data.billingAddress?.country,
       },
       note: data.note,
     };
 
-    const response = await paymentsApi.createPayment(body);
-    const parsedResponse = JSON.stringify(response.result, (_, value) =>
+    const response = await $fetch<any>(
+      'https://connect.squareupsandbox.com/v2/payments',
+      {
+        method: 'POST',
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+          'Square-Version': '2023-08-16',
+          Authorization:
+            'Bearer EAAAEJyncqd3OPpoDxFbqfbNjmfeDnM_8OZmPxgUfk-ifWbwexuPqMaAUACyfdbs',
+        },
+      }
+    );
+    const parsedResponse = JSON.stringify(response, (_, value) =>
       typeof value === 'bigint' ? value.toString() : value
     );
     const { payment } = JSON.parse(parsedResponse);
@@ -49,6 +54,7 @@ export default defineEventHandler(async (event) => {
       data: payment as PaymentResponse,
     };
   } catch (error) {
+    console.log(error);
     return createError({
       statusCode: 500,
       statusMessage: 'Error procesando el pago',

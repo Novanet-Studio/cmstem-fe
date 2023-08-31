@@ -1,27 +1,31 @@
-import { Client, Environment } from 'square';
 import type { CreateCustomerRequest, Customer } from 'square';
 
 interface CustomerResponse extends Customer {
   version: bigint;
 }
 
-const { customersApi } = new Client({
-  environment: Environment.Sandbox,
-  accessToken:
-    'EAAAEJyncqd3OPpoDxFbqfbNjmfeDnM_8OZmPxgUfk-ifWbwexuPqMaAUACyfdbs',
-});
-
 export default defineEventHandler(async (event) => {
   try {
     const data = (await readBody(event)) as CreateCustomerRequest;
     const body = {
-      idempotencyKey: data.idempotencyKey,
-      givenName: data.givenName,
-      emailAddress: data.emailAddress,
+      idempotency_key: data.idempotencyKey,
+      given_name: data.givenName,
+      email_address: data.emailAddress,
     };
-    const response = await customersApi.createCustomer(body);
-    const { version, ...customer } = response.result
-      .customer as CustomerResponse;
+    const response = await $fetch<any>(
+      'https://connect.squareupsandbox.com/v2/customers',
+      {
+        method: 'POST',
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+          'Square-Version': '2023-08-16',
+          Authorization:
+            'Bearer EAAAEJyncqd3OPpoDxFbqfbNjmfeDnM_8OZmPxgUfk-ifWbwexuPqMaAUACyfdbs',
+        },
+      }
+    );
+    const { version, ...customer } = response.customer as CustomerResponse;
 
     return {
       data: customer,
