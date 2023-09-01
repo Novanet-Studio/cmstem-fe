@@ -72,7 +72,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
         >
           <swiper-slide v-for="image in product.images" :key="image.id">
             <img
-              class="object-contain rounded-xl h-90px w-full"
+              class="object-contain rounded-xl h-90px"
               :src="image.url"
               :alt="image.alternativeText"
             />
@@ -125,7 +125,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
 }
 
 .swiper-thumbs {
-  @apply h-100px w-300px box-border px-0 py-10px md:w-auto lg:(w-100px h-400px);
+  @apply h-100px box-border px-0 py-10px md:(w-300px h-400px) lg:(w-100px w-300px h-400px);
 }
 
 .swiper-thumbs .swiper-slide {
