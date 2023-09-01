@@ -1,14 +1,10 @@
 <script lang="ts" setup>
+import { AddressType } from '~/config/constants';
+
 definePageMeta({
   layout: 'account',
   middleware: 'authentication',
 });
-
-enum AddressType {
-  Billing = 'billing',
-  Shipping = 'shipping',
-  None = '',
-}
 
 const route = useRoute();
 

@@ -3,12 +3,7 @@ import { useForm } from 'vee-validate';
 import { object, string, minLength, nonNullable, any } from 'valibot';
 import { toTypedSchema } from '@vee-validate/valibot';
 import countries from '~/data/countries.json';
-
-enum AddressType {
-  Billing = 'billing',
-  Shipping = 'shipping',
-  None = '',
-}
+import { AddressType } from '~/config/constants';
 
 type Form = {
   country: string;

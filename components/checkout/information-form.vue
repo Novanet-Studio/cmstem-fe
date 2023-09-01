@@ -4,6 +4,7 @@ import { object, string, minLength, email, any } from 'valibot';
 import { toTypedSchema } from '@vee-validate/valibot';
 import { GetAddressByIdAndType } from '~/graphql/queries';
 import countries from '~/data/countries.json';
+import { AddressType } from '~/config/constants';
 
 type Form = {
   name: string;
@@ -16,12 +17,6 @@ type Form = {
   zipCode: string;
   phone: string;
 };
-
-enum AddressType {
-  Billing = 'billing',
-  Shipping = 'shipping',
-  None = '',
-}
 
 const router = useRouter();
 const graphql = useStrapiGraphQL();

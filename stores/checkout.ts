@@ -1,12 +1,7 @@
 import config from '~/config/config.json';
+import { AddressType } from '~/config/constants';
 import { CreateAddress, UpdateAddress } from '~/graphql/mutations';
 import { GetAddressByIdAndType } from '~/graphql/queries';
-
-enum AddressType {
-  Billing = 'billing',
-  Shipping = 'shipping',
-  None = '',
-}
 
 interface GetAddressParams {
   userId: number;
