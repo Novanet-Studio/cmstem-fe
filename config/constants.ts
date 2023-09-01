@@ -5,3 +5,9 @@ export const injectKeys = Object.freeze({
   product: Symbol('product') as ProductKey,
   productDetail: Symbol('productDetail') as ProductDetailKey,
 });
+
+export enum AddressType {
+  Billing = 'billing',
+  Shipping = 'shipping',
+  None = '',
+}

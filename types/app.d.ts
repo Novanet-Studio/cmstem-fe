@@ -4,12 +4,6 @@ declare module '*.gql' {
   export = Schema;
 }
 
-enum AddressType {
-  Billing = 'billing',
-  Shipping = 'shipping',
-  None = '',
-}
-
 declare module 'vue3-tabs-component' {
   import { Component } from 'vue';
   const Tabs: Component;
