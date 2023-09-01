@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { injectKeys } from '~/config/constants';
 import { FreeMode, Navigation, Mousewheel, Thumbs } from 'swiper/modules';
+import { injectKeys } from '~/config/constants';
 import 'swiper/element/css/navigation';
 import 'swiper/element/css/thumbs';
 
@@ -48,7 +48,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
               <button
                 class="w-13 h-13 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md"
               >
-                00
+                ${{ product.price }}
               </button>
             </div>
           </div>
