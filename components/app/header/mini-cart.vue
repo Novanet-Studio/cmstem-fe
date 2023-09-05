@@ -73,7 +73,7 @@ function toggleIsOpen() {
 
 <style scoped>
 .mini-cart {
-  @apply absolute min-w-[300px] right-0 -left-[178px] z-30 pt-[10px] transition ease;
+  @apply absolute min-w-[300px] right-0 -left-[178px] z-30 pt-[10px] transition ease rounded-xl;
 }
 
 .mini-cart__body {
