@@ -8,15 +8,19 @@ const amount = computed(() => cartStore.amount);
 const cartProducts = computed(() => productStore.cartProducts);
 
 const isOpen = ref(false);
+
+function toggleIsOpen() {
+  isOpen.value = !isOpen.value;
+}
 </script>
 
 <template>
-  <div class="relative">
-    <div
+  <div class="relative mt-2">
+    <button
       class="cursor-pointer"
+      @click.prevent="toggleIsOpen"
       @mouseover="isOpen = true"
       @mouseleave="isOpen = false"
-      @click.prevent="isOpen = !isOpen"
     >
       <div class="header-actions__link">
         <div class="i-ph-bag-light header-actions__icon"></div>
@@ -24,10 +28,13 @@ const isOpen = ref(false);
           <i class="header-actions__indicator">{{ total }}</i>
         </span>
       </div>
-      <!-- Menu -->
-      <transition name="slide-fade">
-        <template v-if="isOpen">
-          <div v-if="total > 0" class="mini-cart">
+    </button>
+
+    <!-- Menu -->
+    <transition name="slide-fade">
+      <template v-if="isOpen">
+        <div class="mini-cart shadow-xl">
+          <div v-if="total > 0">
             <div class="mini-cart__body">
               <app-loader v-if="isLoadingCart" />
               <template v-else-if="cartProducts?.length">
@@ -58,9 +65,9 @@ const isOpen = ref(false);
           <div v-else class="mini-cart">
             <div class="mini-cart__empty">No hay productos en el carrito</div>
           </div>
-        </template>
-      </transition>
-    </div>
+        </div>
+      </template>
+    </transition>
   </div>
 </template>
 
