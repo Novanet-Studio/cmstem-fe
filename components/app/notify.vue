@@ -11,7 +11,7 @@
       <template #body="props">
         <div class="ps-notify" :class="props?.className || ''">
           <button class="ps-notify__close" @click="props.close">
-            <div class="i-ph-x-light"></div>
+            <div class="i-ph-x-light text-color-2"></div>
           </button>
           <div class="ps-notify__header">
             <span>{{ props.item.title }}</span>
@@ -32,8 +32,8 @@
   padding: 15px 50px 15px 20px;
   border-radius: 4px;
   background-color: #fff;
-  border: 1px solid #f9f9f9;
-  border-bottom: 3px solid #feeed7;
+  border: 1px solid #fff;
+  border-bottom: 3px solid #001e61;
   box-shadow: 0 1px 5px 1px rgba(#ccc, 0.5);
 }
 
