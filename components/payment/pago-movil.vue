@@ -1,15 +1,25 @@
 <script lang="ts" setup>
 const { amountRate, bcvUsd } = await useGetBcvUsd();
 
+const formatToVES = (value: number) =>
+  new Intl.NumberFormat('es-VE', {
+    style: 'currency',
+    currency: 'VES',
+  }).format(value);
+
 const { isSending, hasError, submit } = usePaymentForm({
   equalAmountTo: amountRate.value.toString(),
   method: 'pago_movil',
   payment: {
     validation: (data) =>
       Date.parse(data.date) > Date.parse(new Date().toISOString()),
-    message: `El monto del pago debe ser de ${amountRate.value} y la fecha debe concordar con el dia de hoy!`,
+    message: `El monto del pago debe ser de ${formatToVES(
+      amountRate.value
+    )} y la fecha debe concordar con el dia de hoy!`,
   },
 });
+
+console.log(formatToVES(amountRate.value));
 </script>
 
 <template>
@@ -66,7 +76,7 @@ const { isSending, hasError, submit } = usePaymentForm({
         >
         <p class="text-xs max-w-full text-wrap font-bold whitespace-normal">
           La tasa del día BCV es de {{ bcvUsd }} BsD. El monto del pago debe ser
-          de {{ amountRate }}
+          de {{ formatToVES(amountRate) }}
         </p>
         <app-input name="amountPayed" />
       </div>

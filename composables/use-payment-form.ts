@@ -32,7 +32,7 @@ export default function usePaymentForm({
   payment,
 }: Params): UsePaymentForm {
   if (!equalAmountTo || !method || !payment?.message || !payment?.validation) {
-    throw new Error('All parameters are required');
+    throw new Error('usePaymentForm: All parameters are required');
   }
 
   const isSending = useState('isSending', () => false);
