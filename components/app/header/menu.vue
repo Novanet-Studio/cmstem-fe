@@ -8,6 +8,11 @@ const mainMenu = ref([
     text: 'Contáctanos',
     url: '/contacto',
   },
+  {
+    text: 'Principal',
+    url: 'https://cms.sitio.com',
+    icon: 'i-ph-arrow-up-right',
+  },
 ]);
 </script>
 
@@ -19,8 +24,13 @@ const mainMenu = ref([
       class="menu__item"
       :class="$route.path === item?.url ? 'text-white font-bold' : 'text-white'"
     >
-      <nuxt-link class="menu__link" :to="item.url">
+      <nuxt-link
+        class="menu__link"
+        :to="item.url"
+        :class="item?.icon && '!flex !items-center'"
+      >
         {{ item.text }}
+        <div v-if="item?.icon" :class="[item?.icon, 'ml-1']"></div>
       </nuxt-link>
     </li>
   </ul>
