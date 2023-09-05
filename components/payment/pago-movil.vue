@@ -18,8 +18,6 @@ const { isSending, hasError, submit } = usePaymentForm({
     )} y la fecha debe concordar con el dia de hoy!`,
   },
 });
-
-console.log(formatToVES(amountRate.value));
 </script>
 
 <template>
