@@ -93,7 +93,10 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
             <app-button class="!text-xs !w-32" @click="handleAddToCart(item!)">
               Añadir al carrito
             </app-button>
-            <button class="text-color-2 ml-4">
+            <button
+              class="text-color-2 ml-4"
+              @click="handleRemoveItemFromWishlist(item)"
+            >
               <div class="i-ph-x-light"></div>
             </button>
           </td>
