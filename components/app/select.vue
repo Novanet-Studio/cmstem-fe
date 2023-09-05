@@ -92,8 +92,6 @@ const compareOptions = (option: any) => {
 watch(selected, (val: string | ObjectValue) => {
   if (!val?.value) return;
 
-  console.log('selected.value: ', selected.value);
-
   if (isObjectData.value) {
     value.value = val?.value;
     return;
