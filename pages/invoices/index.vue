@@ -6,7 +6,7 @@ definePageMeta({
 
 const sectionTitle = inject('sectionTitle') as Ref<string>;
 
-sectionTitle.value = 'Ordenes de compra';
+sectionTitle.value = 'Órdenes de compra';
 
 const invoice = useInvoiceStore();
 </script>
@@ -18,7 +18,7 @@ const invoice = useInvoiceStore();
       class="text-sm font-bold text-color-7 text-center mb-12 md:(mt-24 text-base)"
       v-if="!invoice.invoices.length"
     >
-      No hay ordenes de compra
+      No hay órdenes de compra
     </h5>
     <div class="invoices__content">
       <invoices-table />
