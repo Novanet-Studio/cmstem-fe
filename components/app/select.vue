@@ -27,6 +27,8 @@ const DELAY_UNWATCH_INTERVAL = 1000;
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 const isObjectData = ref(false);
+const searchInputRef = ref(null);
+const filterText = ref('');
 
 const value = computed({
   get: () => props.modelValue,
@@ -59,6 +61,15 @@ const data = computed(() => {
   });
 });
 
+const filteredOptions = computed(() => {
+  return data.value.filter((option) => {
+    return (
+      option.label.toLowerCase().includes(filterText.value.toLowerCase()) ??
+      data
+    );
+  });
+});
+
 const target = ref(null);
 
 onClickOutside(target, () => {
@@ -79,8 +90,12 @@ const compareOptions = (option: any) => {
 };
 
 watch(selected, (val: string | ObjectValue) => {
+  if (!val?.value) return;
+
+  console.log('selected.value: ', selected.value);
+
   if (isObjectData.value) {
-    value.value = val.value;
+    value.value = val?.value;
     return;
   }
 
@@ -103,6 +118,16 @@ const unwatch = watchEffect(() => {
   }
 });
 
+watch(open, () => {
+  if (!open.value) return;
+
+  if (searchInputRef.value) {
+    setTimeout(() => {
+      searchInputRef.value!.focus();
+    }, 100);
+  }
+});
+
 setTimeout(() => {
   unwatch();
 }, DELAY_UNWATCH_INTERVAL);
@@ -113,7 +138,7 @@ setTimeout(() => {
     <div class="relative mt-2" ref="target">
       <button
         type="button"
-        class="relative w-full cursor-default rounded-md bg-white py-3 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-color-1 sm:text-sm sm:leading-6"
+        class="relative w-full cursor-default rounded-md bg-white py-3 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-color-1 sm:text-sm sm:leading-6 md:py-4"
         :class="[error && 'ring-red-600']"
         aria-haspopup="listbox"
         aria-expanded="true"
@@ -137,10 +162,26 @@ setTimeout(() => {
             :src="selected.avatar"
             class="h-5 w-5 flex-shrink-0 rounded-full"
           /> -->
-          <span class="block truncate text-gray-400 p-0 ml-1 text-xs">{{
-            placeholder ?? 'Select a option'
-          }}</span>
+          <input
+            type="text"
+            class="focus:outline-none"
+            :class="[open || filterText ? 'block' : 'hidden']"
+            v-model="filterText"
+            ref="searchInputRef"
+          />
+          <span
+            class="block truncate text-gray-400 p-0 ml-1 text-xs"
+            v-if="!open && !filterText"
+            >{{ placeholder ?? 'Select a option' }}</span
+          >
         </span>
+        <!-- <span
+          class="pointer-events-none absolute inset-y-0 right-6 ml-3 flex items-center pr-2"
+          v-if="filterText"
+          @click="filterText = ''"
+        >
+          <div class="i-ph-x-circle text-10px h-5 w-5 text-gray-400"></div>
+        </span> -->
         <span
           class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2"
         >
@@ -173,7 +214,7 @@ setTimeout(() => {
           aria-labelledby="listbox-label"
           aria-activedescendant="listbox-option-3"
         >
-          <template v-for="(option, index) in data" :key="index">
+          <template v-for="(option, index) in filteredOptions" :key="index">
             <!--
             Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
     
@@ -181,18 +222,22 @@ setTimeout(() => {
           -->
 
             <li
-              class="relative cursor-default select-none py-2 pl-3 pr-9 transition ease text-xs hover:bg-color-2 hover:text-white"
+              class="relative cursor-default select-none pr-9 transition ease text-xs hover:bg-color-2 hover:text-white md:(text-sm)"
               :class="
                 compareOptions(option)
                   ? 'bg-color-2 text-white'
                   : 'text-gray-900'
               "
-              @click="
-                selected = option;
-                open = false;
-              "
             >
-              <div class="flex items-center">
+              <div
+                class="flex items-center py-2 pl-3 md:py-3"
+                @click="
+                  () => {
+                    selected = option;
+                    open = false;
+                  }
+                "
+              >
                 <!-- <img
                   :src="person.avatar"
                   alt=""
@@ -209,10 +254,16 @@ setTimeout(() => {
 
               <span
                 v-if="compareOptions(option)"
-                class="absolute inset-y-0 right-0 flex items-center pr-4 hover:text-white"
-                :class="compareOptions(option) ? 'text-white' : 'text-color-1'"
+                class="absolute inset-y-0 right-0 flex items-center pr-4 hover:text-white cursor-pointer"
+                :class="compareOptions(option) ? 'text-white' : 'text-color-3'"
+                @click.prevent="
+                  () => {
+                    filterText = '';
+                    selected = null;
+                  }
+                "
               >
-                <div class="i-ph-x-light h-5 w-5"></div>
+                <div class="i-ph-x-light h-4 w-4"></div>
               </span>
             </li>
           </template>
