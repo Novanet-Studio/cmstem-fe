@@ -9,8 +9,8 @@ const mainMenu = ref([
     url: '/contacto',
   },
   {
-    text: 'Principal',
-    url: 'https://cms.sitio.com',
+    text: 'Volver al sitio corporativo',
+    url: 'https://ccsmultisport.com/',
     icon: 'i-ph-arrow-up-right',
   },
 ]);
@@ -28,6 +28,7 @@ const mainMenu = ref([
         class="menu__link"
         :to="item.url"
         :class="item?.icon && '!flex !items-center'"
+        :target="item?.icon ? '_blank' : ''"
       >
         {{ item.text }}
         <div v-if="item?.icon" :class="[item?.icon, 'ml-1']"></div>
