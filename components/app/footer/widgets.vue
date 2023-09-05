@@ -3,10 +3,15 @@ const appConfig = useAppConfig();
 const widgets = appConfig.footer.widgets;
 
 const icons = {
-  instagram: 'i-ph-instagram-logo-light',
-  whatsapp: 'i-ph-whatsapp-logo-light',
-  email: 'i-ph-envelope-light',
+  instagram: 'i-ph-instagram-logo',
+  whatsapp: 'i-ph-whatsapp-logo',
+  email: 'i-ph-envelope',
+  facebook: 'i-ph-facebook-logo',
 };
+
+// Phone -> 584241548330
+// Instagram -> https://www.instagram.com/ccsmultisport
+// Facebook -> https://www.facebook.com/CcsMultiSport
 </script>
 
 <template>
@@ -17,6 +22,7 @@ const icons = {
         <li v-for="(item, index) in widgets" :key="index" class="widgets__item">
           <a class="widgets__link" :href="item.link" target="_blank">
             <div :class="icons[item.icon]" class="text-3xl text-color-3" />
+            <span class="text-xs md:text-sm">{{ item.text }}</span>
           </a>
         </li>
       </ul>
@@ -38,10 +44,10 @@ const icons = {
 }
 
 .widgets__list {
-  @apply w-full flex justify-center gap-2 md:mt-4;
+  @apply w-full flex justify-center gap-4 mt-2 md:(mt-4 gap-6);
 }
 
 .widgets__link {
-  @apply flex text-xl;
+  @apply flex flex-col text-lg items-center gap-2 md:(flex-row text-xl);
 }
 </style>
