@@ -25,10 +25,7 @@ export default defineAppConfig({
     ],
   },
   home: {
-    slider: ['/img/home/1.jpg', '/img/home/2.jpg' ],
+    slider: ['/img/home/1.jpg', '/img/home/2.jpg'],
     promotions: ['/img/home/promotion-1.jpeg'],
-  },
-  nosotros: {
-    slider: ['/img/home/1.jpg', '/img/home/2.jpg' ],
   },
 });

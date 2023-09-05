@@ -5,10 +5,6 @@ const mainMenu = ref([
     url: '/',
   },
   {
-    text: 'Nosotros',
-    url: '/nosotros',
-  },
-  {
     text: 'Contáctanos',
     url: '/contacto',
   },
