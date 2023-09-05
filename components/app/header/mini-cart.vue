@@ -62,8 +62,8 @@ function toggleIsOpen() {
               </figure>
             </div>
           </div>
-          <div v-else class="mini-cart">
-            <div class="mini-cart__empty">No hay productos en el carrito</div>
+          <div v-else class="mini-cart__empty">
+            No hay productos en el carrito
           </div>
         </div>
       </template>
