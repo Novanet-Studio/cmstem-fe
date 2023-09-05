@@ -42,7 +42,7 @@ const { isSending, hasError, submit } = usePaymentForm({
             >*</sup
           ></label
         >
-        <app-input name="name" placeholder="john" />
+        <app-input name="name" placeholder="John" />
       </div>
       <div class="form__group">
         <label class="form__label"
@@ -50,7 +50,7 @@ const { isSending, hasError, submit } = usePaymentForm({
             >*</sup
           ></label
         >
-        <app-input name="lastName" placeholder="doe" />
+        <app-input name="lastName" placeholder="Doe" />
       </div>
       <div class="form__group">
         <label class="form__label"

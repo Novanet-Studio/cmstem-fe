@@ -156,7 +156,7 @@ const submit = handleSubmit(async (data, { resetForm }) => {
         :type="showPasswords ? 'text' : 'password'"
         icon-left="fa fa-lock"
       />
-      <app-checkbox label="Show passwords" v-model="showPasswords" />
+      <app-checkbox label="Mostrar contraseñas" v-model="showPasswords" />
       <div class="auth-form__footer !mb-0">
         <app-button @click="submit" :loading="state.isLoading">
           Registrar cuenta

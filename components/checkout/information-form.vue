@@ -124,20 +124,20 @@ onMounted(() => {
           <label class="form__label"
             >Email<sup class="form__required">*</sup></label
           >
-          <app-input name="email" placeholder="correo@mail.com" />
+          <app-input name="email" placeholder="john@doe.com" />
         </div>
 
         <div class="form__container">
           <div class="form__left">
             <div class="form__group">
               <label class="form__label">Nombre</label>
-              <app-input name="name" placeholder="Juan" />
+              <app-input name="name" placeholder="John" />
             </div>
           </div>
           <div class="form__right">
             <div class="form__group">
               <label class="form__label">Apellido</label>
-              <app-input name="lastName" placeholder="Pérez" />
+              <app-input name="lastName" placeholder="Doe" />
             </div>
           </div>
         </div>
@@ -165,7 +165,7 @@ onMounted(() => {
             label="name"
             value-key="code"
             :options="countries"
-            placeholder="Selecciona una opcion"
+            placeholder="Selecciona una opción"
             :error="!!errors.country"
             :error-message="errors.country"
           />
