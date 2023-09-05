@@ -8,20 +8,20 @@ const amount = computed(() => cartStore.amount);
 const cartProducts = computed(() => productStore.cartProducts);
 
 const isOpen = ref(false);
+const miniCartRef = ref(null);
 
 function toggleIsOpen() {
   isOpen.value = !isOpen.value;
 }
+
+onClickOutside(miniCartRef, () => {
+  isOpen.value = false;
+});
 </script>
 
 <template>
   <div class="relative mt-2">
-    <button
-      class="cursor-pointer"
-      @click.prevent="toggleIsOpen"
-      @mouseover="isOpen = true"
-      @mouseleave="isOpen = false"
-    >
+    <button class="cursor-pointer" @click.prevent="toggleIsOpen">
       <div class="header-actions__link">
         <div class="i-ph-bag-light header-actions__icon"></div>
         <span class="header-actions__indicator-wrapper">
@@ -33,7 +33,7 @@ function toggleIsOpen() {
     <!-- Menu -->
     <transition name="slide-fade">
       <template v-if="isOpen">
-        <div class="mini-cart shadow-xl">
+        <div class="mini-cart shadow-xl" ref="miniCartRef">
           <div v-if="total > 0">
             <div class="mini-cart__body">
               <app-loader v-if="isLoadingCart" />
