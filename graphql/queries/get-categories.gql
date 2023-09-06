@@ -7,6 +7,15 @@ query getCategories {
         products {
           data {
             id
+            attributes {
+              images {
+                data {
+                  attributes {
+                    url
+                  }
+                }
+              }
+            }
           }
         }
       }

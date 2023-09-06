@@ -8,11 +8,17 @@ interface Params {
 
 interface Result {
   categories: Ref<Category[]>;
+  categoriesResult: Ref<Category[]>;
+  categoryActive: Ref<string>;
   isLoading: Ref<boolean>;
+  filterByCategory: (categoryId: string) => void;
+  removeFilters: () => void;
 }
 
 export default function useCategory(params?: Params): Result {
   const categories = useState<Category[]>('categories', () => []);
+  const categoriesResult = useState<Category[]>('categoriesResult', () => []);
+  const categoryActive = useState('categoryActive', () => '');
   const isLoading = useState<boolean>('isCategoriesLoading', () => false);
 
   const graphql = useStrapiGraphQL();
@@ -28,10 +34,12 @@ export default function useCategory(params?: Params): Result {
           (a: CategoriesData, b: CategoriesData) => Number(a.id) - Number(b.id)
         );
         categories.value = strapiMapper<Category[]>(ordered);
+        categoriesResult.value = strapiMapper<Category[]>(ordered);
         return;
       }
 
       categories.value = strapiMapper(response.data.categories.data);
+      categoriesResult.value = strapiMapper(response.data.categories.data);
     } catch (error) {
       console.log(error);
       $notify({
@@ -45,12 +53,28 @@ export default function useCategory(params?: Params): Result {
     }
   };
 
+  const filterByCategory = (categoryId: string) => {
+    categoryActive.value = categoryId;
+    categoriesResult.value = categories.value.filter(
+      (category) => category.id === categoryId
+    );
+  };
+
+  const removeFilters = () => {
+    categoryActive.value = '';
+    getCategories();
+  };
+
   onMounted(() => {
     getCategories();
   });
 
   return {
     categories,
+    categoryActive,
+    categoriesResult,
     isLoading,
+    filterByCategory,
+    removeFilters,
   };
 }
