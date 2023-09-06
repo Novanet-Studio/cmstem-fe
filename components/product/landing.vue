@@ -5,7 +5,6 @@ type Props = {
 
 const props = defineProps<Props>();
 const productStore = useProductStore();
-
 const products = ref<Product[] | null>(null);
 
 onMounted(async () => {
