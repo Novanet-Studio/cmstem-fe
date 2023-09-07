@@ -34,7 +34,7 @@ const {
           </transition>
         </div>
         <div
-          class="grid grid-cols-3 place-items-center content-center mt-4 md:(max-w-md mx-auto) lg:(mx-none)"
+          class="grid grid-cols-3 place-items-center content-center mt-4 md:(max-w-3xl mx-auto grid-cols-5) lg:(mx-none grid-cols-6)"
         >
           <button
             v-for="category in categories"
