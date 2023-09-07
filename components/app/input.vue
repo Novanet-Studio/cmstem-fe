@@ -6,6 +6,8 @@ type Props = {
   placeholder?: string;
   class?: string;
   type?: 'text' | 'password' | 'email' | 'date';
+  iconLeft?: string;
+  iconRight?: string;
 };
 
 const focus = ref(false);
@@ -26,8 +28,11 @@ const { value, errorMessage } = useField(() => props.name);
         focus && 'border-color-2',
       ]"
     >
-      <div class="mr-3" v-if="$slots.left">
+      <div class="mr-3" v-if="$slots.left && !iconLeft">
         <slot name="left" />
+      </div>
+      <div class="mr-3" v-if="!$slots.left && iconLeft">
+        <div class="text-black/40" :class="iconLeft"></div>
       </div>
       <input
         class="w-4/5 text-xs md:w-full outline-none md:text-sm"
@@ -38,8 +43,11 @@ const { value, errorMessage } = useField(() => props.name);
         :placeholder="placeholder"
         height="50"
       />
-      <div v-if="$slots.right">
+      <div v-if="$slots.right && !iconRight">
         <slot name="right" />
+      </div>
+      <div v-if="!$slots.right && iconRight">
+        <div class="text-black/40" :class="iconRight"></div>
       </div>
     </div>
     <div class="text-xs pt-1 text-red-500" v-if="errorMessage?.length">

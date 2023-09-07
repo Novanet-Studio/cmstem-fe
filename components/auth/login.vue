@@ -111,6 +111,12 @@ const submit = handleSubmit(async (data, { resetForm }) => {
           Entrar
         </app-button>
       </div>
+
+      <div class="flex mt-4 justify-center">
+        <nuxt-link class="text-xs underline text-color-2" to="/forgot-password"
+          >¿Has olvidado tu contraseña?</nuxt-link
+        >
+      </div>
     </div>
   </form>
 </template>
