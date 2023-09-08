@@ -17,6 +17,11 @@ query GetProductById($id: ID!) {
             }
           }
         }
+        size_stock {
+          id
+          talla
+          inventario
+        }
         category {
           data {
             id

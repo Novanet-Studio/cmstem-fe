@@ -118,6 +118,7 @@ interface ProductAttributes {
   materials: string;
   price: number;
   category: CategoryAttributes;
+  size_stock?: SizeStock[];
 }
 
 interface InvoiceAtributes {
@@ -167,6 +168,7 @@ interface CartItem {
   id: string;
   quantity: number;
   price: number;
+  size: string;
 }
 
 interface ShippingInfo {
@@ -185,6 +187,7 @@ interface ProductBuyed {
   id?: string;
   quantity: number;
   product: Product | string;
+  size: string;
   // product_id: number;
   // product_name: string;
 }
@@ -213,6 +216,12 @@ interface InvoicePaymentInfo {
   amount: string;
   confirmation_id: string;
   payment_date: string;
+}
+
+interface SizeStock {
+  id: string;
+  talla: string;
+  inventario: number;
 }
 
 interface Image {

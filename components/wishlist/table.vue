@@ -65,6 +65,7 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
         <tr class="rounded-t-3xl">
           <th scope="col" class="table-th">Producto</th>
           <th scope="col" class="table-th">Precio</th>
+          <th scope="col" class="table-th">Talla</th>
           <th scope="col" class="table-th">Acciones</th>
         </tr>
       </thead>
@@ -89,6 +90,15 @@ function handleRemoveItemFromWishlist(product: any, notify = true) {
             </div>
           </td>
           <td class="price-td">$ {{ item?.price.toFixed(2) }}</td>
+          <td class="price-td">
+            {{
+              item?.size_stock?.[0].talla
+                .toLocaleLowerCase()
+                .includes('no_aplica')
+                ? 'N/A'
+                : cleanupSize(item?.size_stock?.[0].talla as string)
+            }}
+          </td>
           <td class="flex items-center !h-full mt-6 md:mt-8 lg:mt-10">
             <app-button class="!text-xs !w-32" @click="handleAddToCart(item!)">
               Añadir al carrito

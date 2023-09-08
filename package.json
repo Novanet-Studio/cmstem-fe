@@ -10,8 +10,8 @@
   },
   "devDependencies": {
     "@iconify-json/ph": "^1.1.6",
-    "@nuxt/devtools": "^0.8.0",
-    "@nuxt/image-edge": "1.0.0-rc.1-28224985.8423773",
+    "@nuxt/devtools": "^0.8.3",
+    "@nuxt/image-edge": "1.0.0-rc.1-28240731.2506a71",
     "@nuxtjs/strapi": "^1.9.0",
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@rollup/plugin-graphql": "^2.0.3",
@@ -21,7 +21,7 @@
     "@vueuse/core": "^10.3.0",
     "@vueuse/nuxt": "^10.3.0",
     "graphql": "^16.8.0",
-    "nuxt": "^3.7.0",
+    "nuxt": "^3.7.1",
     "rimraf": "^5.0.1"
   },
   "dependencies": {
@@ -31,13 +31,13 @@
     "@pinia/nuxt": "^0.4.11",
     "@sendgrid/mail": "^7.7.0",
     "@unocss/reset": "^0.55.7",
-    "@vee-validate/valibot": "^4.11.3",
+    "@vee-validate/valibot": "^4.11.6",
     "gitart-vue-dialog": "^3.1.0",
     "smapper": "^0.0.9",
     "square": "^30.0.0",
     "swiper": "^10.2.0",
-    "valibot": "^0.13.1",
-    "vee-validate": "^4.11.3",
+    "valibot": "^0.15.0",
+    "vee-validate": "^4.11.6",
     "vue3-tabs-component": "^1.3.6"
   }
 }

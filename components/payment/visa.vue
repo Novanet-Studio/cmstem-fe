@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { GetAddressByIdAndType } from '~/graphql/queries';
 import { AddressType } from '~/config/constants';
-import type { Payment } from 'square';
 
 interface State {
   card: Square.Card | null;
@@ -20,6 +19,7 @@ const { SQUARE_APPLICATION_ID, SQUARE_LOCATION_ID } = useRuntimeConfig().public;
 const graphql = useStrapiGraphQL();
 const auth = useAuthStore();
 const cart = useCartStore();
+const productStore = useProductStore();
 const checkout = useCheckoutStore();
 const invoice = useInvoiceStore();
 
@@ -69,7 +69,7 @@ const checkBilling = async (): Promise<CheckBillingResponse> => {
   }
 };
 
-const createPayment = async (paymentBody: any) => {
+const createPayment = async (paymentBody: any, products: Product[]) => {
   const { data } = await useFetch<any>('/api/payment', {
     method: 'post',
     body: paymentBody,
@@ -91,7 +91,10 @@ const createPayment = async (paymentBody: any) => {
     text: 'El pago se ha realizado con éxito',
   });
 
-  const invoiceItems = cart.cartItems;
+  const invoiceItems: CartItem[] = cart.cartItems.filter((item) => {
+    return products.find((product) => product.id === item.id);
+  });
+
   const response = await invoice.createVisaInvoice(data.value, invoiceItems);
 
   if (!response?.data?.createInvoice?.data?.id) {
@@ -103,6 +106,8 @@ const createPayment = async (paymentBody: any) => {
     state.isLoading = false;
     return;
   }
+
+  await productStore.update();
 
   $notify({
     group: 'all',
@@ -125,6 +130,19 @@ const makePayment = async (tokenResult: Square.TokenResult) => {
         group: 'all',
         title: 'Error',
         text: 'Hubo un problema al iniciar proceso de compra, intente de nuevo',
+      });
+      return;
+    }
+
+    const [validProducts, noStockProducts] = await productStore.checkStock();
+
+    if (noStockProducts.length) {
+      noStockProducts.forEach((product) => {
+        $notify({
+          group: 'all',
+          title: 'Error',
+          text: `El producto ${product.name} está agotado o superas la cantidad disponible`,
+        });
       });
       return;
     }
@@ -153,7 +171,7 @@ const makePayment = async (tokenResult: Square.TokenResult) => {
 
     const billing = await checkBilling();
     payment.billingAddress = billing;
-    await createPayment(payment);
+    await createPayment(payment, validProducts);
   } catch (err) {
     console.log(err);
   } finally {

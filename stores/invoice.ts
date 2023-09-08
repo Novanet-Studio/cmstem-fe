@@ -120,6 +120,7 @@ export const useInvoiceStore = defineStore(
           productsFiltered.push({
             product: product.id,
             quantity: Number(product.quantity),
+            size: product.size,
           });
         }
       });
@@ -182,7 +183,7 @@ export const useInvoiceStore = defineStore(
             productsFiltered.push({
               product: product.id,
               quantity: Number(product.quantity),
-              // name_product: found.name,
+              size: product.size,
             });
           }
         });
@@ -248,6 +249,7 @@ export const useInvoiceStore = defineStore(
             productsFiltered.push({
               product: product.id,
               quantity: Number(product.quantity),
+              size: product.size,
             });
           }
         });

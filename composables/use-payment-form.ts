@@ -41,6 +41,7 @@ export default function usePaymentForm({
   const { $notify } = useNuxtApp();
   const cart = useCartStore();
   const invoice = useInvoiceStore();
+  const productStore = useProductStore();
 
   const schema = toTypedSchema(
     object({
@@ -83,6 +84,7 @@ export default function usePaymentForm({
 
       const invoiceItems = cart.cartItems;
       await invoice.createInvoiceReport(paymentData, invoiceItems, method);
+      await productStore.update();
 
       $notify({
         group: 'all',

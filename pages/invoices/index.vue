@@ -13,7 +13,6 @@ const invoice = useInvoiceStore();
 
 <template>
   <section class="invoices">
-    <!-- TODO: Add condition to render this text -->
     <h5
       class="text-sm font-bold text-color-7 text-center mb-12 md:(mt-24 text-base)"
       v-if="!invoice.invoices.length"

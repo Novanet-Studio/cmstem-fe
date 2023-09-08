@@ -40,6 +40,7 @@ const handleRemoveProductFromCart = (product?: Product) => {
           <th scope="col" class="table__th">Producto</th>
           <th scope="col" class="table__th">Precio</th>
           <th scope="col" class="table__th">Cantidad</th>
+          <th scope="col" class="table__th">Talla</th>
           <th scope="col" class="table__th">Total</th>
           <th scope="col" class="table__th">Acciones</th>
         </tr>
@@ -60,6 +61,15 @@ const handleRemoveProductFromCart = (product?: Product) => {
           <td class="base-td">${{ product!.price }}</td>
           <td class="quantity-td">
             <quantity class="group-hover:bg-white" :id="product!.id" />
+          </td>
+          <td class="base-td !font-bold">
+            {{
+              product?.size_stock?.[0].talla
+                .toLocaleLowerCase()
+                .includes('no_aplica')
+                ? 'N/A'
+                : cleanupSize(product?.size_stock?.[0].talla)
+            }}
           </td>
           <td class="base-td">
             <total-quantity
