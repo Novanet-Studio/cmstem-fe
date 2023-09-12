@@ -37,10 +37,6 @@ const isQuantityGreaterThanTen = computed(() => {
 
 const isQuantityGreaterThanStock = computed(() => {
   const existItem = cart.cartItems.find((item) => item.id === product.value.id);
-  console.log({
-    quantity: quantity.value + existItem!.quantity,
-    inventario: selectedSize.value!.inventario,
-  });
   return (
     existItem?.id &&
     quantity.value + existItem.quantity > selectedSize.value!.inventario
