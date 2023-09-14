@@ -51,7 +51,7 @@ const tabs = [
 }
 
 :deep(.tabs-component-tabs) {
-  @apply flex overflow-x-scroll w-26rem max-w-26rem md:(w-full max-w-full) rounded-l-3xl rounded-r-3xl shadow shadow-md;
+  @apply grid max-w-26rem md:(w-full max-w-full) rounded-l-2xl rounded-r-2xl shadow shadow-md border-2 grid-cols-3 lg:(grid-cols-6 rounded-l-3xl rounded-r-3xl);
 }
 
 :deep(.tabs-component-tab) {
@@ -59,7 +59,7 @@ const tabs = [
 }
 
 :deep(.is-active:not(a)) {
-  @apply px-4 py-3 bg-color-2 text-white font-bold;
+  @apply px-4 py-3 bg-color-2 text-white font-bold first:(bg-color-2 rounded-tl-2xl) last:(bg-color-2 rounded-br-2xl) [&:nth-child(3)]:(bg-color-2 rounded-tr-2xl) [&:nth-child(4)]:(bg-color-2 rounded-bl-2xl) lg:(first:(rounded-l-3xl) last:(rounded-r-3xl) [&:nth-child(3)]:(rounded-none) [&:nth-child(4)]:(rounded-none));
 }
 
 :deep(.is-disabled:not(a)) {
