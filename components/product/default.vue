@@ -6,6 +6,7 @@ import { GetProductById } from '~/graphql/queries';
 const props = defineProps<{ product: Product }>();
 
 const cart = useCartStore();
+const router = useRouter();
 const graphql = useStrapiGraphQL();
 const pruductStore = useProductStore();
 const { $notify } = useNuxtApp();
@@ -16,6 +17,16 @@ async function handleAddToCart() {
     quantity: 1,
     price: props.product.price,
   };
+
+  if (props.product.size_stock?.length) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia',
+      text: `Seleccione una talla`,
+    });
+    router.push(`/product/${props.product.id}`);
+    return;
+  }
 
   cart.addProductToCart(newProduct);
 
