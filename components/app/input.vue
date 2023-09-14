@@ -8,6 +8,7 @@ type Props = {
   type?: 'text' | 'password' | 'email' | 'date';
   iconLeft?: string;
   iconRight?: string;
+  disabled?: boolean;
 };
 
 const focus = ref(false);
@@ -26,6 +27,7 @@ const { value, errorMessage } = useField(() => props.name);
       :class="[
         errorMessage?.length && 'border-red-5',
         focus && 'border-color-2',
+        disabled && 'opacity-70',
       ]"
     >
       <div class="mr-3" v-if="$slots.left && !iconLeft">
@@ -42,6 +44,7 @@ const { value, errorMessage } = useField(() => props.name);
         @blur="focus = false"
         :placeholder="placeholder"
         height="50"
+        :disabled="disabled"
       />
       <div v-if="$slots.right && !iconRight">
         <slot name="right" />

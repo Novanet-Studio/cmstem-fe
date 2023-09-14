@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-const { amountRate, bcvUsd } = await useGetBcvUsd();
+import { useField } from 'vee-validate';
+const { bcvUsd } = await useGetBcvUsd();
+
+const cartStore = useCartStore();
+const amountRate = computed(() => cartStore.amount * bcvUsd.value);
+
+const { copied, copy } = useClipboard({
+  legacy: true,
+});
 
 const formatToVES = (value: number) =>
   new Intl.NumberFormat('es-VE', {
@@ -18,6 +26,17 @@ const { isSending, hasError, submit } = usePaymentForm({
     )} y la fecha debe concordar con el dia de hoy!`,
   },
 });
+
+const field = useField<string>('amountToPay');
+const ves = formatToVES(amountRate.value).replace('Bs.S', 'Bs.D') as string;
+field.setValue(ves);
+
+watch(
+  () => cartStore.amount,
+  () => {
+    field.setValue(formatToVES(amountRate.value).replace('Bs.S', 'Bs.D'));
+  }
+);
 </script>
 
 <template>
@@ -74,9 +93,20 @@ const { isSending, hasError, submit } = usePaymentForm({
         >
         <p class="text-xs max-w-full text-wrap font-bold whitespace-normal">
           La tasa del día BCV es de {{ bcvUsd }} BsD. El monto del pago debe ser
-          de {{ formatToVES(amountRate) }}
+          de:
         </p>
-        <app-input name="amountPayed" />
+        <app-input name="amountToPay" disabled>
+          <template #right>
+            <button
+              class="flex items-center justify-center"
+              @click="copy(formatToVES(amountRate).replace('Bs.S', ''))"
+              :disabled="copied"
+            >
+              <div class="i-ph-copy-bold" v-if="!copied"></div>
+              <div class="i-ph-check-bold" v-else></div>
+            </button>
+          </template>
+        </app-input>
       </div>
       <div class="form__group">
         <label class="form__label"
