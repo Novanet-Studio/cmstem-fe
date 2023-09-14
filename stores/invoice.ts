@@ -29,6 +29,7 @@ export const useInvoiceStore = defineStore(
     const invoices = ref<Invoice[]>([]);
     const products = ref<Product[]>([]);
     const loading = ref<boolean>(false);
+    const auth = useAuthStore();
 
     const mapped = computed(() => {
       if (!invoices.value.length) return [];
@@ -237,8 +238,12 @@ export const useInvoiceStore = defineStore(
       }
     }
 
-    async function createVisaInvoice(payment: Payment, products: CartItem[]) {
+    async function createVisaInvoice(
+      payment: Record<string, unknown>,
+      products: CartItem[]
+    ) {
       try {
+        console.log({ payment });
         const productList = productsCart.cartProducts;
         const productsFiltered: ProductBuyed[] = [];
 
@@ -257,23 +262,23 @@ export const useInvoiceStore = defineStore(
         const addressData = {
           phone: checkout.phone,
           home: checkout.home,
-          country: payment.shippingAddress?.country,
-          locality: payment.shippingAddress?.locality,
-          postalCode: payment.shippingAddress?.postalCode,
-          addressLine1: payment.shippingAddress?.addressLine1,
+          country: payment.shipping_address?.country,
+          locality: payment.shipping_address?.locality,
+          postalCode: payment.shipping_address?.postal_code,
+          addressLine1: payment.shipping_address?.address_line1,
         };
 
         const paymentInfo: PaymentStrapi = {
           name: checkout.name,
           lastname: checkout.lastName,
-          email: payment.buyerEmailAddress as string,
+          email: auth.user.email as string,
           confirmation: payment.id as string,
-          amount: Number(payment!.totalMoney!.amount) / 100,
+          amount: Number(payment!.total_money!.amount) / 100,
           payment_date: getDate(),
         };
 
         const data = {
-          amount: Number(payment!.totalMoney!.amount) / 100,
+          amount: Number(payment!.total_money!.amount) / 100,
           order_id: payment.orderId,
           paid: true,
           payment_id: payment.id,
@@ -281,9 +286,9 @@ export const useInvoiceStore = defineStore(
           user: authStore.user.id.toString(),
           shippingAddress: addressData,
           fullName: payment.note,
-          cardType: payment?.cardDetails?.card?.cardBrand,
-          cardKind: payment?.cardDetails?.card?.cardType,
-          cardLast: payment?.cardDetails?.card?.last4,
+          cardType: payment?.card_details?.card?.card_brand,
+          cardKind: payment?.card_details?.card?.card_type,
+          cardLast: payment?.card_details?.card?.last_4,
           payment_info: [paymentInfo],
           payment_method: 'squareup',
         };
@@ -294,6 +299,7 @@ export const useInvoiceStore = defineStore(
 
         return result;
       } catch (error) {
+        console.log({ error });
         throw new PaymentReportError('An error occurred while sending report');
       }
     }
@@ -462,7 +468,7 @@ export const useInvoiceStore = defineStore(
         const emailContent = getEmailTemplate(products);
         const created = new Date(payment?.createdAt ?? '').toLocaleDateString();
         const amountPayed = `$${
-          Number(payment!.amountMoney!.amount) / 100
+          Number(payment!.amount_money!.amount) / 100
         } USD`;
 
         const merchant = getMerchantObject({
@@ -477,7 +483,7 @@ export const useInvoiceStore = defineStore(
           payed: amountPayed,
           date: created,
           content: emailContent,
-          email: payment.buyerEmailAddress,
+          email: auth.user.email,
           nameCustomer: payment.note,
         });
 

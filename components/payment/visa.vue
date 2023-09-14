@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { GetAddressByIdAndType } from '~/graphql/queries';
 import { AddressType } from '~/config/constants';
+import { PaymentReportError } from '~/errors';
 
 interface State {
   card: Square.Card | null;
@@ -70,52 +71,69 @@ const checkBilling = async (): Promise<CheckBillingResponse> => {
 };
 
 const createPayment = async (paymentBody: any, products: Product[]) => {
-  const { data } = await useFetch<any>('/api/payment', {
-    method: 'post',
-    body: paymentBody,
-  });
+  try {
+    const { data } = await useFetch<any>('/api/payment', {
+      method: 'post',
+      body: paymentBody,
+    });
 
-  if (data.value.status !== 'COMPLETED') {
+    if (data.value.data.status !== 'COMPLETED') {
+      $notify({
+        group: 'all',
+        title: 'Error',
+        text: 'El pago no fué realizado',
+      });
+      state.isLoading = false;
+      return;
+    }
+
     $notify({
       group: 'all',
-      title: 'Error',
-      text: 'El pago no fué realizado',
+      title: 'Éxito',
+      text: 'El pago se ha realizado con éxito',
     });
-    state.isLoading = false;
-    return;
-  }
 
-  $notify({
-    group: 'all',
-    title: 'Éxito',
-    text: 'El pago se ha realizado con éxito',
-  });
+    const invoiceItems: CartItem[] = cart.cartItems.filter((item) => {
+      return products.find((product) => product.id === item.id);
+    });
 
-  const invoiceItems: CartItem[] = cart.cartItems.filter((item) => {
-    return products.find((product) => product.id === item.id);
-  });
+    const response = await invoice.createVisaInvoice(
+      data.value.data,
+      invoiceItems
+    );
 
-  const response = await invoice.createVisaInvoice(data.value, invoiceItems);
+    if (!response?.data?.createInvoice?.data?.id) {
+      $notify({
+        group: 'all',
+        title: 'Error',
+        text: 'Hubo un problema al generar la factura',
+      });
+      state.isLoading = false;
+      return;
+    }
 
-  if (!response?.data?.createInvoice?.data?.id) {
+    await productStore.update();
+
     $notify({
       group: 'all',
-      title: 'Error',
-      text: 'Hubo un problema al generar la factura',
+      title: 'Éxito',
+      text: 'Su recibo fué creado, puede revisarlo en sus ordenes',
     });
-    state.isLoading = false;
-    return;
+
+    await invoice.sendVisaEmail(invoiceItems, data.value.data);
+
+    console.log('email sent');
+  } catch (error) {
+    console.log('createPayment: ', error);
+    if (error instanceof PaymentReportError) {
+      $notify({
+        group: 'all',
+        title: 'Error',
+        text: 'Hubo un error en el pago, intente de nuevo',
+      });
+      return;
+    }
   }
-
-  await productStore.update();
-
-  $notify({
-    group: 'all',
-    title: 'Éxito',
-    text: 'Su recibo fué creado, puede revisarlo en sus ordenes',
-  });
-
-  await invoice.sendVisaEmail(invoiceItems, data.value);
 };
 
 const makePayment = async (tokenResult: Square.TokenResult) => {
@@ -194,6 +212,11 @@ const loadSquareCard = async () => {
       makePayment(tokenResult);
     });
   } catch (error) {
+    $notify({
+      group: 'all',
+      title: 'Error',
+      text: 'Hubo un error el formulario de la tarjeta, por favor, recargue la página',
+    });
     console.error('error: ', { error });
   } finally {
     isLoadingCard.value = false;
