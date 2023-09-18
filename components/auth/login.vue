@@ -73,7 +73,7 @@ const submit = handleSubmit(async (data, { resetForm }) => {
   <form class="auth-form">
     <div class="auth-form__wrapper">
       <h5 class="auth-form__title">Inicia sesión en tu cuenta</h5>
-      <app-input name="user" placeholder="john@doe.com">
+      <app-input name="user" placeholder="Usuario">
         <template #left>
           <div class="i-ph-bag-light text-[20px] text-gray-400" />
         </template>

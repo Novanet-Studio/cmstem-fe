@@ -129,10 +129,10 @@ watchEffect(() => {
   <form class="auth-form">
     <div class="auth-form__wrapper">
       <h5 class="auth-form__title">Crear una cuenta</h5>
-      <app-input name="username" placeholder="John Doe" icon-left="i-ph-user" />
+      <app-input name="username" placeholder="Usuario" icon-left="i-ph-user" />
       <app-input
         name="email"
-        placeholder="john@doe.com"
+        placeholder="correo@mail.com"
         icon-left="i-ph-envelope"
       />
       <app-input

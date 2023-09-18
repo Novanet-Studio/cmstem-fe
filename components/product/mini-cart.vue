@@ -40,7 +40,7 @@ const handleRemoveProductFromCart = (product: any) => {
         <div class="i-ph-x-light text-color-4" />
       </a>
       <h5
-        class="m-0 block text-center text-lg lg:text-sm font-800 pt-2 pb-1 pl-0 overflow-hidden pr-4 text-black"
+        class="m-0 block text-md lg:text-sm font-800 pt-2 pb-1 pl-0 overflow-hidden pr-4 text-black"
       >
         {{ product.name }}
       </h5>
@@ -53,7 +53,7 @@ const handleRemoveProductFromCart = (product: any) => {
 
 <style scoped>
 .product-mini-cart {
-  @apply mb-8 flex flex-nowrap h-16;
+  @apply mb-8 flex flex-nowrap  border-b;
 }
 
 .product-mini-cart__image-wrapper {
