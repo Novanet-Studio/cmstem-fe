@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { FreeMode, Navigation, Mousewheel, Thumbs } from 'swiper/modules';
 import { injectKeys } from '~/config/constants';
-import 'swiper/element/css/navigation';
-import 'swiper/element/css/thumbs';
+
+defineEmits<{
+  (e: 'show-lightbox'): void;
+}>();
 
 const product = inject(injectKeys.productDetail) as Ref<Product>;
 const thumbsSwiper = ref(null);
@@ -24,7 +26,10 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
       <figure>
         <div class="ps-wrapper max-w-3xl md:max-w-16rem">
           <!-- Gallery-->
-          <div class="ps-product__gallery relative">
+          <div
+            class="ps-product__gallery relative"
+            @click="$emit('show-lightbox')"
+          >
             <swiper-container
               class="main-swiper"
               :space-between="10"
@@ -44,7 +49,7 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
               </swiper-slide>
             </swiper-container>
 
-            <div class="absolute -bottom-4 flex w-full justify-center z-9999">
+            <div class="absolute -bottom-4 flex w-full justify-center z-8">
               <button
                 class="w-13 h-13 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md"
               >
@@ -128,13 +133,13 @@ const setThumbsSwiper = (swiper: any) => (thumbsSwiper.value = swiper);
   @apply h-100px box-border px-0 py-10px md:(w-300px h-400px) lg:(w-100px w-300px h-400px);
 }
 
-.swiper-thumbs .swiper-slide {
+.swiper-thumbs .swiper-slide-visible {
   width: 25%;
   opacity: 0.4;
   @apply h-100px;
 }
 
-.swiper-thumbs .swiper-slide .swiper-slide-thumb-active {
+.swiper-thumbs .swiper-slide-thumb-active {
   opacity: 1;
 }
 

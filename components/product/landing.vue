@@ -1,11 +1,11 @@
 <script lang="ts" setup>
 type Props = {
   category: Category;
+  filtered: boolean;
 };
 
 const props = defineProps<Props>();
 const productStore = useProductStore();
-
 const products = ref<Product[] | null>(null);
 
 onMounted(async () => {
@@ -37,12 +37,23 @@ onMounted(async () => {
               spaceBetween: 1,
             },
           }"
-          v-if="products.length"
+          v-if="products.length && !filtered"
         >
           <template #default="{ product }">
             <product-default :product="product" />
           </template>
         </app-slider>
+
+        <div
+          class="grid grid-cols-2 gap-4 md:(grid-cols-3) lg:(grid-cols-5)"
+          v-if="filtered"
+        >
+          <product-default
+            v-for="product in products"
+            :product="product"
+            :key="product.id"
+          />
+        </div>
       </div>
     </div>
   </div>

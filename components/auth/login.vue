@@ -73,7 +73,7 @@ const submit = handleSubmit(async (data, { resetForm }) => {
   <form class="auth-form">
     <div class="auth-form__wrapper">
       <h5 class="auth-form__title">Inicia sesión en tu cuenta</h5>
-      <app-input name="user" placeholder="john o john@doe.com">
+      <app-input name="user" placeholder="john@doe.com">
         <template #left>
           <div class="i-ph-bag-light text-[20px] text-gray-400" />
         </template>
@@ -110,6 +110,12 @@ const submit = handleSubmit(async (data, { resetForm }) => {
         >
           Entrar
         </app-button>
+      </div>
+
+      <div class="flex mt-4 justify-center">
+        <nuxt-link class="text-xs underline text-color-2" to="/forgot-password"
+          >¿Has olvidado tu contraseña?</nuxt-link
+        >
       </div>
     </div>
   </form>

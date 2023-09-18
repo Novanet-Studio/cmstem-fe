@@ -10,6 +10,7 @@ import {
   nonNullable,
 } from 'valibot';
 import { toTypedSchema } from '@vee-validate/valibot';
+import { PASSWORD_REGEX } from '~/config/constants';
 
 type Form = {
   email: string;
@@ -35,48 +36,28 @@ const state = reactive({
 });
 const showPasswords = ref(false);
 
-const PASSWORD_REGEX =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/gm;
-
 const schema = toTypedSchema(
-  object(
-    {
-      email: string([
-        minLength(1, 'Ingrese su email'),
-        email('Formato de email inválido'),
-      ]),
-      username: nonNullable(
-        string([
-          minLength(1, 'Este campo es requerido'),
-          minLength(2, 'El nombre es muy corto'),
-          maxLength(10, 'El nombre es muy largo'),
-        ])
-      ),
-      password: string([
+  object({
+    email: string([
+      minLength(1, 'Ingrese su email'),
+      email('Formato de email inválido'),
+    ]),
+    username: nonNullable(
+      string([
         minLength(1, 'Este campo es requerido'),
-        regex(
-          PASSWORD_REGEX,
-          'Debe ser igual o mayor a 8 carácteres, una letra mayúscula, una minúscula, un número y un carácter especial'
-        ),
-      ]),
-      confirmPassword: string([minLength(1, 'Este campo es requerido')]),
-    },
-    [
-      (input) => {
-        if (input.password !== input.confirmPassword) {
-          return {
-            issue: {
-              validation: 'custom',
-              message: 'Las contraseñas no coinciden',
-              input,
-            },
-          };
-        }
-
-        return { output: input };
-      },
-    ]
-  )
+        minLength(2, 'El nombre es muy corto'),
+        maxLength(10, 'El nombre es muy largo'),
+      ])
+    ),
+    password: string([
+      minLength(1, 'Este campo es requerido'),
+      regex(
+        PASSWORD_REGEX,
+        'Debe ser igual o mayor a 8 carácteres, una letra mayúscula, una minúscula, un número y un carácter especial'
+      ),
+    ]),
+    confirmPassword: string([minLength(1, 'Este campo es requerido')]),
+  })
 );
 
 const resetState = () => {
@@ -84,9 +65,12 @@ const resetState = () => {
   state.isDisabled = false;
 };
 
-const { handleSubmit } = useForm<Form>({
+const { handleSubmit, defineInputBinds, setFieldError } = useForm<Form>({
   validationSchema: schema,
 });
+
+const password = defineInputBinds('password');
+const confirmPassword = defineInputBinds('confirmPassword');
 
 const submit = handleSubmit(async (data, { resetForm }) => {
   try {
@@ -128,35 +112,42 @@ const submit = handleSubmit(async (data, { resetForm }) => {
     resetForm();
   }
 });
+
+watchEffect(() => {
+  if (
+    confirmPassword.value.value &&
+    password.value.value &&
+    confirmPassword.value.value?.length >= 8 &&
+    password.value.value !== confirmPassword.value.value
+  ) {
+    setFieldError('confirmPassword', 'Las contraseñas no coinciden');
+  }
+});
 </script>
 
 <template>
   <form class="auth-form">
     <div class="auth-form__wrapper">
       <h5 class="auth-form__title">Crear una cuenta</h5>
-      <app-input
-        name="username"
-        placeholder="John Doe"
-        icon-left="fa fa-user"
-      />
+      <app-input name="username" placeholder="John Doe" icon-left="i-ph-user" />
       <app-input
         name="email"
         placeholder="john@doe.com"
-        icon-left="fa fa-envelope"
+        icon-left="i-ph-envelope"
       />
       <app-input
         name="password"
         placeholder="Ingresa tu contraseña"
         :type="showPasswords ? 'text' : 'password'"
-        icon-left="fa fa-lock"
+        :icon-left="showPasswords ? 'i-ph-lock-open' : 'i-ph-lock'"
       />
       <app-input
         name="confirmPassword"
         placeholder="Confirma contraseña"
         :type="showPasswords ? 'text' : 'password'"
-        icon-left="fa fa-lock"
+        :icon-left="showPasswords ? 'i-ph-lock-open' : 'i-ph-lock'"
       />
-      <app-checkbox label="Show passwords" v-model="showPasswords" />
+      <app-checkbox label="Mostrar contraseñas" v-model="showPasswords" />
       <div class="auth-form__footer !mb-0">
         <app-button @click="submit" :loading="state.isLoading">
           Registrar cuenta

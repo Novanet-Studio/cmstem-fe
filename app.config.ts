@@ -10,25 +10,22 @@ export default defineAppConfig({
       {
         link: 'https://www.instagram.com/cms/',
         icon: 'instagram',
-        text: '@cms',
+        text: '@ccsmultisport',
       },
       {
-        link: '#',
+        link: 'https://wa.me/message/XTA7RUDHZKT4C1',
         icon: 'whatsapp',
-        text: '+58 412-12315654',
+        text: '+58 424-154-8330',
       },
       {
-        link: '#',
-        icon: 'email',
-        text: 'cms@gmal.com',
+        link: 'https://www.facebook.com/CcsMultiSport',
+        icon: 'facebook',
+        text: 'CcsMultiSport',
       },
     ],
   },
   home: {
-    slider: ['/img/home/1.jpg', '/img/home/2.jpg' ],
+    slider: ['/img/home/1.jpg', '/img/home/2.jpg'],
     promotions: ['/img/home/promotion-1.jpeg'],
-  },
-  nosotros: {
-    slider: ['/img/home/1.jpg', '/img/home/2.jpg' ],
   },
 });

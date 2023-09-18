@@ -67,17 +67,13 @@ const submit = handleSubmit(async (data) => {
           <div class="form__left">
             <div class="form__group">
               <label class="form__label">Nombre y Apellido</label>
-              <app-input name="fullname" placeholder="Juan" />
+              <app-input name="fullname" placeholder="John" />
             </div>
           </div>
           <div class="form__right">
             <div class="form__group">
               <label class="form__label">Email</label>
-              <app-input
-                name="email"
-                type="email"
-                placeholder="correo@mail.com"
-              />
+              <app-input name="email" type="email" placeholder="john@doe.com" />
             </div>
           </div>
         </div>
@@ -94,7 +90,7 @@ const submit = handleSubmit(async (data) => {
           <textarea
             class="w-full border border-color-7 rounded-md p-4 text-sm outline-none ring-2 ring-transparent focus:ring-color-2"
             cols="15"
-            placeholder="Saludos, me gustaria saber..."
+            placeholder="Saludos, me gustaría saber..."
             rows="8"
             v-bind="message"
           ></textarea>

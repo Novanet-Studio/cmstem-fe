@@ -1,4 +1,10 @@
 <script lang="ts" setup>
+import { useField } from 'vee-validate';
+
+const { copied, copy } = useClipboard({
+  legacy: true,
+});
+
 const cart = useCartStore();
 const { isSending, hasError, submit } = usePaymentForm({
   equalAmountTo: cart.amount.toString(),
@@ -9,6 +15,9 @@ const { isSending, hasError, submit } = usePaymentForm({
     message: `El monto del pago no es valido o la fecha no concuerda con el dia de hoy`,
   },
 });
+
+const field = useField<string>('amountToPay');
+field.setValue('$ ' + cart.amount.toString());
 </script>
 
 <template>
@@ -40,13 +49,13 @@ const { isSending, hasError, submit } = usePaymentForm({
         <label class="form__label"
           >Nombre del usuario<sup class="form__required">*</sup></label
         >
-        <app-input name="name" placeholder="john" />
+        <app-input name="name" placeholder="John" />
       </div>
       <div class="form__group">
         <label class="form__label"
           >Apellido del usuario<sup class="form__required">*</sup></label
         >
-        <app-input name="lastName" placeholder="doe" />
+        <app-input name="lastName" placeholder="Doe" />
       </div>
       <div class="form__group">
         <label class="form__label"
@@ -58,7 +67,18 @@ const { isSending, hasError, submit } = usePaymentForm({
         <label class="form__label"
           >Monto del pago en USD<sup class="form__required">*</sup></label
         >
-        <app-input name="amountPayed" />
+        <app-input name="amountToPay" disabled>
+          <template #right>
+            <button
+              class="flex items-center justify-center"
+              @click="copy(cart.amount.toString().trim())"
+              :disabled="copied"
+            >
+              <div class="i-ph-copy-bold" v-if="!copied"></div>
+              <div class="i-ph-check-bold" v-else></div>
+            </button>
+          </template>
+        </app-input>
       </div>
       <div class="form__group">
         <label class="form__label"

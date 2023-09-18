@@ -4,6 +4,17 @@
       <div class="default__container">
         <div class="default__content">
           <app-header />
+          <div
+            class="py-4 bg-color-6 px-16 text-xs text-color-7 font-bold flex justify-center md:(text-sm) lg:(justify-initial py-8)"
+            v-if="$route.path.includes('product')"
+          >
+            <button
+              class="flex items-center gap-1 lg:ml-17"
+              @click="$router.go(-1)"
+            >
+              <span class="i-ph-arrow-left inline-block"></span>Volver
+            </button>
+          </div>
           <main class="default__main">
             <nuxt-page />
           </main>

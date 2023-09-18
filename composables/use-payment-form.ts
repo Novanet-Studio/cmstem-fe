@@ -1,5 +1,5 @@
 import { useForm } from 'vee-validate';
-import { object, string, minLength, equal } from 'valibot';
+import { object, string, minLength } from 'valibot';
 import { toTypedSchema } from '@vee-validate/valibot';
 import { PaymentReportError, SendInvoiceEmailError } from '~/errors';
 
@@ -7,7 +7,7 @@ type Form = {
   name: string;
   lastName: string;
   date: string;
-  amountPayed: string;
+  // amountPayed: string;
   confirmation: string;
 };
 
@@ -32,7 +32,7 @@ export default function usePaymentForm({
   payment,
 }: Params): UsePaymentForm {
   if (!equalAmountTo || !method || !payment?.message || !payment?.validation) {
-    throw new Error('All parameters are required');
+    throw new Error('usePaymentForm: All parameters are required');
   }
 
   const isSending = useState('isSending', () => false);
@@ -41,21 +41,28 @@ export default function usePaymentForm({
   const { $notify } = useNuxtApp();
   const cart = useCartStore();
   const invoice = useInvoiceStore();
+  const productStore = useProductStore();
 
   const schema = toTypedSchema(
     object({
       name: string([minLength(1, 'Este campo es requerido')]),
       lastName: string([minLength(1, 'Este campo es requerido')]),
       date: string([minLength(1, 'Este campo es requerido')]),
-      amountPayed: string([
-        minLength(1, 'Este campo es requerido'),
-        equal(equalAmountTo, 'La cantidad no es igual al monto especificado'),
-      ]),
+      // amountPayed: string([
+      //   minLength(1, 'Este campo es requerido'),
+      //   equal(equalAmountTo, 'La cantidad no es igual al monto especificado'),
+      // ]),
       confirmation: string([minLength(1, 'Este campo es requerido')]),
     })
   );
 
   const { handleSubmit, errors } = useForm<Form>({
+    initialValues: {
+      name: '',
+      lastName: '',
+      date: '',
+      confirmation: '',
+    },
     validationSchema: schema,
   });
 
@@ -77,12 +84,13 @@ export default function usePaymentForm({
         name: data.name,
         lastname: data.lastName,
         confirmation: data.confirmation,
-        amount: data.amountPayed,
+        amount: equalAmountTo,
         paymentDate: data.date,
       };
 
       const invoiceItems = cart.cartItems;
       await invoice.createInvoiceReport(paymentData, invoiceItems, method);
+      await productStore.update();
 
       $notify({
         group: 'all',

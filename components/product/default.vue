@@ -6,6 +6,7 @@ import { GetProductById } from '~/graphql/queries';
 const props = defineProps<{ product: Product }>();
 
 const cart = useCartStore();
+const router = useRouter();
 const graphql = useStrapiGraphQL();
 const pruductStore = useProductStore();
 const { $notify } = useNuxtApp();
@@ -16,6 +17,16 @@ async function handleAddToCart() {
     quantity: 1,
     price: props.product.price,
   };
+
+  if (props.product.size_stock?.length) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia',
+      text: `Seleccione una talla`,
+    });
+    router.push(`/product/${props.product.id}`);
+    return;
+  }
 
   cart.addProductToCart(newProduct);
 
@@ -66,10 +77,11 @@ provide(injectKeys.product, props.product);
     </div>
     <div class="w-full mt-2 px-4 mx-12 pb-2">
       <button
-        class="py-2 px-8 rounded-full w-full bg-color-2 shadow-md shadow-black/20 text-color-4 font-bold text-xs lg:text-base"
+        class="py-2 px-8 rounded-full w-full bg-color-2 shadow-md shadow-black/20 text-color-4 font-bold text-xs lg:text-base disabled:opacity-50"
+        :disabled="!product.size_stock?.length"
         @click="handleAddToCart"
       >
-        Comprar
+        {{ product.size_stock?.length ? 'Agregar al carrito' : 'Agotado' }}
       </button>
     </div>
   </div>

@@ -8,26 +8,33 @@ const amount = computed(() => cartStore.amount);
 const cartProducts = computed(() => productStore.cartProducts);
 
 const isOpen = ref(false);
+const miniCartRef = ref(null);
+
+function toggleIsOpen() {
+  isOpen.value = !isOpen.value;
+}
+
+onClickOutside(miniCartRef, () => {
+  isOpen.value = false;
+});
 </script>
 
 <template>
-  <div class="relative">
-    <div
-      class="cursor-pointer"
-      @mouseover="isOpen = true"
-      @mouseleave="isOpen = false"
-      @click.prevent="isOpen = !isOpen"
-    >
+  <div class="relative mt-2">
+    <button class="cursor-pointer" @click.prevent="toggleIsOpen">
       <div class="header-actions__link">
         <div class="i-ph-bag-light header-actions__icon"></div>
         <span class="header-actions__indicator-wrapper">
           <i class="header-actions__indicator">{{ total }}</i>
         </span>
       </div>
-      <!-- Menu -->
-      <transition name="slide-fade">
-        <template v-if="isOpen">
-          <div v-if="total > 0" class="mini-cart">
+    </button>
+
+    <!-- Menu -->
+    <transition name="slide-fade">
+      <template v-if="isOpen">
+        <div class="mini-cart shadow-xl" ref="miniCartRef">
+          <div v-if="total > 0">
             <div class="mini-cart__body">
               <app-loader v-if="isLoadingCart" />
               <template v-else-if="cartProducts?.length">
@@ -55,18 +62,18 @@ const isOpen = ref(false);
               </figure>
             </div>
           </div>
-          <div v-else class="mini-cart">
-            <div class="mini-cart__empty">No hay productos en el carrito</div>
+          <div v-else class="mini-cart__empty">
+            No hay productos en el carrito
           </div>
-        </template>
-      </transition>
-    </div>
+        </div>
+      </template>
+    </transition>
   </div>
 </template>
 
 <style scoped>
 .mini-cart {
-  @apply absolute min-w-[300px] right-0 -left-[178px] z-30 pt-[10px] transition ease;
+  @apply absolute min-w-[300px] right-0 -left-[178px] z-30 pt-[10px] transition ease rounded-xl;
 }
 
 .mini-cart__body {

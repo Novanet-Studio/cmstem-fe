@@ -20,8 +20,13 @@ const value = computed({
 
 <template>
   <div class="input-group flex items-center gap-2 text-sm text-gray-500">
-    <input id="check" type="checkbox" class="p-1" v-model="value" @change="onChange" />
+    <input
+      id="check"
+      type="checkbox"
+      class="p-1 accent-color-2"
+      v-model="value"
+      @change="onChange"
+    />
     <label for="check">{{ label }}</label>
   </div>
 </template>
-

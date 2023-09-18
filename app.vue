@@ -18,7 +18,7 @@ html {
 
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.4s;
+  transition: all 0.2s;
 }
 
 .page-enter-from,
@@ -27,12 +27,9 @@ html {
   filter: blur(1rem);
 }
 
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
+.slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.2s ease;
 }
 
 .slide-fade-enter-from,
@@ -41,9 +38,13 @@ html {
   opacity: 0;
 }
 
-.slide-fade-leave-active {
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
   opacity: 0;
-  display: none;
-  visibility: hidden;
+  transform: translateX(30px);
 }
 </style>

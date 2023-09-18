@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { GetAddressByIdAndType } from '~/graphql/queries';
 import { AddressType } from '~/config/constants';
-import type { Payment } from 'square';
+import { PaymentReportError } from '~/errors';
 
 interface State {
   card: Square.Card | null;
@@ -20,6 +20,7 @@ const { SQUARE_APPLICATION_ID, SQUARE_LOCATION_ID } = useRuntimeConfig().public;
 const graphql = useStrapiGraphQL();
 const auth = useAuthStore();
 const cart = useCartStore();
+const productStore = useProductStore();
 const checkout = useCheckoutStore();
 const invoice = useInvoiceStore();
 
@@ -69,48 +70,70 @@ const checkBilling = async (): Promise<CheckBillingResponse> => {
   }
 };
 
-const createPayment = async (paymentBody: any) => {
-  const { data } = await useFetch<any>('/api/payment', {
-    method: 'post',
-    body: paymentBody,
-  });
+const createPayment = async (paymentBody: any, products: Product[]) => {
+  try {
+    const { data } = await useFetch<any>('/api/payment', {
+      method: 'post',
+      body: paymentBody,
+    });
 
-  if (data.value.status !== 'COMPLETED') {
+    if (data.value.data.status !== 'COMPLETED') {
+      $notify({
+        group: 'all',
+        title: 'Error',
+        text: 'El pago no fué realizado',
+      });
+      state.isLoading = false;
+      return;
+    }
+
     $notify({
       group: 'all',
-      title: 'Error',
-      text: 'El pago no fué realizado',
+      title: 'Éxito',
+      text: 'El pago se ha realizado con éxito',
     });
-    state.isLoading = false;
-    return;
-  }
 
-  $notify({
-    group: 'all',
-    title: 'Éxito',
-    text: 'El pago se ha realizado con éxito',
-  });
+    const invoiceItems: CartItem[] = cart.cartItems.filter((item) => {
+      return products.find((product) => product.id === item.id);
+    });
 
-  const invoiceItems = cart.cartItems;
-  const response = await invoice.createVisaInvoice(data.value, invoiceItems);
+    const response = await invoice.createVisaInvoice(
+      data.value.data,
+      invoiceItems
+    );
 
-  if (!response?.data?.createInvoice?.data?.id) {
+    if (!response?.data?.createInvoice?.data?.id) {
+      $notify({
+        group: 'all',
+        title: 'Error',
+        text: 'Hubo un problema al generar la factura',
+      });
+      state.isLoading = false;
+      return;
+    }
+
+    await productStore.update();
+
     $notify({
       group: 'all',
-      title: 'Error',
-      text: 'Hubo un problema al generar la factura',
+      title: 'Éxito',
+      text: 'Su recibo fué creado, puede revisarlo en sus ordenes',
     });
-    state.isLoading = false;
-    return;
+
+    await invoice.sendVisaEmail(invoiceItems, data.value.data);
+
+    console.log('email sent');
+  } catch (error) {
+    console.log('createPayment: ', error);
+    if (error instanceof PaymentReportError) {
+      $notify({
+        group: 'all',
+        title: 'Error',
+        text: 'Hubo un error en el pago, intente de nuevo',
+      });
+      return;
+    }
   }
-
-  $notify({
-    group: 'all',
-    title: 'Éxito',
-    text: 'Su recibo fué creado, puede revisarlo en sus ordenes',
-  });
-
-  await invoice.sendVisaEmail(invoiceItems, data.value);
 };
 
 const makePayment = async (tokenResult: Square.TokenResult) => {
@@ -125,6 +148,19 @@ const makePayment = async (tokenResult: Square.TokenResult) => {
         group: 'all',
         title: 'Error',
         text: 'Hubo un problema al iniciar proceso de compra, intente de nuevo',
+      });
+      return;
+    }
+
+    const [validProducts, noStockProducts] = await productStore.checkStock();
+
+    if (noStockProducts.length) {
+      noStockProducts.forEach((product) => {
+        $notify({
+          group: 'all',
+          title: 'Error',
+          text: `El producto ${product.name} está agotado o superas la cantidad disponible`,
+        });
       });
       return;
     }
@@ -153,7 +189,7 @@ const makePayment = async (tokenResult: Square.TokenResult) => {
 
     const billing = await checkBilling();
     payment.billingAddress = billing;
-    await createPayment(payment);
+    await createPayment(payment, validProducts);
   } catch (err) {
     console.log(err);
   } finally {
@@ -176,6 +212,11 @@ const loadSquareCard = async () => {
       makePayment(tokenResult);
     });
   } catch (error) {
+    $notify({
+      group: 'all',
+      title: 'Error',
+      text: 'Hubo un error el formulario de la tarjeta, por favor, recargue la página',
+    });
     console.error('error: ', { error });
   } finally {
     isLoadingCard.value = false;

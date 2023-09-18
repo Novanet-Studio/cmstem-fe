@@ -1,22 +1,70 @@
 <script lang="ts" setup>
+import mapper from 'smapper';
 import { injectKeys } from '~/config/constants';
+import { GetProductById } from '~/graphql/queries';
 
 const { $notify } = useNuxtApp();
+const graphql = useStrapiGraphQL();
+
 const cart = useCartStore();
+const productStore = useProductStore();
 const wishlist = useWishlistStore();
 const router = useRouter();
+const selectedSize = ref<SizeStock>();
 const quantity = ref<number>(1);
 
 const product = inject(injectKeys.productDetail) as Ref<Product>;
+
+const productHasSize = computed(
+  () =>
+    product.value.size_stock?.length &&
+    product.value.size_stock.filter(
+      (size) =>
+        !size.talla.toLocaleLowerCase().includes('no_aplica') &&
+        size.inventario > 0
+    ).length
+);
+const productHasStock = computed(
+  () =>
+    product.value.size_stock?.length &&
+    product.value.size_stock.filter((stock) => stock.inventario > 0).length
+);
+
+const isQuantityGreaterThanTen = computed(() => {
+  const existItem = cart.cartItems.find((item) => item.id === product.value.id);
+  return existItem?.id && quantity.value + existItem.quantity > 10;
+});
+
+const isQuantityGreaterThanStock = computed(() => {
+  const existItem = cart.cartItems.find((item) => item.id === product.value.id);
+  return (
+    existItem?.id &&
+    quantity.value + existItem.quantity > selectedSize.value!.inventario
+  );
+});
 
 const handleIncreaseQuantity = () => quantity.value++;
 const handleDescreaseQuantity = () =>
   quantity.value > 1 ? quantity.value-- : quantity;
 
 const addItemToCart = async (payload: CartItem) => {
+  const temp: Product[] = [];
+
   cart.addProductToCart(payload);
 
   if (!cart.cartItems.length) return;
+
+  const itemsList = cart.cartItems.map((item) =>
+    graphql<ProductRequest>(GetProductById, { id: item.id })
+  );
+
+  const itemsResult = await Promise.all(itemsList);
+
+  mapper<any[]>(itemsResult).forEach((item) => {
+    temp.push(item.products[0]);
+  });
+
+  productStore.addCartProducts(temp);
 
   $notify({
     group: 'all',
@@ -32,6 +80,24 @@ const handleAddItemToWishlist = () => {
     id: product.value.id,
   };
 
+  if (isQuantityGreaterThanStock.value) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia',
+      text: `No hay suficiente productos en el inventario`,
+    });
+    return;
+  }
+
+  if (isQuantityGreaterThanTen.value) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia!',
+      text: `No puede añadir más de 10 elementos`,
+    });
+    return;
+  }
+
   wishlist.addItem(item);
 
   $notify({
@@ -42,44 +108,63 @@ const handleAddItemToWishlist = () => {
 };
 
 const handleAddToCart = (isBuyNow = false) => {
-  const existItem = cart.cartItems.find((item) => item.id === product.value.id);
   const item = {
     id: product.value.id,
     quantity: quantity.value,
     price: product.value.price,
+    size: selectedSize.value?.talla as string,
   };
 
-  if (!existItem) {
-    addItemToCart(item);
-    if (isBuyNow) goToCheckout();
+  if (productHasSize.value && !selectedSize.value) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia',
+      text: `Seleccione una talla`,
+    });
     return;
   }
 
-  const isQuantityGreaterThanTen = quantity.value + existItem.quantity > 10;
-
-  if (!isQuantityGreaterThanTen) {
-    addItemToCart(item);
-    if (isBuyNow) goToCheckout();
+  if (isQuantityGreaterThanStock.value) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia',
+      text: `No hay suficiente productos en el inventario`,
+    });
     return;
   }
 
-  $notify({
-    group: 'all',
-    title: 'Advertencia!',
-    text: `No puede añadir más de 10 elementos`,
-  });
+  if (isQuantityGreaterThanTen.value) {
+    $notify({
+      group: 'all',
+      title: 'Advertencia!',
+      text: `No puede añadir más de 10 elementos`,
+    });
+    return;
+  }
+
+  addItemToCart(item);
+
+  if (isBuyNow) goToCheckout();
 };
 </script>
 
 <template>
   <div>
-    <div class="mt-2 lg:mt-4">
+    <div class="mt-2 lg:mt-4" v-if="productHasSize">
       <div class="text-sm font-bold lg:text-base">Tallas</div>
-      <div class="mt-2">
+      <div class="mt-2 flex gap-4">
         <button
-          class="w-9 h-9 rounded-full bg-color-3 text-white text-xs font-bold shadow shadow-md lg:(w-12 h-12)"
+          class="w-9 h-9 rounded-full bg-color-3 text-white text-xs font-bold ring-2 ring-offset-2 shadow shadow-md lg:(w-12 h-12)"
+          :class="
+            selectedSize?.talla === size.talla
+              ? 'ring-color-3'
+              : 'ring-transparent'
+          "
+          v-for="(size, index) in product?.size_stock"
+          :key="index"
+          @click="selectedSize = size"
         >
-          XS
+          {{ cleanupSize(size.talla) }}
         </button>
       </div>
     </div>
@@ -88,7 +173,11 @@ const handleAddToCart = (isBuyNow = false) => {
       <div
         class="max-w-[6.25rem] flex items-center justify-between rounded-full shadow shadow-md lg:px-4"
       >
-        <button class="px-2" @click.prevent="handleDescreaseQuantity">
+        <button
+          class="px-2 disabled:opacity-50"
+          @click.prevent="handleDescreaseQuantity"
+          :disabled="!productHasStock"
+        >
           <div class="i-ph-minus-light text-xs text-gray-5 lg:text-sm" />
         </button>
         <input
@@ -97,7 +186,11 @@ const handleAddToCart = (isBuyNow = false) => {
           type="text"
           disabled
         />
-        <button class="px-2" @click.prevent="handleIncreaseQuantity">
+        <button
+          class="px-2 disabled:opacity-50"
+          @click.prevent="handleIncreaseQuantity"
+          :disabled="!productHasStock"
+        >
           <div class="i-ph-plus-light text-xs text-gray-5 lg:text-sm" />
         </button>
       </div>
@@ -109,15 +202,17 @@ const handleAddToCart = (isBuyNow = false) => {
         <!-- <span class="i-ph-shopping-cart text-lg"></span> -->
       </button>
       <button
-        class="bg-color-5 shadow shadow-md text-sm font-bold w-10 h-10 rounded-full flex items-center justify-center"
+        class="bg-color-5 shadow shadow-md text-sm font-bold w-10 h-10 rounded-full flex items-center justify-center disabled:opacity-50"
         @click="handleAddItemToWishlist"
+        :disabled="!productHasStock"
       >
         <span class="i-ph-heart text-lg"></span>
       </button>
     </div>
     <div class="flex justify-center mt-8 md:justify-initial">
       <button
-        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full md:px-10 lg:px-12"
+        class="px-6 py-2 text-sm bg-color-2 text-white font-bold rounded-full md:px-10 lg:px-12 disabled:opacity-50"
+        :disabled="!productHasStock"
         @click="handleAddToCart(true)"
       >
         Comprar

@@ -22,35 +22,36 @@ const isOpen = ref(false);
   <div
     v-else
     class="user-area__menu"
-    @click="isOpen = !isOpen"
     @mouseover="isOpen = true"
     @mouseleave="isOpen = false"
   >
-    <div class="i-ph-user-light user-area__icon" />
-    <transition name="slide-fade">
-      <div class="user-area__menu-container" v-if="isOpen">
-        <ul class="user-area__menu-list">
-          <li
-            v-for="link in global?.links"
-            :key="link.text"
-            class="user-area__menu-list-item"
-          >
-            <nuxt-link :to="link.url" class="user-area__menu-link">
-              {{ link.text }}
-            </nuxt-link>
-          </li>
-          <li class="user-area__menu-logout">
-            <a
-              href="#"
-              class="transition-colors ease"
-              @click.prevent="auth.logout"
+    <button @click="isOpen = !isOpen">
+      <div class="i-ph-user-light user-area__icon" />
+      <transition name="slide-fade">
+        <div class="user-area__menu-container" v-if="isOpen">
+          <ul class="user-area__menu-list">
+            <li
+              v-for="link in global?.links"
+              :key="link.text"
+              class="user-area__menu-list-item"
             >
-              Cerrar Sesión
-            </a>
-          </li>
-        </ul>
-      </div>
-    </transition>
+              <nuxt-link :to="link.url" class="user-area__menu-link">
+                {{ link.text }}
+              </nuxt-link>
+            </li>
+            <li class="user-area__menu-logout">
+              <a
+                href="#"
+                class="transition-colors ease"
+                @click.prevent="auth.logout"
+              >
+                Cerrar Sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+      </transition>
+    </button>
   </div>
 </template>
 
