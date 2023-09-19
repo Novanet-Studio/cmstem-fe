@@ -154,7 +154,7 @@ const handleAddToCart = (isBuyNow = false) => {
       <div class="text-sm font-bold lg:text-base">Tallas</div>
       <div class="mt-2 flex justify-evenly">
         <button
-          class="w-10  h-10 rounded-full bg-color-3 text-white text-xs font-bold ring-0 ring-offset-2 shadow shadow-md lg:(w-12 h-12)"
+          class="w-10 h-10 rounded-full bg-color-3 text-white text-xs font-bold ring-1 ring-offset-2 ring-offset-[#ecedee] shadow shadow-md lg:(w-12 h-12)"
           :class="
             selectedSize?.talla === size.talla
               ? 'ring-color-3'
