@@ -22,7 +22,7 @@ const {
       <product-loader v-if="isLoading" />
       <template v-else>
         <div class="flex items-center justify-between mt-8">
-          <h3 class="ml-5 text-color-2 font-900 text-2xl">Categorias</h3>
+          <h3 class="ml-5 text-color-2 font-900 text-2xl">Categorías</h3>
           <transition name="slide-fade">
             <button
               class="block text-xs border border-color-3 px-2 py-1 rounded-xl text-color-3 md:(px-4 py-2 rounded-full) lg:(transition ease hover:(bg-color-3/10))"
@@ -42,10 +42,10 @@ const {
             @click="filterByCategory(category.id)"
           >
             <nuxt-img
-              class="w-20 h-20 rounded-full object-cover border md:(w-30 h-30)"
+              class="w-20 h-20 rounded-full object-cover border-3 md:(w-30 h-30)"
               :class="
                 category.id === categoryActive
-                  ? 'border-color-1'
+                  ? 'border-color-3'
                   : 'border-color-5'
               "
               :src="category.products[0].images[0].url"
