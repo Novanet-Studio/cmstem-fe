@@ -83,6 +83,8 @@ const fillFormFromStorage = () => {
     zipCode: checkout.zipCode || '',
     phone: checkout.phone || '',
   });
+
+  country.value.modelValue = checkout.country;
 };
 
 const fillFormFromStrapiShippingData = async () => {
