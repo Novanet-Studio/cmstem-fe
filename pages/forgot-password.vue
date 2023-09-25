@@ -31,7 +31,6 @@ const { handleSubmit } = useForm<Form>({
 });
 
 const submit = handleSubmit(async (data) => {
-  console.log('clicked');
   try {
     isLoading.value = true;
     isDisabled.value = true;
@@ -41,8 +40,6 @@ const submit = handleSubmit(async (data) => {
     });
 
     sessionStorage.setItem('cms.forgot', btoa(data.email));
-
-    console.log('email encoded: ', btoa(data.email));
 
     $notify({
       group: 'all',
@@ -93,9 +90,7 @@ const submit = handleSubmit(async (data) => {
           </div>
 
           <div class="flex mt-4 justify-center">
-            <nuxt-link
-              class="text-xs underline text-color-2"
-              to="/forgot-password"
+            <nuxt-link class="text-xs underline text-color-2" to="/auth/login"
               >Atrás para iniciar sesión</nuxt-link
             >
           </div>
