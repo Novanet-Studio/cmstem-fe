@@ -1,10 +1,14 @@
 interface EmailObjectParams {
-  payed: string;
-  date: string;
-  content: string;
-  orderId: string;
+  customer?: string;
   email?: string;
-  nameCustomer?: string;
+  date: string;
+  orderId: string;
+  payed: string;
+  tableData: {
+    name: string;
+    price: string;
+    quantity: string;
+  }[];
 }
 
 interface PaymentStrapi {

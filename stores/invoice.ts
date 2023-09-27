@@ -304,9 +304,14 @@ export const useInvoiceStore = defineStore(
       }
     }
 
-    function getEmailTemplate(products: any[]): string {
-      let emailContent = '';
-      const productList = [];
+    type MailProduct = {
+      name: string;
+      price: string;
+      quantity: string;
+    };
+
+    function getEmailProducts(products: any[]): MailProduct[] {
+      const productsMail: MailProduct[] = [];
 
       products.forEach((item) => {
         const productFinded = productsCart.cartProducts!.find(
@@ -314,14 +319,7 @@ export const useInvoiceStore = defineStore(
         );
 
         if (productFinded) {
-          productList.push({
-            quantity: item.quantity,
-            name: productFinded.name,
-            amount: item.price,
-            description: productFinded.description,
-          });
-
-          emailContent += emailTemplate({
+          productsMail.push({
             name: productFinded.name,
             price: item.price,
             quantity: item.quantity,
@@ -329,46 +327,55 @@ export const useInvoiceStore = defineStore(
         }
       });
 
-      return emailContent;
+      return productsMail;
     }
+
+    const createTable = (data: any[]) => ({
+      columns: [
+        { header: 'Producto', key: 'name' },
+        { header: 'Precio', key: 'price' },
+        { header: 'Cantidad', key: 'quantity' },
+      ],
+      data,
+    });
 
     const getMerchantObject = ({
       payed,
       date,
-      content,
+      tableData,
       email,
-      nameCustomer,
+      customer,
       orderId,
     }: EmailObjectParams) => ({
       payed,
       date,
-      content,
+      table: createTable(tableData),
+      orderId,
       email: email || checkout?.email || authStore.user.email,
       phone: checkout.phone,
       shipping: checkout.shippingAddress,
-      nameCustomer: nameCustomer || checkout.fullName,
-      order_id: orderId,
+      customer: customer || checkout.fullName,
     });
 
     const getReceiptObject = ({
       payed,
       date,
-      content,
+      tableData,
       orderId,
       email,
-      nameCustomer,
+      customer,
     }: EmailObjectParams) => ({
       payed,
       date,
-      content,
+      orderId,
+      table: createTable(tableData),
       email: email || checkout?.email || authStore.user.email,
-      nameCustomer: nameCustomer || checkout.fullName,
-      order_id: orderId,
+      customer: customer || checkout.fullName,
     });
 
     async function sendEmail(products: any[], payment: PaymentObject) {
       try {
-        const emailContent = getEmailTemplate(products);
+        const emailProducts = getEmailProducts(products);
         const createdDate = new Date(payment.paymentDate).toLocaleDateString();
         const realAmount = payment?.amountRate ? cart.amount : payment.amount;
         const amountPayed = `$${realAmount} USD`;
@@ -378,14 +385,14 @@ export const useInvoiceStore = defineStore(
           orderId,
           payed: amountPayed,
           date: createdDate,
-          content: emailContent,
+          tableData: emailProducts,
         });
 
         const receipt = getReceiptObject({
           orderId,
           payed: amountPayed,
           date: createdDate,
-          content: emailContent,
+          tableData: emailProducts,
         });
 
         await Promise.all([
@@ -419,7 +426,7 @@ export const useInvoiceStore = defineStore(
       items: CartItem[]
     ) {
       try {
-        const emailContent = getEmailTemplate(items);
+        const emailProducts = getEmailProducts(items);
         const created = new Date(order.create_time).toLocaleDateString();
         const amountPayed = `$${order.purchase_units[0].amount.value.toString()} USD`;
 
@@ -427,14 +434,14 @@ export const useInvoiceStore = defineStore(
           orderId: order.id,
           payed: amountPayed,
           date: created,
-          content: emailContent,
+          tableData: emailProducts,
         });
 
         const receipt = getReceiptObject({
           orderId: order.id,
           payed: amountPayed,
           date: created,
-          content: emailContent,
+          tableData: emailProducts,
         });
 
         await Promise.all([
@@ -465,7 +472,7 @@ export const useInvoiceStore = defineStore(
 
     async function sendVisaEmail(products: CartItem[], payment: Payment) {
       try {
-        const emailContent = getEmailTemplate(products);
+        const emailProducts = getEmailProducts(products);
         const created = new Date(payment?.createdAt ?? '').toLocaleDateString();
         const amountPayed = `$${
           Number(payment!.amount_money!.amount) / 100
@@ -475,16 +482,16 @@ export const useInvoiceStore = defineStore(
           orderId: payment.id as string,
           payed: amountPayed,
           date: created,
-          content: emailContent,
+          tableData: emailProducts,
         });
 
         const receipt = getReceiptObject({
           orderId: payment.id as string,
           payed: amountPayed,
           date: created,
-          content: emailContent,
+          tableData: emailProducts,
           email: auth.user.email,
-          nameCustomer: payment.note,
+          customer: payment.note,
         });
 
         await Promise.all([
