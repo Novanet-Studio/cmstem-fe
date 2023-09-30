@@ -46,7 +46,7 @@ watchEffect(() => {
   >
     <template v-if="renderImages">
       <swiper-slide v-for="(image, index) in images" :key="index">
-        <nuxt-img
+        <img
           class="slider__image"
           :src="image"
           alt="Products of the brand"
