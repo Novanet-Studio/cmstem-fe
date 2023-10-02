@@ -4,6 +4,11 @@ type Props = {
   filtered: boolean;
 };
 
+type Emits = {
+  (e: 'filter'): void;
+};
+
+defineEmits<Emits>();
 const props = defineProps<Props>();
 const productStore = useProductStore();
 const products = ref<Product[] | null>(null);
@@ -21,6 +26,9 @@ onMounted(async () => {
         <h3 class="landing__title">
           {{ category.name }}
         </h3>
+        <button class="underline" @click="$emit('filter')" v-if="!filtered">
+          ver todos
+        </button>
       </div>
       <div class="landing__content">
         <app-slider

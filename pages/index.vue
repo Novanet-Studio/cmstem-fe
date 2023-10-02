@@ -20,7 +20,7 @@ const {
         subtitle="Tenemos artículos para todos"
       />
       <product-loader v-if="isLoading" />
-      <template v-else>
+      <div id="parent" v-if="!isLoading && categories.length">
         <div class="flex items-center justify-between mt-8">
           <h3 class="ml-5 text-color-2 font-900 text-2xl">Categorías</h3>
           <transition name="slide-fade">
@@ -39,7 +39,7 @@ const {
           <button
             v-for="category in categories"
             :key="category.id"
-            @click="filterByCategory(category.id)"
+            @click="filterByCategory(category.id, '#parent')"
           >
             <nuxt-img
               class="w-20 h-20 rounded-full object-cover border-3 md:(w-30 h-30)"
@@ -62,9 +62,10 @@ const {
             :key="category.id"
             :category="category"
             :filtered="!!categoryActive"
+            @filter="filterByCategory(category.id, '#parent')"
           />
         </transition-group>
-      </template>
+      </div>
     </section>
   </div>
 </template>
