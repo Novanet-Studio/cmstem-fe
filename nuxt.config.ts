@@ -30,7 +30,6 @@ export default defineNuxtConfig({
     '@kevinmarrec/nuxt-pwa',
     '@nuxt/image-edge',
     '@sidebase/nuxt-pdf',
-    'vue-email/nuxt',
   ],
 
   css: ['@unocss/reset/tailwind.css'],
@@ -109,6 +108,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify-edge',
+    preset: 'netlify-builder',
   },
 });
