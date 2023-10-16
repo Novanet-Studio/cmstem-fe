@@ -1,21 +1,28 @@
 import sgMail from '@sendgrid/mail';
-import { config } from 'vue-email/compiler';
-import { resolve } from 'node:path';
-
-const vuemail = config(resolve('./emails'));
 
 export default defineEventHandler(async (event) => {
   try {
     const data = await readBody(event);
-    const { sendgrid } = useRuntimeConfig();
+    const { sendgrid, emailUrl } = useRuntimeConfig();
+    const RECEIPT_EMAIL_URL = `${emailUrl}/api/receipt-email`;
 
-    const template = await vuemail.render('receipt.vue', {
-      props: {
-        body: {
-          ...data,
+    const template = await $fetch<string>(RECEIPT_EMAIL_URL, {
+      method: 'post',
+      body: {
+        props: {
+          body: {
+            ...data,
+          },
         },
       },
     });
+
+    if (!template) {
+      return createError({
+        statusCode: 500,
+        statusMessage: 'Error enviando el email del recibo',
+      });
+    }
 
     sgMail.setApiKey(sendgrid.apiKey);
 

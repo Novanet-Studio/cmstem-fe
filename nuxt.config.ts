@@ -43,6 +43,7 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    emailUrl: 'https://emails-api-k93m.onrender.com',
     sendgrid: {
       apiKey: process.env.SENDGRID_API_KEY,
       senderEmail: process.env.SENDGRID_SENDER_MAIL,
@@ -108,6 +109,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'netlify-builder',
+    preset: 'netlify-edge',
   },
 });
