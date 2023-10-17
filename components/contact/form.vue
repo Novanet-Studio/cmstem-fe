@@ -63,6 +63,8 @@ const submit = handleSubmit(async (data) => {
         data-netlify-honeypot="bot-field"
         @submit.prevent="submit"
       >
+        <input type="hidden" name="form-name" value="contacto" />
+
         <div class="form__container">
           <div class="form__left">
             <div class="form__group">
