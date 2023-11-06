@@ -2,6 +2,7 @@
 import { GetAddressByIdAndType } from '~/graphql/queries';
 import { AddressType } from '~/config/constants';
 import { PaymentReportError } from '~/errors';
+import services from '~/services';
 
 interface State {
   card: Square.Card | null;
@@ -72,12 +73,11 @@ const checkBilling = async (): Promise<CheckBillingResponse> => {
 
 const createPayment = async (paymentBody: any, products: Product[]) => {
   try {
-    const { data } = await useFetch<any>('/api/payment', {
-      method: 'post',
-      body: paymentBody,
-    });
+    const { data } = (await services.generatePayment(paymentBody)) as {
+      data: Ref<any>;
+    };
 
-    if (data.value.data.status !== 'COMPLETED') {
+    if (data.value.status !== 'COMPLETED') {
       $notify({
         group: 'all',
         title: 'Error',
@@ -97,10 +97,7 @@ const createPayment = async (paymentBody: any, products: Product[]) => {
       return products.find((product) => product.id === item.id);
     });
 
-    const response = await invoice.createVisaInvoice(
-      data.value.data,
-      invoiceItems
-    );
+    const response = await invoice.createVisaInvoice(data.value, invoiceItems);
 
     if (!response?.data?.createInvoice?.data?.id) {
       $notify({
@@ -120,7 +117,7 @@ const createPayment = async (paymentBody: any, products: Product[]) => {
       text: 'Su recibo fué creado, puede revisarlo en sus ordenes',
     });
 
-    await invoice.sendVisaEmail(invoiceItems, data.value.data);
+    await invoice.sendVisaEmail(invoiceItems, data.value);
 
     console.log('email sent');
   } catch (error) {

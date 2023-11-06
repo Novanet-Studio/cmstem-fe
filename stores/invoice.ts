@@ -6,6 +6,7 @@ import { PaymentReportError, SendInvoiceEmailError } from '~/errors';
 
 import type { OrderResponseBody } from '@paypal/paypal-js';
 import type { Payment } from 'square';
+import services from '~/services';
 
 const PAGE_LIMIT = 10;
 const DEFAULT_PAGE = 1;
@@ -396,14 +397,8 @@ export const useInvoiceStore = defineStore(
         });
 
         await Promise.all([
-          useFetch('/api/send-receipt-email', {
-            method: 'post',
-            body: receipt,
-          }),
-          useFetch('/api/send-merchant-email', {
-            method: 'post',
-            body: merchant,
-          }),
+          services.sendReceiptEmail(receipt),
+          services.sendMerchantEmail(merchant),
         ]);
 
         $notify({
@@ -445,14 +440,8 @@ export const useInvoiceStore = defineStore(
         });
 
         await Promise.all([
-          useFetch('/api/send-receipt-email', {
-            method: 'post',
-            body: receipt,
-          }),
-          useFetch('/api/send-merchant-email', {
-            method: 'post',
-            body: merchant,
-          }),
+          services.sendReceiptEmail(receipt),
+          services.sendMerchantEmail(merchant),
         ]);
 
         $notify({
@@ -495,14 +484,8 @@ export const useInvoiceStore = defineStore(
         });
 
         await Promise.all([
-          useFetch('/api/send-receipt-email', {
-            method: 'post',
-            body: receipt,
-          }),
-          useFetch('/api/send-merchant-email', {
-            method: 'post',
-            body: merchant,
-          }),
+          services.sendReceiptEmail(receipt),
+          services.sendMerchantEmail(merchant),
         ]);
 
         $notify({

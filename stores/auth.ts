@@ -1,6 +1,7 @@
 import config from '~/config/config.json';
 import { LoginQuery, RegisterQuery } from '~/graphql/mutations';
 import type { StrapiUser } from '@nuxtjs/strapi/dist/runtime/types';
+import services from '~/services';
 
 type User = StrapiUser & {
   customerId: string;
@@ -90,10 +91,7 @@ export const useAuthStore = defineStore(
         emailAddress: email,
       };
 
-      const { data: result } = await useFetch('/api/create-customer', {
-        method: 'post',
-        body: data,
-      });
+      const { data: result } = await services.createCustomer(data);
 
       return result;
     }

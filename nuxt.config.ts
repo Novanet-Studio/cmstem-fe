@@ -43,19 +43,15 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    emailUrl: 'https://emails-api-k93m.onrender.com',
-    sendgrid: {
-      apiKey: process.env.SENDGRID_API_KEY,
-      senderEmail: process.env.SENDGRID_SENDER_MAIL,
-      receiverEmail: process.env.SENDGRID_RECEIVER_MAIL,
-    },
     public: {
       strapi: {
         url: process.env.STRAPI_URL || 'http://localhost:1337',
       },
+      services: {
+        url: process.env.SERVICES_URL || 'http://localhost:3001',
+      },
       SQUARE_APPLICATION_ID: process.env.SQUARE_APPLICATION_ID,
       SQUARE_LOCATION_ID: process.env.SQUARE_LOCATION_ID,
-      // SQUARE_ACCESS_TOKEN: process.env.SQUARE_ACCESS_TOKEN,
       PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID,
     },
   },
@@ -106,9 +102,5 @@ export default defineNuxtConfig({
       isCustomElement: (tag: string) =>
         ['swiper-container', 'swiper-slide'].includes(tag),
     },
-  },
-
-  nitro: {
-    preset: 'netlify-edge',
   },
 });

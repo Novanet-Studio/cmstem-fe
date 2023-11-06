@@ -79,7 +79,7 @@ const submit = handleSubmit(async (data, { resetForm }) => {
 
     const response = await auth.createCustomer(data.username, data.email);
 
-    if (!response.value?.data?.id) {
+    if (!response.value!.id) {
       $notify({
         group: 'all',
         title: 'Error!',
@@ -89,7 +89,7 @@ const submit = handleSubmit(async (data, { resetForm }) => {
       return;
     }
 
-    const customerId = response.value.data.id;
+    const customerId = response!.value!.id;
     const { confirmPassword: _, ...body } = data;
 
     await auth.register({
