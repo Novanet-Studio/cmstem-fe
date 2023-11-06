@@ -1,10 +1,10 @@
 import { merchantTemplateConfig, receiptTemplateConfig } from '~/config/email';
 
-const {
-  public: {
-    services: { url },
-  },
-} = useRuntimeConfig();
+const servicesUrl = import.meta.env.VITE_SERVICES_URL;
+
+if (!servicesUrl) {
+  throw new Error('Missing services url');
+}
 
 interface CreateCustomerPayload {
   idempotencyKey: string;
@@ -13,14 +13,14 @@ interface CreateCustomerPayload {
 }
 
 async function createCustomer(payload: CreateCustomerPayload) {
-  return useFetch(`${url}/api/create-customer`, {
+  return useFetch(`${servicesUrl}/api/create-customer`, {
     method: 'post',
     body: payload,
   });
 }
 
 async function generatePayment(payload: any) {
-  return useFetch(`${url}/api/payment`, {
+  return useFetch(`${servicesUrl}/api/payment`, {
     method: 'post',
     body: payload,
   });
@@ -28,7 +28,7 @@ async function generatePayment(payload: any) {
 
 async function sendReceiptEmail(payload: any, rawTemplate: boolean = false) {
   return useFetch(
-    `${url}/api/receipt-email${rawTemplate ? '?rawTemplate=true' : ''}`,
+    `${servicesUrl}/api/receipt-email${rawTemplate ? '?rawTemplate=true' : ''}`,
     {
       method: 'post',
       body: {
@@ -41,7 +41,9 @@ async function sendReceiptEmail(payload: any, rawTemplate: boolean = false) {
 
 async function sendMerchantEmail(payload: any, rawTemplate: boolean = false) {
   return useFetch(
-    `${url}/api/merchant-email${rawTemplate ? '?rawTemplate=true' : ''}`,
+    `${servicesUrl}/api/merchant-email${
+      rawTemplate ? '?rawTemplate=true' : ''
+    }`,
     {
       method: 'post',
       body: {
