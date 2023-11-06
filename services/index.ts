@@ -26,24 +26,30 @@ async function generatePayment(payload: any) {
   });
 }
 
-async function sendReceiptEmail(payload: any) {
-  return useFetch(`${url}/api/receipt-email`, {
-    method: 'post',
-    body: {
-      ...payload,
-      email: receiptTemplateConfig(),
-    },
-  });
+async function sendReceiptEmail(payload: any, rawTemplate: boolean = false) {
+  return useFetch(
+    `${url}/api/receipt-email${rawTemplate ? '?rawTemplate=true' : ''}`,
+    {
+      method: 'post',
+      body: {
+        ...payload,
+        email: receiptTemplateConfig(),
+      },
+    }
+  );
 }
 
-async function sendMerchantEmail(payload: any) {
-  return useFetch(`${url}/api/merchant-email`, {
-    method: 'post',
-    body: {
-      ...payload,
-      email: merchantTemplateConfig(),
-    },
-  });
+async function sendMerchantEmail(payload: any, rawTemplate: boolean = false) {
+  return useFetch(
+    `${url}/api/merchant-email${rawTemplate ? '?rawTemplate=true' : ''}`,
+    {
+      method: 'post',
+      body: {
+        ...payload,
+        email: merchantTemplateConfig(),
+      },
+    }
+  );
 }
 
 export default {
