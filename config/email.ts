@@ -23,7 +23,6 @@ export function receiptTemplateConfig() {
           phone: '0412.203.1239',
         },
       },
-      body: {},
       footer: {
         cta: {
           link: 'https://caracasmultisport.com/',
@@ -72,7 +71,6 @@ export function merchantTemplateConfig() {
           alt: 'Caracas Multisport',
         },
       },
-      body: {},
       footer: {
         cta: {
           link: 'https://caracasmultisport.com/',

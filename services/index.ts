@@ -33,7 +33,7 @@ async function sendReceiptEmail(payload: any, rawTemplate: boolean = false) {
       method: 'post',
       body: {
         ...payload,
-        email: receiptTemplateConfig(),
+        config: receiptTemplateConfig(),
       },
     }
   );
@@ -48,7 +48,7 @@ async function sendMerchantEmail(payload: any, rawTemplate: boolean = false) {
       method: 'post',
       body: {
         ...payload,
-        email: merchantTemplateConfig(),
+        config: merchantTemplateConfig(),
       },
     }
   );
